@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+models/
+data/raw/
+lora_adapters/
+*.safetensors
+*.bin
+.DS_Store
