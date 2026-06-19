@@ -33,131 +33,263 @@ RESULTS_DIR = PROJECT_ROOT / "results"
 
 
 # Comprehensive Linux Kernel test cases
+
+# Comprehensive Linux Kernel test cases — v0.2
+# Categories:
+#   L1 (Basic):  General OS/kernel concepts any engineer should know
+#   L2 (Intermediate): Linux-specific kernel mechanisms
+#   L3 (Advanced):  Deep kernel internals, code-level understanding
+#   Code:          Kernel code understanding & completion
+#   Chinese:       Kernel concepts in Chinese
+
 TEST_CASES = [
-    # === Kernel Concepts (English) ===
+    # ===== L1: Basic Kernel Concepts (8 questions) =====
     {
-        "id": "concept_01",
-        "category": "kernel_concepts",
+        "id": "l1_01",
+        "category": "basic_concepts",
+        "difficulty": "L1",
         "question": "What is the Linux kernel? Explain its role in an operating system.",
         "reference_keywords": ["monolithic", "process", "memory", "hardware", "system calls"],
     },
     {
-        "id": "concept_02",
-        "category": "kernel_concepts",
-        "question": "What is a page fault? Describe the steps the kernel takes when a page fault occurs.",
-        "reference_keywords": ["MMU", "page table", "swap", "SIGSEGV", "demand paging"],
-    },
-    {
-        "id": "concept_03",
-        "category": "kernel_concepts",
+        "id": "l1_02",
+        "category": "basic_concepts",
+        "difficulty": "L1",
         "question": "Explain the difference between user space and kernel space in Linux.",
         "reference_keywords": ["ring 0", "ring 3", "system call", "protection", "privilege"],
     },
     {
-        "id": "concept_04",
-        "category": "kernel_concepts",
+        "id": "l1_03",
+        "category": "basic_concepts",
+        "difficulty": "L1",
         "question": "What is a system call? Give three examples of common Linux system calls and explain what they do.",
         "reference_keywords": ["fork", "exec", "open", "read", "write", "mmap"],
     },
     {
-        "id": "concept_05",
-        "category": "kernel_concepts",
-        "question": "What is the purpose of the task_struct in the Linux kernel? What key information does it contain?",
-        "reference_keywords": ["PID", "state", "priority", "mm_struct", "files"],
+        "id": "l1_04",
+        "category": "basic_concepts",
+        "difficulty": "L1",
+        "question": "What is a process? How does it differ from a thread in the Linux kernel?",
+        "reference_keywords": ["task_struct", "PID", "TGID", "clone", "shared address space"],
     },
     {
-        "id": "concept_06",
-        "category": "kernel_concepts",
-        "question": "Explain how Linux handles interrupts. What is the difference between top halves and bottom halves?",
-        "reference_keywords": ["IRQ", "softirq", "tasklet", "workqueue", "handler"],
+        "id": "l1_05",
+        "category": "basic_concepts",
+        "difficulty": "L1",
+        "question": "What is virtual memory? Why does the Linux kernel use it?",
+        "reference_keywords": ["MMU", "page table", "TLB", "address space", "isolation"],
     },
     {
-        "id": "concept_07",
-        "category": "kernel_concepts",
-        "question": "What is a spinlock? When should you use a spinlock vs a mutex in kernel code?",
-        "reference_keywords": ["spin", "sleep", "atomic", "SMP", "preemption"],
+        "id": "l1_06",
+        "category": "basic_concepts",
+        "difficulty": "L1",
+        "question": "What is a device driver in Linux? How does it interact with the kernel?",
+        "reference_keywords": ["module", "probe", "file_operations", "platform_driver", "init"],
     },
     {
-        "id": "concept_08",
-        "category": "kernel_concepts",
-        "question": "Describe the Linux Virtual File System (VFS) layer. What are the key data structures?",
-        "reference_keywords": ["inode", "dentry", "super_block", "file", "operations"],
+        "id": "l1_07",
+        "category": "basic_concepts",
+        "difficulty": "L1",
+        "question": "What is a kernel panic? What causes it and how is it handled?",
+        "reference_keywords": ["oops", "BUG", "die", "reboot", "kdump"],
     },
     {
-        "id": "concept_09",
-        "category": "kernel_concepts",
-        "question": "What is RCU (Read-Copy-Update)? Explain its use case in the Linux kernel.",
-        "reference_keywords": ["lock-free", "grace period", "pointer", "synchronize", "call_rcu"],
-    },
-    {
-        "id": "concept_10",
-        "category": "kernel_concepts",
-        "question": "How does the Linux kernel manage memory? Explain the buddy allocator and slab allocator.",
-        "reference_keywords": ["page", "order", "kmalloc", "kmem_cache", "fragmentation"],
+        "id": "l1_08",
+        "category": "basic_concepts",
+        "difficulty": "L1",
+        "question": "What is the Linux kernel's role in file systems? Explain the Virtual File System (VFS) layer.",
+        "reference_keywords": ["inode", "dentry", "super_block", "file", "vfsmount"],
     },
 
-    # === Code Understanding ===
+    # ===== L2: Intermediate Kernel Mechanisms (8 questions) =====
+    {
+        "id": "l2_01",
+        "category": "kernel_mechanisms",
+        "difficulty": "L2",
+        "question": "What is a page fault? Describe the steps the kernel takes when a page fault occurs.",
+        "reference_keywords": ["MMU", "page table", "swap", "demand paging", "major fault", "minor fault"],
+    },
+    {
+        "id": "l2_02",
+        "category": "kernel_mechanisms",
+        "difficulty": "L2",
+        "question": "What is the purpose of the task_struct in the Linux kernel? What key information does it contain?",
+        "reference_keywords": ["PID", "state", "priority", "mm_struct", "files_struct", "signal"],
+    },
+    {
+        "id": "l2_03",
+        "category": "kernel_mechanisms",
+        "difficulty": "L2",
+        "question": "Explain how Linux handles interrupts. What is the difference between top halves and bottom halves?",
+        "reference_keywords": ["IRQ", "softirq", "tasklet", "workqueue", "handler", "request_irq"],
+    },
+    {
+        "id": "l2_04",
+        "category": "kernel_mechanisms",
+        "difficulty": "L2",
+        "question": "What is a spinlock? When should you use a spinlock vs a mutex in kernel code?",
+        "reference_keywords": ["spin", "sleep", "atomic", "SMP", "preemption", "context"],
+    },
+    {
+        "id": "l2_05",
+        "category": "kernel_mechanisms",
+        "difficulty": "L2",
+        "question": "Describe the Linux kernel's scheduler (CFS). How does it decide which process to run next?",
+        "reference_keywords": ["CFS", "vruntime", "red-black tree", "nice", "time slice", "fairness"],
+    },
+    {
+        "id": "l2_06",
+        "category": "kernel_mechanisms",
+        "difficulty": "L2",
+        "question": "How does the Linux kernel manage physical memory? Explain the buddy allocator and slab allocator.",
+        "reference_keywords": ["page", "order", "buddy", "kmalloc", "kmem_cache", "fragmentation"],
+    },
+    {
+        "id": "l2_07",
+        "category": "kernel_mechanisms",
+        "difficulty": "L2",
+        "question": "What is RCU (Read-Copy-Update)? Explain its use case in the Linux kernel.",
+        "reference_keywords": ["lock-free", "grace period", "synchronize_rcu", "call_rcu", "read-side"],
+    },
+    {
+        "id": "l2_08",
+        "category": "kernel_mechanisms",
+        "difficulty": "L2",
+        "question": "Explain the Linux kernel's approach to concurrency. What mechanisms exist beyond spinlocks and mutexes?",
+        "reference_keywords": ["atomic", "RCU", "semaphore", "completion", "percpu", "seqcount"],
+
+    },
+
+    # ===== L3: Advanced Kernel Internals (6 questions) =====
+    {
+        "id": "l3_01",
+        "category": "advanced_internals",
+        "difficulty": "L3",
+        "question": "Explain how copy_from_user() and copy_to_user() work. Why can't the kernel just dereference user-space pointers directly?",
+        "reference_keywords": ["access_ok", "page fault", "probe_kernel", "SMAP", "SMEP", "KASLR"],
+    },
+    {
+        "id": "l3_02",
+        "category": "advanced_internals",
+        "difficulty": "L3",
+        "question": "What is the Linux kernel's approach to memory barriers? When would you use smp_mb(), smp_wmb(), or smp_rmb()?",
+        "reference_keywords": ["ordering", "store buffer", "cache coherency", "acquire", "release", "DMA"],
+    },
+    {
+        "id": "l3_03",
+        "category": "advanced_internals",
+        "difficulty": "L3",
+        "question": "Explain the Linux kernel's approach to device driver model. What are the roles of struct device, struct bus_type, and struct device_driver?",
+        "reference_keywords": ["probe", "remove", "match", "uevent", "sysfs", "devicetree"],
+    },
+    {
+        "id": "l3_04",
+        "category": "advanced_internals",
+        "difficulty": "L3",
+        "question": "How does the Linux kernel handle out-of-memory (OOM) situations? Explain the OOM killer.",
+        "reference_keywords": ["oom_score", "badness", "overcommit", "panic_on_oom", "cgroup"],
+    },
+    {
+        "id": "l3_05",
+        "category": "advanced_internals",
+        "difficulty": "L3",
+        "question": "Explain the Linux kernel's approach to tracing and debugging. What are ftrace, perf, and eBPF?",
+        "reference_keywords": ["tracepoint", "kprobe", "uprobe", "ring buffer", "bpftrace"],
+    },
+    {
+        "id": "l3_06",
+        "category": "advanced_internals",
+        "difficulty": "L3",
+        "question": "How does the Linux kernel handle namespaces and cgroups? What role do they play in containerization?",
+        "reference_keywords": ["pid_namespace", "net_namespace", "cgroupfs", "resource limit", "isolation"],
+    },
+
+    # ===== Code Understanding (6 questions) =====
     {
         "id": "code_01",
         "category": "code_understanding",
-        "question": "What does the kmalloc() function do in the Linux kernel? What are the common GFP flags?",
-        "reference_keywords": ["allocate", "GFP_KERNEL", "GFP_ATOMIC", "slab", "bytes"],
+        "difficulty": "L2",
+        "question": "What does the kmalloc() function do in the Linux kernel? What are the common GFP flags and when would you use each?",
+        "reference_keywords": ["allocate", "GFP_KERNEL", "GFP_ATOMIC", "GFP_DMA", "slab", "bytes"],
     },
     {
         "id": "code_02",
         "category": "code_understanding",
-        "question": "Explain the purpose of copy_from_user() and copy_to_user(). Why are they necessary?",
-        "reference_keywords": ["user space", "kernel space", "security", "access_ok", "fault"],
+        "difficulty": "L2",
+        "question": "What does the schedule() function do in the Linux kernel? When is it called?",
+        "reference_keywords": ["context switch", "runqueue", "preempt", "yield", "TASK_RUNNING", "scheduler"],
     },
     {
         "id": "code_03",
         "category": "code_understanding",
-        "question": "What does the schedule() function do? When is it called?",
-        "reference_keywords": ["context switch", "runqueue", "preempt", "yield", "TASK_RUNNING"],
+        "difficulty": "L2",
+        "question": "Explain the Linux kernel module init and exit mechanism. What are module_init() and module_exit()?",
+        "reference_keywords": ["insmod", "rmmod", "MODULE_LICENSE", "__init", "__exit", "GPL"],
     },
     {
         "id": "code_04",
         "category": "code_understanding",
-        "question": "Explain the Linux kernel module init and exit mechanism. What are module_init() and module_exit()?",
-        "reference_keywords": ["insmod", "rmmod", "license", "GPL", "__init"],
+        "difficulty": "L2",
+        "question": "What is the purpose of printk() in the kernel? How does it differ from printf()? What are the log levels?",
+        "reference_keywords": ["KERN_EMERG", "KERN_INFO", "dmesg", "console", "ring buffer", "log level"],
     },
     {
         "id": "code_05",
         "category": "code_understanding",
-        "question": "What is the purpose of printk() in the kernel? How does it differ from printf()? What are the log levels?",
-        "reference_keywords": ["KERN_EMERG", "KERN_INFO", "dmesg", "console", "ring buffer"],
+        "difficulty": "L3",
+        "question": "Explain the Linux kernel's linked list implementation (struct list_head). How does container_of() work?",
+        "reference_keywords": ["list_add", "list_for_each", "offsetof", "type safety", "embedded"],
+    },
+    {
+        "id": "code_06",
+        "category": "code_understanding",
+        "difficulty": "L3",
+        "question": "What is a waitqueue in the Linux kernel? How do wait_event_interruptible() and wake_up() work?",
+        "reference_keywords": ["wait_queue_head", "TASK_INTERRUPTIBLE", "condition", "blocking", "wake_up"],
     },
 
-    # === Chinese Knowledge ===
+    # ===== Chinese Knowledge (6 questions) =====
     {
         "id": "cn_01",
         "category": "chinese_knowledge",
+        "difficulty": "L1",
         "question": "请解释Linux内核中的进程调度器(scheduler)是如何工作的？CFS调度器的主要特点是什么？",
-        "reference_keywords": ["CFS", "vruntime", "红黑树", "nice", "时间片"],
+        "reference_keywords": ["CFS", "vruntime", "红黑树", "nice", "时间片", "公平"],
     },
     {
         "id": "cn_02",
         "category": "chinese_knowledge",
+        "difficulty": "L1",
         "question": "什么是内核态和用户态？为什么需要区分这两种状态？",
-        "reference_keywords": ["特权级", "系统调用", "保护", "Ring 0", "Ring 3"],
+        "reference_keywords": ["特权级", "系统调用", "保护", "Ring 0", "Ring 3", "安全"],
     },
     {
         "id": "cn_03",
         "category": "chinese_knowledge",
+        "difficulty": "L2",
         "question": "请解释Linux中的虚拟内存管理机制，包括页表、TLB和缺页异常处理。",
-        "reference_keywords": ["页表", "TLB", "缺页", "MMU", "交换"],
+        "reference_keywords": ["页表", "TLB", "缺页", "MMU", "交换", "多级页表"],
     },
     {
         "id": "cn_04",
         "category": "chinese_knowledge",
+        "difficulty": "L2",
         "question": "Linux内核中的并发控制机制有哪些？请比较自旋锁、互斥锁和信号量的使用场景。",
-        "reference_keywords": ["自旋锁", "互斥锁", "信号量", "RCU", "原子操作"],
+        "reference_keywords": ["自旋锁", "互斥锁", "信号量", "RCU", "原子操作", "上下文"],
     },
     {
         "id": "cn_05",
         "category": "chinese_knowledge",
+        "difficulty": "L2",
         "question": "请描述Linux网络协议栈的基本架构，从网卡接收到数据到应用层经历了哪些步骤？",
-        "reference_keywords": ["NAPI", "sk_buff", "netfilter", "socket", "TCP/IP"],
+        "reference_keywords": ["NAPI", "sk_buff", "netfilter", "socket", "TCP/IP", "协议栈"],
+    },
+    {
+        "id": "cn_06",
+        "category": "chinese_knowledge",
+        "difficulty": "L3",
+        "question": "请解释Linux内核的OOM killer机制。它是如何选择要杀死的进程的？",
+        "reference_keywords": ["OOM", "badness", "oom_score", "overcommit", "cgroup", "panic"],
     },
 ]
 
@@ -166,6 +298,7 @@ CODE_COMPLETION_TESTS = [
     {
         "id": "complete_01",
         "category": "code_completion",
+        "difficulty": "L1",
         "prompt": """Complete the following Linux kernel module initialization function:
 
 ```c
@@ -176,11 +309,12 @@ static int __init my_module_init(void)
 {
     printk(KERN_INFO "My module loaded\\n");
 """,
-        "reference_keywords": ["return 0", "module_init", "module_exit", "MODULE_LICENSE"],
+        "reference_keywords": ["return 0", "module_init", "module_exit", "MODULE_LICENSE", "GPL"],
     },
     {
         "id": "complete_02",
         "category": "code_completion",
+        "difficulty": "L1",
         "prompt": """Complete the following Linux kernel function that allocates memory:
 
 ```c
@@ -188,11 +322,12 @@ void *allocate_buffer(size_t size)
 {
     void *buf;
 """,
-        "reference_keywords": ["kmalloc", "GFP_KERNEL", "kfree", "NULL"],
+        "reference_keywords": ["kmalloc", "GFP_KERNEL", "kfree", "NULL", "return"],
     },
     {
         "id": "complete_03",
         "category": "code_completion",
+        "difficulty": "L2",
         "prompt": """Complete the following character device driver read function:
 
 ```c
@@ -201,7 +336,47 @@ static ssize_t my_read(struct file *filp, char __user *buf, size_t count, loff_t
     char *kernel_buf = "Hello from kernel\\n";
     size_t len = strlen(kernel_buf);
 """,
-        "reference_keywords": ["copy_to_user", "return", "bytes", "f_pos"],
+        "reference_keywords": ["copy_to_user", "return", "bytes", "f_pos", "EFAULT"],
+    },
+    {
+        "id": "complete_04",
+        "category": "code_completion",
+        "difficulty": "L2",
+        "prompt": """Complete the following Linux kernel function that uses a spinlock:
+
+```c
+#include <linux/spinlock.h>
+
+static DEFINE_SPINLOCK(my_lock);
+static int shared_counter = 0;
+
+void increment_counter(void)
+{
+""",
+        "reference_keywords": ["spin_lock", "spin_unlock", "shared_counter", "irqsave", "flags"],
+    },
+    {
+        "id": "complete_05",
+        "category": "code_completion",
+        "difficulty": "L3",
+        "prompt": """Complete the following Linux kernel function that registers a platform driver:
+
+```c
+#include <linux/platform_device.h>
+
+static struct platform_driver my_driver = {
+    .probe = my_probe,
+    .remove = my_remove,
+    .driver = {
+        .name = "my_device",
+        .of_match_table = my_of_match,
+    },
+};
+
+static int __init my_driver_init(void)
+{
+""",
+        "reference_keywords": ["platform_driver_register", "return", "module_platform_driver", "module_init"],
     },
 ]
 

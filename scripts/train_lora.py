@@ -153,16 +153,22 @@ def run_training(model, tokenizer, train_dataset, valid_dataset, lora_config, ou
 
     # Training args
     adapter_path = output_dir / "adapters.safetensors"
+    # v0.2 optimized hyperparameters (based on v0.1 learnings):
+    # - Reduced iters to 100 to avoid overfitting on small dataset
+    # - Lower learning rate for more stable convergence
+    # - Larger batch size with grad_accumulation for smoother gradients
+    # - More frequent eval to catch overfitting early
     training_args = TrainingArgs(
         batch_size=1,
-        iters=200,
-        val_batches=10,
-        steps_per_report=10,
-        steps_per_eval=50,
+        iters=100,
+        val_batches=20,
+        steps_per_report=5,
+        steps_per_eval=25,
         steps_per_save=50,
         max_seq_length=2048,
         adapter_file=str(adapter_path),
         grad_checkpoint=True,
+        grad_accumulation_steps=2,
     )
 
     table = Table(title="Training Hyperparameters")
@@ -174,7 +180,8 @@ def run_training(model, tokenizer, train_dataset, valid_dataset, lora_config, ou
     console.print()
 
     # Optimizer
-    optimizer = optim.Adam(learning_rate=1e-4)
+    # v0.2: Lower LR (5e-5 vs 1e-4) to prevent catastrophic forgetting
+    optimizer = optim.Adam(learning_rate=5e-5)
 
     # Save config
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -236,9 +243,9 @@ def main():
                         help="Path to processed training data")
     parser.add_argument("--output", type=str, default="lora_adapters/kernel-lora",
                         help="Output directory for LoRA adapters")
-    parser.add_argument("--iters", type=int, default=200,
+    parser.add_argument("--iters", type=int, default=100,
                         help="Number of training iterations")
-    parser.add_argument("--lr", type=float, default=1e-4,
+    parser.add_argument("--lr", type=float, default=5e-5,
                         help="Learning rate")
     parser.add_argument("--rank", type=int, default=8,
                         help="LoRA rank")
