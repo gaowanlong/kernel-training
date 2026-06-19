@@ -2,6 +2,16 @@
 
 用 Linux Kernel 源码对端侧 LLM 做 QLoRA 后训练，让模型天然拥有内核知识。
 
+## HuggingFace Model
+
+The fine-tuned model is available for upload to HuggingFace. To upload:
+
+1. Login to HuggingFace: `huggingface-cli login`
+2. Upload the fused model: `python -m mlx_lm fuse --model models/qwen2.5-7b --adapter-path lora_adapters/kernel-lora --save-path models/qwen2.5-7b-fused --upload-repo gaowanlong/kernel-lora-v0.4`
+
+The fused model is at `models/qwen2.5-7b-fused/` (~4.3GB).
+
+
 ## 硬件要求
 
 - Apple Silicon Mac (M1 Pro 32GB 实测可用)
