@@ -1,0 +1,2888 @@
+{
+  "timestamp": "20260619_170434",
+  "base_model": {
+    "results": [
+      {
+        "id": "l1_01",
+        "category": "basic_concepts",
+        "question": "What is the Linux kernel? Explain its role in an operating system.",
+        "response": "The Linux kernel is the core component of a Linux-based operating system. Its role is to manage and coordinate the hardware and software resources of a computer, providing a stable and efficient environment for running applications.\n\nThe kernel is responsible for managing the computer's memory, storage, and input/output devices, such as hard drives, printers, and network interfaces. It also manages processes, which are instances of running programs, and provides a mechanism for inter-process communication.\n\nThe kernel provides a set of low-level system services, such as memory management, process scheduling, and inter-process communication. It also provides a set of APIs (application programming interfaces) that allow user-space programs to interact with the kernel and access its services.\n\nIn summary, the Linux kernel is the foundation of a Linux-based operating system, providing a stable, efficient, and secure environment for running applications by managing hardware and software resources. It is a crucial component of any Linux-based system, responsible for ensuring that the system is responsive, stable, and secure.",
+        "score": 0.7,
+        "keywords_matched": [
+          "process",
+          "memory",
+          "hardware"
+        ],
+        "keywords_total": [
+          "monolithic",
+          "process",
+          "memory",
+          "hardware",
+          "system calls"
+        ],
+        "elapsed_sec": 7.3169848918914795
+      },
+      {
+        "id": "l1_01",
+        "category": "basic_concepts",
+        "question": "What is the Linux kernel? Explain its role in an operating system.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "monolithic",
+          "process",
+          "memory",
+          "hardware",
+          "system calls"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_02",
+        "category": "basic_concepts",
+        "question": "Explain the difference between user space and kernel space in Linux.",
+        "response": "User space and kernel space are two distinct regions in the memory hierarchy of a Linux system.\n\nUser space refers to the part of the computer's memory that is accessible to user-level programs or processes. User-level programs include applications such as web browsers, word processors, and media players. User space programs run in a protected environment, which means they cannot directly access hardware or other resources, as this could cause a system crash. User-level programs use system calls to request access to system resources.\n\nKernel space, on the other hand, is the part of the memory that is accessible only to the operating system kernel. The kernel is responsible for managing and controlling the hardware resources of the system. Kernel space contains the code and data structures used by the kernel to manage hardware resources and provide system services to user-level programs. Kernel space programs, such as device drivers, run with full access to hardware resources and can directly manipulate hardware.\n\nThe main difference between user space and kernel space is the level of access and privilege. User-level programs have limited access to system resources, while kernel-level programs have full access. The separation between user space and kernel space is essential for system stability and security. By limiting the access of user-level programs to system resources, the operating system can prevent user-level programs from causing a system crash. Additionally, by running kernel-level programs with full access to system resources, the operating system can ensure that these programs can perform their necessary functions without interference from user-level programs.\n\nIn summary, user space refers",
+        "score": 0.7,
+        "keywords_matched": [
+          "system call",
+          "privilege"
+        ],
+        "keywords_total": [
+          "ring 0",
+          "ring 3",
+          "system call",
+          "protection",
+          "privilege"
+        ],
+        "elapsed_sec": 10.951313018798828
+      },
+      {
+        "id": "l1_02",
+        "category": "basic_concepts",
+        "question": "Explain the difference between user space and kernel space in Linux.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "ring 0",
+          "ring 3",
+          "system call",
+          "protection",
+          "privilege"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_03",
+        "category": "basic_concepts",
+        "question": "What is a system call? Give three examples of common Linux system calls and explain what they do.",
+        "response": "A system call is a request made by a program to the operating system (OS) kernel to perform a specific task or access system resources. System calls are used to manage hardware and software resources and are used to interface between user-level programs and the kernel.\n\nThree common Linux system calls are:\n\n1. `open()`: This system call is used to open a file or device. It takes a file path as an argument and returns a file descriptor that can be used to perform further operations on the file, such as reading or writing. The `open()` system call allows programs to access and manipulate files.\n\n2. `read()`: This system call is used to read data from a file descriptor, which can be a file, device, or other resource. It takes a file descriptor as an argument and reads a specified number of bytes into a buffer provided by the caller. The `read()` system call is useful for reading data from files or devices, such as reading input from a keyboard or reading data from a network socket.\n\n3. `write()`: This system call is used to write data to a file descriptor. It takes a file descriptor as an argument and writes a specified number of bytes from a buffer provided by the caller to the file or device associated with the file descriptor. The `write()` system call is useful for writing data to files or devices, such as writing output to a terminal or sending data over a network socket.\n\nThese system calls are fundamental to interacting with files and devices",
+        "score": 0.7,
+        "keywords_matched": [
+          "open",
+          "read",
+          "write"
+        ],
+        "keywords_total": [
+          "fork",
+          "exec",
+          "open",
+          "read",
+          "write",
+          "mmap"
+        ],
+        "elapsed_sec": 11.246622800827026
+      },
+      {
+        "id": "l1_03",
+        "category": "basic_concepts",
+        "question": "What is a system call? Give three examples of common Linux system calls and explain what they do.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "fork",
+          "exec",
+          "open",
+          "read",
+          "write",
+          "mmap"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_04",
+        "category": "basic_concepts",
+        "question": "What is a process? How does it differ from a thread in the Linux kernel?",
+        "response": "In the context of the Linux kernel, a process is a running instance of a program. It is an independent unit of execution that has its own memory space, process ID (PID), process control block, and set of system resources. Each process can perform its own operations, independent of other processes, and can communicate with other processes through inter-process communication mechanisms such as pipes, sockets, shared memory, and message queues.\nA thread, on the other hand, is a lightweight sub-process that runs within the context of a process. It shares the same memory space and resources as the process it belongs to. A process can have one or more threads, and all the threads in a process share the same memory space and resources. A thread is created by a process to perform a specific task or set of tasks within the process.\nThe key differences between a process and a thread are:\n\n  * A process has its own separate memory space, while a thread shares the memory space of its parent process.\n  * A process has its own process control block (PCB), while a thread shares the PCB of its parent process.\n  * A process has its own set of system resources, such as file descriptors and open ports, while a thread shares the resources of its parent process.\n  * Creating a new process is a more expensive operation than creating a new thread, because a new process requires the allocation of a new memory space and resources.\n  * Communication between threads within the same process is generally faster and",
+        "score": 0.8,
+        "keywords_matched": [
+          "PID"
+        ],
+        "keywords_total": [
+          "task_struct",
+          "PID",
+          "TGID",
+          "clone",
+          "shared address space"
+        ],
+        "elapsed_sec": 11.455879926681519
+      },
+      {
+        "id": "l1_04",
+        "category": "basic_concepts",
+        "question": "What is a process? How does it differ from a thread in the Linux kernel?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "task_struct",
+          "PID",
+          "TGID",
+          "clone",
+          "shared address space"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_05",
+        "category": "basic_concepts",
+        "question": "What is virtual memory? Why does the Linux kernel use it?",
+        "response": "How can I check the usage of virtual memory? How can I optimize virtual memory usage? Virtual memory is a memory management technique used by operating systems to extend the physical memory by using disk space. It enables the system to use the disk space as if it were physical memory. In other words, virtual memory allows the computer to use more memory than the actual amount of physical RAM installed on the system. Linux kernel uses virtual memory to manage the system's memory more efficiently and to ensure that critical system processes have enough memory to function properly.\n\nVirtual memory works by dividing the memory into fixed-size segments called pages. The system uses a cache (page cache) to store frequently used data, and the kernel uses a memory management unit (MMU) to manage the virtual and physical memory mapping. When the system runs out of physical memory, it moves some of the data from physical memory to virtual memory on the disk.\n\nTo check the usage of virtual memory, you can use the `top`, `htop`, `free`, or `vmstat` command. The `top` and `htop` commands show the virtual memory usage in the \"Virtual\" column. The `free` and `vmstat` commands show the virtual memory usage in the \"Swap\" column.\n\nTo optimize virtual memory usage, you can try the following:\n\n1. Increase the size of the swap file or partition: You can increase the size of the swap file or partition to give the system more virtual memory. However,",
+        "score": 0.5,
+        "keywords_matched": [
+          "MMU"
+        ],
+        "keywords_total": [
+          "MMU",
+          "page table",
+          "TLB",
+          "address space",
+          "isolation"
+        ],
+        "elapsed_sec": 11.020226955413818
+      },
+      {
+        "id": "l1_05",
+        "category": "basic_concepts",
+        "question": "What is virtual memory? Why does the Linux kernel use it?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "MMU",
+          "page table",
+          "TLB",
+          "address space",
+          "isolation"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_06",
+        "category": "basic_concepts",
+        "question": "What is a device driver in Linux? How does it interact with the kernel?",
+        "response": "Provide an example of a driver and explain its purpose.\n\nA device driver in Linux is a software component that enables the operating system to communicate with and control a specific hardware device. It acts as an intermediary between the kernel and the hardware, providing a standardized interface for the kernel to interact with the device.\n\nThe device driver interacts with the kernel by registering itself with the kernel's device model. It provides functions that the kernel can call to perform various operations on the device, such as reading or writing data, controlling device settings, or handling interrupts.\n\nFor example, consider the driver for a USB mouse. When a USB mouse is connected to the system, the driver is responsible for initializing the device, reading input data, and sending events to the kernel. The kernel then uses this data to update the mouse position or detect button presses. When the mouse is moved or a button is pressed, the driver generates an interrupt, which the kernel handles by calling the appropriate driver function. The driver then processes the event and sends the relevant information to the kernel, which updates the mouse cursor position or triggers mouse events for the application using the mouse.\n\nIn this example, the USB mouse driver serves as a bridge between the USB hardware and the Linux kernel, allowing the kernel to control the mouse and receive input events from it. It abstracts away the low-level details of the USB protocol and hardware specifics, providing a clean and consistent interface for the kernel to interact with the mouse.\n\nAnother example of a device driver is the Ethernet",
+        "score": 0.7,
+        "keywords_matched": [
+          "init"
+        ],
+        "keywords_total": [
+          "module",
+          "probe",
+          "file_operations",
+          "platform_driver",
+          "init"
+        ],
+        "elapsed_sec": 11.211148023605347
+      },
+      {
+        "id": "l1_06",
+        "category": "basic_concepts",
+        "question": "What is a device driver in Linux? How does it interact with the kernel?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "module",
+          "probe",
+          "file_operations",
+          "platform_driver",
+          "init"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_07",
+        "category": "basic_concepts",
+        "question": "What is a kernel panic? What causes it and how is it handled?",
+        "response": "A kernel panic is a critical error that occurs in the kernel of an operating system, which causes the system to stop responding and become unstable. It is a serious error that can cause the system to crash or become unresponsive.\n\nA kernel panic is typically caused by an unrecoverable error or a critical system failure that the kernel cannot handle. This can include hardware failures, driver or system software bugs, or other issues that cause the kernel to become unstable.\n\nWhen a kernel panic occurs, the kernel will print an error message to the system console or log file, indicating the cause of the panic. The system will then attempt to shut down or reboot to recover from the error. In some cases, the system may become unresponsive and require a hard reboot to recover.\n\nTo handle a kernel panic, the system administrator or user should identify the cause of the error and take appropriate action to resolve it. This may involve updating system software, replacing hardware components, or troubleshooting driver or software issues. Once the issue has been resolved, the system can be restarted and should return to normal operation. In some cases, the kernel panic may be a symptom of a deeper system issue and may require further investigation to identify and resolve the underlying cause. Additionally, system logs can be reviewed to help diagnose the cause of the kernel panic. In extreme cases, it may be necessary to perform a system restore or reinstall the operating system to resolve the issue.",
+        "score": 0.7,
+        "keywords_matched": [
+          "BUG",
+          "reboot"
+        ],
+        "keywords_total": [
+          "oops",
+          "BUG",
+          "die",
+          "reboot",
+          "kdump"
+        ],
+        "elapsed_sec": 11.083230018615723
+      },
+      {
+        "id": "l1_07",
+        "category": "basic_concepts",
+        "question": "What is a kernel panic? What causes it and how is it handled?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "oops",
+          "BUG",
+          "die",
+          "reboot",
+          "kdump"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_08",
+        "category": "basic_concepts",
+        "question": "What is the Linux kernel's role in file systems? Explain the Virtual File System (VFS) layer.",
+        "response": "The Linux kernel plays a crucial role in managing and providing access to file systems. The kernel manages the storage of data on disk and provides an interface for user applications to read and write files. In Linux, the kernel is responsible for managing the file system's metadata, such as file permissions, ownership, and access control.\n\nThe Virtual File System (VFS) layer is a high-level abstraction layer that sits between the kernel's file system code and the specific file system implementations. The VFS layer provides a generic interface to file systems, allowing them to be interchangeable, which means a single user-level program can access files from different file systems without needing to know which file system is being used.\n\nThe VFS layer provides a unified file system interface that allows user-space programs to interact with different file systems in a consistent way. It provides the following functions:\n\n1. File operations: This includes file creation, deletion, renaming, opening, closing, reading, and writing.\n\n2. Directory operations: This includes creating, deleting, and renaming directories, as well as listing directory contents.\n\n3. File system information: This includes getting file system statistics, such as free space, total space, and block size.\n\n4. File system mount/unmount: This includes mounting and unmounting file systems.\n\nBy providing a consistent interface, the VFS layer abstracts away the details of the specific file system implementation, allowing different file systems to be used interchangeably. This makes it easier to develop and maintain file system",
+        "score": 0.8,
+        "keywords_matched": [
+          "file"
+        ],
+        "keywords_total": [
+          "inode",
+          "dentry",
+          "super_block",
+          "file",
+          "vfsmount"
+        ],
+        "elapsed_sec": 11.950300216674805
+      },
+      {
+        "id": "l1_08",
+        "category": "basic_concepts",
+        "question": "What is the Linux kernel's role in file systems? Explain the Virtual File System (VFS) layer.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "inode",
+          "dentry",
+          "super_block",
+          "file",
+          "vfsmount"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_01",
+        "category": "kernel_mechanisms",
+        "question": "What is a page fault? Describe the steps the kernel takes when a page fault occurs.",
+        "response": "A page fault is an event that occurs when a process attempts to access a memory location that is not currently mapped to a physical page in the process's address space. This typically happens when a process tries to read from or write to a page that is not present in physical memory. When a page fault is detected, the kernel must take several steps to resolve it:\n\n1. Determine the faulting address: The kernel first identifies the address where the fault occurred.\n2. Check the page table: The kernel then checks the page table to see if the address is mapped to a valid physical page. If the address is not found in the page table, a page fault occurs.\n3. Request the page from disk: If the page is not found in physical memory, the kernel must read the page from the disk and load it into physical memory. The kernel may use techniques like demand paging or lazy allocation to defer loading the page until it is actually needed.\n4. Update the page table: Once the page is loaded, the kernel updates the page table to map the virtual address to the physical page in memory.\n5. Retry the instruction: After resolving the page fault, the kernel retries the instruction that caused the fault. If the instruction was a page-in or page-out operation, the kernel may need to retry the operation to ensure that the page is properly loaded or swapped out.\n6. Handle exceptions: If the page fault cannot be resolved, the kernel may handle the exception by terminating the process or",
+        "score": 0.7,
+        "keywords_matched": [
+          "page table",
+          "swap",
+          "demand paging"
+        ],
+        "keywords_total": [
+          "MMU",
+          "page table",
+          "swap",
+          "demand paging",
+          "major fault",
+          "minor fault"
+        ],
+        "elapsed_sec": 11.965142011642456
+      },
+      {
+        "id": "l2_01",
+        "category": "kernel_mechanisms",
+        "question": "What is a page fault? Describe the steps the kernel takes when a page fault occurs.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "MMU",
+          "page table",
+          "swap",
+          "demand paging",
+          "major fault",
+          "minor fault"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_02",
+        "category": "kernel_mechanisms",
+        "question": "What is the purpose of the task_struct in the Linux kernel? What key information does it contain?",
+        "response": "The `task_struct` is a data structure used by the Linux kernel to represent a process. It stores information about the process, such as its process ID, parent process ID, process state, memory management information, file descriptor set, signal handling information, and scheduling information. It is a crucial data structure for process management and scheduling in the Linux kernel. Here are some of the key pieces of information that the `task_struct` contains:\n\n- Process ID (PID): The unique ID assigned to a process.\n- Parent process ID: The ID of the parent process that created the current process.\n- Process state: The current state of the process, such as running, sleeping, or stopped.\n- Memory management information: Information about the process's memory usage, such as virtual memory size, resident set size, and memory allocation.\n- File descriptor set: A set of file descriptors that the process can access.\n- Signal handling information: Information about the signals that the process can receive and how they should be handled.\n- Scheduling information: Information about the process's priority, scheduling policy, and run queue information.\n- CPU usage: Information about the amount of CPU time the process has used.\n- Process environment: Information about the environment variables and command-line arguments of the process.\n- Network information: Information about the network connections and sockets the process is using.\n- Thread information: Information about the threads associated with the process.\n- Process accounting: Information about the process's resource usage, such as the",
+        "score": 0.8,
+        "keywords_matched": [
+          "PID",
+          "state",
+          "priority",
+          "signal"
+        ],
+        "keywords_total": [
+          "PID",
+          "state",
+          "priority",
+          "mm_struct",
+          "files_struct",
+          "signal"
+        ],
+        "elapsed_sec": 12.507487773895264
+      },
+      {
+        "id": "l2_02",
+        "category": "kernel_mechanisms",
+        "question": "What is the purpose of the task_struct in the Linux kernel? What key information does it contain?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "PID",
+          "state",
+          "priority",
+          "mm_struct",
+          "files_struct",
+          "signal"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_03",
+        "category": "kernel_mechanisms",
+        "question": "Explain how Linux handles interrupts. What is the difference between top halves and bottom halves?",
+        "response": "How does Linux avoid reentrancy issues while handling interrupts?\n\nLinux handles interrupts through a mechanism that involves both hardware and software. The process can be divided into two main parts: hardware handling and software handling.\n\nWhen an interrupt occurs, the hardware responsible for generating the interrupt (e.g., a network card, disk controller, or timer) informs the CPU that an event has occurred. The CPU then suspends its current task and switches to the interrupt handler routine. The interrupt handler is responsible for performing the necessary actions to respond to the event, such as reading data from a device or scheduling a task to be executed.\n\nThe interrupt handler code is typically written in assembly or a low-level language and runs with high priority to ensure that the interrupt event is handled quickly. The handler must be designed to handle the interrupt in a short amount of time since the CPU is still in interrupt context. Once the interrupt handler finishes, the CPU returns to the task it was executing before the interrupt occurred.\n\nIn Linux, the handling of interrupts is divided into two halves: the bottom half and the top half.\n\nThe bottom half is responsible for performing the work that is required to handle the interrupt event. This can include reading data from a device, scheduling a task, or updating in-memory data structures. Since the bottom half runs in interrupt context and has a limited amount of time to complete its work, it must be kept as small and as simple as possible.\n\nThe top half, on the other hand, is responsible for transitioning",
+        "score": 0.5,
+        "keywords_matched": [
+          "handler"
+        ],
+        "keywords_total": [
+          "IRQ",
+          "softirq",
+          "tasklet",
+          "workqueue",
+          "handler",
+          "request_irq"
+        ],
+        "elapsed_sec": 12.489108085632324
+      },
+      {
+        "id": "l2_03",
+        "category": "kernel_mechanisms",
+        "question": "Explain how Linux handles interrupts. What is the difference between top halves and bottom halves?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "IRQ",
+          "softirq",
+          "tasklet",
+          "workqueue",
+          "handler",
+          "request_irq"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_04",
+        "category": "kernel_mechanisms",
+        "question": "What is a spinlock? When should you use a spinlock vs a mutex in kernel code?",
+        "response": "A spinlock is a synchronization mechanism used in concurrent programming, particularly in kernel code, to ensure that only one thread or process can access a shared resource at a time. The term \"spin\" refers to the fact that a thread will repeatedly check the lock status and \"spin\" (i.e., busy-wait) until it can acquire the lock. Once the lock is acquired, the thread can proceed to use the shared resource.\n\n### Key Characteristics of Spinlocks:\n1. **Busy-Waiting**: The thread will repeatedly check the lock status and keep trying until the lock is available.\n2. **Performance**: Can be very fast because there is no context switch, but it can also waste CPU cycles if the lock is held for a long time.\n3. **Fairness**: No mechanism to ensure fairness; the thread that is first to spin may always get the lock.\n4. **Priority Inversion**: Can lead to priority inversion if a higher-priority thread is waiting to acquire the lock while a lower-priority thread holds it.\n\n### When to Use Spinlocks:\n- **Short Lock Holding Period**: When the lock is held for a very short duration, spinlocks can be more efficient because the overhead of context switching is avoided.\n- **High Concurrency**: In systems with high concurrency and low contention, spinlocks can be more efficient because they avoid the overhead of context switching.\n- **Interrupt Handling**: In some cases, spinlocks can be used in interrupt handlers to ensure that",
+        "score": 0.7,
+        "keywords_matched": [
+          "spin",
+          "context"
+        ],
+        "keywords_total": [
+          "spin",
+          "sleep",
+          "atomic",
+          "SMP",
+          "preemption",
+          "context"
+        ],
+        "elapsed_sec": 13.404744148254395
+      },
+      {
+        "id": "l2_04",
+        "category": "kernel_mechanisms",
+        "question": "What is a spinlock? When should you use a spinlock vs a mutex in kernel code?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "spin",
+          "sleep",
+          "atomic",
+          "SMP",
+          "preemption",
+          "context"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_05",
+        "category": "kernel_mechanisms",
+        "question": "Describe the Linux kernel's scheduler (CFS). How does it decide which process to run next?",
+        "response": "The Linux kernel's Completely Fair Scheduler (CFS) is a fully preemptive, dynamic round-robin processor scheduler. It debuted in Linux 2.6.23 and became the default scheduler for the Linux kernel starting in version 2.6.33. The primary goal of CFS is to provide a fair distribution of CPU time among all running processes, ensuring that no process is starved of CPU resources.\n\n### Key Features of CFS\n\n1. **Dynamic Load Balancing**: CFS dynamically balances the load among all running processes based on their individual needs and utilization.\n   \n2. **Preemption**: It allows for preemption, meaning that a running process can be preempted by another process with higher priority, ensuring that no process starves for CPU time.\n\n3. **Fairness**: CFS aims to allocate CPU time in a \"fair\" manner, meaning that all processes should get an equal share of CPU time over time.\n\n4. **Dynamic Prioritization**: CFS uses a virtual runtime (vruntime) to dynamically prioritize processes. The vruntime is a weighted time that the process has spent running on the CPU. \n\n### How CFS Decides Which Process to Run Next\n\nThe CFS scheduler uses a data structure called the \"runqueue,\" which is a list of processes that are ready to run. The `pick_next_task_fair()` function is called to determine which process to run next.\n\n1. **Sorting by vruntime**: The",
+        "score": 0.8,
+        "keywords_matched": [
+          "CFS",
+          "vruntime",
+          "fairness"
+        ],
+        "keywords_total": [
+          "CFS",
+          "vruntime",
+          "red-black tree",
+          "nice",
+          "time slice",
+          "fairness"
+        ],
+        "elapsed_sec": 25.170362949371338
+      },
+      {
+        "id": "l2_05",
+        "category": "kernel_mechanisms",
+        "question": "Describe the Linux kernel's scheduler (CFS). How does it decide which process to run next?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "CFS",
+          "vruntime",
+          "red-black tree",
+          "nice",
+          "time slice",
+          "fairness"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_06",
+        "category": "kernel_mechanisms",
+        "question": "How does the Linux kernel manage physical memory? Explain the buddy allocator and slab allocator.",
+        "response": "The Linux kernel manages physical memory using a combination of memory allocation mechanisms, including the buddy allocator and slab allocator. Let's discuss each of these in detail.\n\n### Buddy Allocator\n\nThe buddy allocator is a memory allocation strategy designed to efficiently manage contiguous blocks of memory. It is particularly well-suited for the Linux kernel because it can quickly allocate and free memory without causing fragmentation.\n\n#### Key Concepts:\n\n1. **Block Size and Order**:\n   - The buddy allocator organizes memory into blocks of different sizes.\n   - Each block size is a power of two (e.g., 4KB, 8KB, 16KB, etc.).\n   - The \"order\" of a block is the exponent of the power of two that represents its size (e.g., order 2 corresponds to 4KB, order 3 corresponds to 8KB, etc.).\n\n2. **Block Structure**:\n   - Each block can be split into two smaller blocks of the same size (its \"buddy\").\n   - For example, a 16KB block can be split into two 8KB buddy blocks, and each of those can be split into two 4KB buddy blocks, and so on.\n\n3. **Allocation and Deallocation**:\n   - When a request is made for memory, the buddy allocator searches for the smallest block of the appropriate size.\n   - If the requested size is not a power of two, the allocator searches for the smallest block that is at",
+        "score": 0.7,
+        "keywords_matched": [
+          "order",
+          "buddy",
+          "fragmentation"
+        ],
+        "keywords_total": [
+          "page",
+          "order",
+          "buddy",
+          "kmalloc",
+          "kmem_cache",
+          "fragmentation"
+        ],
+        "elapsed_sec": 49.1148681640625
+      },
+      {
+        "id": "l2_06",
+        "category": "kernel_mechanisms",
+        "question": "How does the Linux kernel manage physical memory? Explain the buddy allocator and slab allocator.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "page",
+          "order",
+          "buddy",
+          "kmalloc",
+          "kmem_cache",
+          "fragmentation"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_07",
+        "category": "kernel_mechanisms",
+        "question": "What is RCU (Read-Copy-Update)? Explain its use case in the Linux kernel.",
+        "response": "RCU (Read-Copy-Update) is a concurrency mechanism used in the Linux kernel to allow safe concurrent read access to a shared data structure while allowing it to be modified. It is a non-blocking synchronization technique that avoids the need for mutual exclusion (mutexes or spinlocks) during read operations. RCU is particularly useful in scenarios where frequent read operations are performed, and infrequent updates are made to the data structure.\n\nRCU works by maintaining a snapshot of the data structure at a particular point in time. When a reader wants to access the data, it simply references the snapshot and continues reading. During an update, the system uses a mechanism called \"grace period\" to ensure that all readers have finished referencing the old snapshot before the new data structure is made visible to readers.\n\nThe main idea behind RCU is to balance the needs of readers and writers by allowing readers to proceed without blocking writers, while ensuring that readers see a consistent view of the data. RCU is widely used in the Linux kernel for managing data structures like task lists, file systems, and networking.\n\nHere are a few examples of RCU use cases in the Linux kernel:\n\n1. RCU-protected List: In the Linux kernel, RCU can be used to manage a list of tasks, processes, or network connections. When a task is created or terminated, the corresponding entry in the list is updated. Meanwhile, readers can safely iterate over the list to manage tasks or connections without worrying about concurrent updates",
+        "score": 0.8,
+        "keywords_matched": [
+          "grace period"
+        ],
+        "keywords_total": [
+          "lock-free",
+          "grace period",
+          "synchronize_rcu",
+          "call_rcu",
+          "read-side"
+        ],
+        "elapsed_sec": 26.33389973640442
+      },
+      {
+        "id": "l2_07",
+        "category": "kernel_mechanisms",
+        "question": "What is RCU (Read-Copy-Update)? Explain its use case in the Linux kernel.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "lock-free",
+          "grace period",
+          "synchronize_rcu",
+          "call_rcu",
+          "read-side"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_08",
+        "category": "kernel_mechanisms",
+        "question": "Explain the Linux kernel's approach to concurrency. What mechanisms exist beyond spinlocks and mutexes?",
+        "response": "The Linux kernel's approach to concurrency is designed to handle the complexities of managing multiple processes and threads efficiently while ensuring data integrity and system stability. Beyond the commonly known spinlocks and mutexes, the kernel employs a variety of mechanisms to manage concurrency. Here's an overview of these mechanisms:\n\n### 1. **Spinlocks**\nSpinlocks are used for short, quick critical sections where the overhead of sleeping and waking up the thread is not desirable. However, they can lead to busy-waiting, which can be inefficient.\n\n### 2. **Mutexes**\nMutexes (mutual exclusion locks) are more sophisticated than spinlocks. They allow a thread to hold a lock until it is no longer needed, and other threads will be blocked until the lock is released. Mutexes are typically preferred over spinlocks for most synchronization needs.\n\n### 3. **Semaphore**\nSemaphores are another form of mutual exclusion lock. They are more flexible than regular mutexes because they can be used to control access to a resource by multiple threads or processes. Semaphores can be initialized to any value, and threads can modify their value by incrementing or decrementing it.\n\n### 4. **Spinlocks and Semaphores**\n- **Spinlocks**: Used for short-term critical sections.\n- **Semaphores**: Used for more complex synchronization problems, where waiting is acceptable.\n\n### 5. **Condition Variables**\nCondition variables are used in conjunction with mutexes to wait for a specific condition",
+        "score": 0.7,
+        "keywords_matched": [
+          "semaphore"
+        ],
+        "keywords_total": [
+          "atomic",
+          "RCU",
+          "semaphore",
+          "completion",
+          "percpu",
+          "seqcount"
+        ],
+        "elapsed_sec": 27.011144161224365
+      },
+      {
+        "id": "l2_08",
+        "category": "kernel_mechanisms",
+        "question": "Explain the Linux kernel's approach to concurrency. What mechanisms exist beyond spinlocks and mutexes?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "atomic",
+          "RCU",
+          "semaphore",
+          "completion",
+          "percpu",
+          "seqcount"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_01",
+        "category": "advanced_internals",
+        "question": "Explain how copy_from_user() and copy_to_user() work. Why can't the kernel just dereference user-space pointers directly?",
+        "response": "Copy_from_user() and copy_to_user() are functions in the Linux kernel used to copy data between kernel space and user space. They are essential for safely transferring data to and from user-space programs.\n\nHere's a detailed explanation:\n\n1. **Copy_from_user()**:\n   - **Function**: Reads data from user space to kernel space.\n   - **Parameters**: Typically takes a kernel-space buffer, the user-space pointer, and the number of bytes to copy.\n   - **Usage**: Useful for safely copying data from user-space programs to the kernel.\n\n2. **Copy_to_user()**:\n   - **Function**: Writes data from kernel space to user space.\n   - **Parameters**: Typically takes the user-space buffer, a kernel-space buffer, and the number of bytes to copy.\n   - **Usage**: Useful for safely copying data from the kernel to user-space programs.\n\n### Why Can't the Kernel Directly Dereference User-Space Pointers?\n\n1. **Security**: User-space and kernel-space have different memory protections. Directly dereferencing a user-space pointer could lead to accessing memory regions that are not intended to be accessible by the kernel. This could result in memory corruption, crashes, or security vulnerabilities.\n\n2. **Memory Management**: The kernel manages memory differently from user space. User-space processes have their own memory management contexts, and directly accessing their memory could lead to incorrect data handling or crashes.\n\n3. **Data Integrity**: User-space data can be modified while",
+        "score": 0.8,
+        "keywords_matched": [],
+        "keywords_total": [
+          "access_ok",
+          "page fault",
+          "probe_kernel",
+          "SMAP",
+          "SMEP",
+          "KASLR"
+        ],
+        "elapsed_sec": 26.621588945388794
+      },
+      {
+        "id": "l3_01",
+        "category": "advanced_internals",
+        "question": "Explain how copy_from_user() and copy_to_user() work. Why can't the kernel just dereference user-space pointers directly?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "access_ok",
+          "page fault",
+          "probe_kernel",
+          "SMAP",
+          "SMEP",
+          "KASLR"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_02",
+        "category": "advanced_internals",
+        "question": "What is the Linux kernel's approach to memory barriers? When would you use smp_mb(), smp_wmb(), or smp_rmb()?",
+        "response": "When would you use memory barriers on a single-core system? Why would you need to use memory barriers when writing to a volatile variable?\nThe Linux kernel uses memory barriers to ensure correct ordering of memory operations and prevent certain compiler or CPU optimizations from corrupting the program's behavior. Memory barriers are particularly important in multi-processor systems to ensure that memory operations are ordered correctly across different CPUs. Here’s a breakdown of when to use `smp_mb()`, `smp_wmb()`, and `smp_rmb()`:\n\n### 1. **`smp_mb()` (Memory Barrier)**\n- **Use Case**: When you need to ensure that two sequences of memory operations are ordered correctly, either within a single processor or between processors.\n- **Example**: If you have two sequences of operations, one on CPU1 and one on CPU2, and you want to ensure that the operations from CPU1 are completed before the operations from CPU2 start, you would use `smp_mb()`.\n\n### 2. **`smp_wmb()` (Write Memory Barrier)**\n- **Use Case**: When you need to ensure that a write operation is completed before subsequent operations are performed. This is useful when you have a write operation that needs to be visible to other CPUs before they can read the data.\n- **Example**: If you write to a variable and then perform some other operations, you might want to ensure that the write is completed before the other operations start. You would",
+        "score": 0.8,
+        "keywords_matched": [
+          "ordering"
+        ],
+        "keywords_total": [
+          "ordering",
+          "store buffer",
+          "cache coherency",
+          "acquire",
+          "release",
+          "DMA"
+        ],
+        "elapsed_sec": 27.20823884010315
+      },
+      {
+        "id": "l3_02",
+        "category": "advanced_internals",
+        "question": "What is the Linux kernel's approach to memory barriers? When would you use smp_mb(), smp_wmb(), or smp_rmb()?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "ordering",
+          "store buffer",
+          "cache coherency",
+          "acquire",
+          "release",
+          "DMA"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_03",
+        "category": "advanced_internals",
+        "question": "Explain the Linux kernel's approach to device driver model. What are the roles of struct device, struct bus_type, and struct device_driver?",
+        "response": "How do they interact with each other in the device driver model?\nThe Linux kernel's device driver model is designed to abstract hardware and device management from the rest of the kernel and to make it easier to add support for new devices. The key components of the device driver model are `struct device`, `struct bus_type`, and `struct device_driver`, which interact to manage device drivers and their associated devices.\n\n### 1. `struct device`\n- **Purpose**: Represents a hardware device or a virtual device in the system. It encapsulates information about the device, such as its name, driver, and other attributes.\n- **Components**:\n  - `struct device` contains metadata about the device.\n  - It includes fields like `driver`, `bus_type`, `dev_name`, `dev_class`, etc.\n- **Usage**: Each device instance is created by a driver during probe, and it is registered with the device bus.\n\n### 2. `struct bus_type`\n- **Purpose**: Represents a device bus or bus type. It defines the bus-specific properties, such as how devices are added, removed, and probed.\n- **Components**:\n  - `name`: The name of the bus.\n  - `match_table`: A table of device IDs that the bus can match against.\n  - `probe`: A function pointer for probing devices.\n  - `remove`: A function pointer for removing devices.\n  - `shutdown`: A function pointer for shutting down devices.\n",
+        "score": 0.6,
+        "keywords_matched": [
+          "probe",
+          "remove",
+          "match"
+        ],
+        "keywords_total": [
+          "probe",
+          "remove",
+          "match",
+          "uevent",
+          "sysfs",
+          "devicetree"
+        ],
+        "elapsed_sec": 27.06925106048584
+      },
+      {
+        "id": "l3_03",
+        "category": "advanced_internals",
+        "question": "Explain the Linux kernel's approach to device driver model. What are the roles of struct device, struct bus_type, and struct device_driver?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "probe",
+          "remove",
+          "match",
+          "uevent",
+          "sysfs",
+          "devicetree"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_04",
+        "category": "advanced_internals",
+        "question": "How does the Linux kernel handle out-of-memory (OOM) situations? Explain the OOM killer.",
+        "response": "The Linux kernel handles out-of-memory (OOM) situations by implementing an OOM killer. The OOM killer is a component of the kernel responsible for identifying and killing processes to free up memory when the system runs out of memory.\n\nWhen the kernel detects that the system is running low on memory, it will first try to free up memory by terminating less important processes. This is done by scanning the memory usage of all running processes and identifying those with a lower priority or that have been running for a longer time. Once these processes are terminated, the kernel will attempt to free up memory by swapping out pages or using other techniques.\n\nHowever, if the system still runs out of memory, the kernel will initiate the OOM killer. The OOM killer will scan the memory usage of all running processes again and select a process to kill. The selection process is based on a set of rules, which can be configured by the system administrator. The rules are designed to ensure that the process that is killed is the one that has the least impact on the system.\n\nThe OOM killer is a last resort to free up memory when the system is running out of memory. It is a necessary component of the kernel to ensure that the system can continue to function even when memory is scarce.\n\nIt's worth noting that the OOM killer is a highly controversial feature, as it can lead to the termination of important processes and data loss. Therefore, system administrators should carefully configure the OOM killer rules to ensure that it is",
+        "score": 0.5,
+        "keywords_matched": [],
+        "keywords_total": [
+          "oom_score",
+          "badness",
+          "overcommit",
+          "panic_on_oom",
+          "cgroup"
+        ],
+        "elapsed_sec": 27.183863878250122
+      },
+      {
+        "id": "l3_04",
+        "category": "advanced_internals",
+        "question": "How does the Linux kernel handle out-of-memory (OOM) situations? Explain the OOM killer.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "oom_score",
+          "badness",
+          "overcommit",
+          "panic_on_oom",
+          "cgroup"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_05",
+        "category": "advanced_internals",
+        "question": "Explain the Linux kernel's approach to tracing and debugging. What are ftrace, perf, and eBPF?",
+        "response": "How do they compare to each other, and how do they fit into the overall tracing and debugging ecosystem? The Linux kernel's approach to tracing and debugging is quite comprehensive, offering a variety of tools and mechanisms to help developers understand and diagnose issues in the system. Here's an overview of ftrace, perf, and eBPF, along with their comparisons and roles within the tracing and debugging ecosystem.\n\n### ftrace (Function Tracing)\n\n**What is ftrace?**\n- **ftrace** is a tracing mechanism provided by the Linux kernel. It allows you to trace function entry and exit points, which can be used to monitor the execution flow of kernel functions.\n- **Benefits:**\n  - Simple to use with a command-line interface.\n  - No need to recompile the kernel or load any additional modules.\n- **Limitations:**\n  - Can be intrusive and may affect performance.\n  - Limited to function entry and exit points.\n  - Cannot trace variables or specific instructions within functions.\n\n**Usage:**\n- **trace-cmd**: A user-space tool that works with ftrace to provide a more user-friendly interface.\n- **Examples:**\n  ```sh\n  echo function_trace > /sys/kernel/debug/tracing/ Current Tracing: function_trace\n  trace-cmd record -o output.trc /bin/ls\n  trace-cmd report output.trc\n  ```\n\n### Perf (Performance Monitoring)\n\n**What is Perf?**\n- **Perf",
+        "score": 0.8,
+        "keywords_matched": [],
+        "keywords_total": [
+          "tracepoint",
+          "kprobe",
+          "uprobe",
+          "ring buffer",
+          "bpftrace"
+        ],
+        "elapsed_sec": 27.36679768562317
+      },
+      {
+        "id": "l3_05",
+        "category": "advanced_internals",
+        "question": "Explain the Linux kernel's approach to tracing and debugging. What are ftrace, perf, and eBPF?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "tracepoint",
+          "kprobe",
+          "uprobe",
+          "ring buffer",
+          "bpftrace"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_06",
+        "category": "advanced_internals",
+        "question": "How does the Linux kernel handle namespaces and cgroups? What role do they play in containerization?",
+        "response": "Can you explain the process of creating a new namespace and cgroup, and how they are managed by the kernel?\r\n\r\nThe Linux kernel handles namespaces and cgroups through a series of syscalls and kernel modules. Namespaces allow processes to have their own isolated view of the system, such as their own process, network, or file system. This is achieved by creating a new namespace using the `unshare` syscall and setting it as the current process's namespace using the `setns` syscall. The kernel maintains a separate namespace for each process, allowing them to have their own isolated view of the system. \r\n\r\nCgroups, on the other hand, allow the kernel to limit, account for, and isolate the resources used by a collection of processes. Cgroups are created using the `clone` or `unshare` syscall, which creates a new process hierarchy. The newly created processes are then assigned to a cgroup using the `cgroup_set_cgroupid` or `cgroup_set_cgroupid` syscall. The kernel enforces resource limits and accounting for each cgroup, ensuring that no single process or group of processes can consume more resources than are allowed. \r\n\r\nIn containerization, namespaces and cgroups are used to create isolated environments for each container. Each container is assigned its own namespace, ensuring that it has its own isolated view of the system. Additionally, each container is assigned to a cgroup, ensuring that its resource usage is limited and accounted for. This allows multiple",
+        "score": 0.5,
+        "keywords_matched": [
+          "resource limit"
+        ],
+        "keywords_total": [
+          "pid_namespace",
+          "net_namespace",
+          "cgroupfs",
+          "resource limit",
+          "isolation"
+        ],
+        "elapsed_sec": 27.139039993286133
+      },
+      {
+        "id": "l3_06",
+        "category": "advanced_internals",
+        "question": "How does the Linux kernel handle namespaces and cgroups? What role do they play in containerization?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "pid_namespace",
+          "net_namespace",
+          "cgroupfs",
+          "resource limit",
+          "isolation"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_01",
+        "category": "code_understanding",
+        "question": "What does the kmalloc() function do in the Linux kernel? What are the common GFP flags and when would you use each?",
+        "response": "The `kmalloc()` function in the Linux kernel is used to allocate a block of memory from the kernel's memory pool. The function returns a pointer to the allocated memory, which can be used by the kernel to store data temporarily. The function takes two parameters: the size of the memory block to allocate and a set of flags that specify how the memory should be allocated.\n\nThe common GFP (Get Free Pages) flags used in the Linux kernel are:\n\n- GFP_KERNEL: This flag is used for allocating memory that can be reclaimed by the memory management system. It is the default flag used by most kernel memory allocation functions. It can be used for allocating memory for tasks, buffers, and other kernel structures.\n- GFP_ATOMIC: This flag is used for allocating memory that cannot be reclaimed by the memory management system. It is used for allocating memory for interrupt handlers, atomic functions, and other low-level kernel code. This flag is used to ensure that memory is not reallocated while the interrupt handler is executing.\n- GFP_HIGHMEM: This flag is used for allocating memory that is not in the kernel's low memory region. It is used for allocating memory for structures that are located in high memory, such as the page tables.\n- GFP_NOIO: This flag is used for allocating memory without performing any I/O operations. It is used for allocating memory for structures that do not require any I/O operations, such as kernel structures.\n- GFP_NO WAIT: This flag is used for allocating memory without",
+        "score": 0.7,
+        "keywords_matched": [
+          "allocate",
+          "GFP_KERNEL",
+          "GFP_ATOMIC"
+        ],
+        "keywords_total": [
+          "allocate",
+          "GFP_KERNEL",
+          "GFP_ATOMIC",
+          "GFP_DMA",
+          "slab",
+          "bytes"
+        ],
+        "elapsed_sec": 27.532460689544678
+      },
+      {
+        "id": "code_01",
+        "category": "code_understanding",
+        "question": "What does the kmalloc() function do in the Linux kernel? What are the common GFP flags and when would you use each?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "allocate",
+          "GFP_KERNEL",
+          "GFP_ATOMIC",
+          "GFP_DMA",
+          "slab",
+          "bytes"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_02",
+        "category": "code_understanding",
+        "question": "What does the schedule() function do in the Linux kernel? When is it called?",
+        "response": "How does it manage to handle processes with different priorities?\nThe `schedule()` function in the Linux kernel is a crucial component in the scheduler's mechanism. It is responsible for selecting the next process to run. The `schedule()` function is called when the current running process is no longer runnable or when a context switch is necessary. A context switch can happen due to several reasons such as:\n\n1. A process has used up its time slice.\n2. A process has been blocked (i.e., it is waiting for some resource).\n3. A signal has been received by a process.\n4. A process has finished its execution.\n\nNow, regarding how `schedule()` manages to handle processes with different priorities, the function takes into account the process's priority when selecting the next process to run. The Linux kernel uses a priority-based round-robin scheduling mechanism, which means that a process with a higher priority is more likely to be selected to run than a process with a lower priority.\n\nThe `schedule()` function uses a data structure called the runqueue, which contains a list of processes that are ready to run. The runqueue is maintained by the kernel's scheduler and contains a set of tasks with their respective priorities. The `schedule()` function iterates through the runqueue and selects the process with the highest priority to run.\n\nHere's a simplified version of how the `schedule()` function might work:\n\n1. The function first checks if the current process is still runnable. If it is, the function",
+        "score": 0.5,
+        "keywords_matched": [
+          "context switch",
+          "runqueue",
+          "scheduler"
+        ],
+        "keywords_total": [
+          "context switch",
+          "runqueue",
+          "preempt",
+          "yield",
+          "TASK_RUNNING",
+          "scheduler"
+        ],
+        "elapsed_sec": 27.614057064056396
+      },
+      {
+        "id": "code_02",
+        "category": "code_understanding",
+        "question": "What does the schedule() function do in the Linux kernel? When is it called?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "context switch",
+          "runqueue",
+          "preempt",
+          "yield",
+          "TASK_RUNNING",
+          "scheduler"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_03",
+        "category": "code_understanding",
+        "question": "Explain the Linux kernel module init and exit mechanism. What are module_init() and module_exit()?",
+        "response": "In the Linux kernel, modules are a way to dynamically load and unload code into the kernel's memory. The `module_init()` and `module_exit()` macros are used to specify the functions that should be called when a module is loaded or unloaded, respectively. These functions are part of the module's initialization and cleanup code.\n\n### Module Initialization (`module_init()`)\n\nWhen a kernel module is loaded into the kernel, the `module_init()` function is called. This function is typically used to initialize any data structures, start background threads, or perform other setup tasks that are necessary for the module to function properly.\n\nHere is an example of how `module_init()` is used:\n\n```c\nstatic int __init mymodule_init(void) {\n    // Perform initialization tasks\n    printk(KERN_INFO \"mymodule: Initializing...\\n\");\n    // Register a device, set up a network interface, etc.\n    return 0; // Return 0 on success, non-zero on error\n}\nmodule_init(mymodule_init);\n```\n\nIn this example, `mymodule_init()` is the function that will be called when the module is loaded. The `module_init()` macro takes the function name and wraps it to ensure that the initialization function is executed at the appropriate time.\n\n### Module Cleanup (`module_exit()`)\n\nWhen a kernel module is unloaded, the `module_exit()` function is called. This function is typically used to clean up any resources that were allocated during the module's initialization,",
+        "score": 0.7,
+        "keywords_matched": [
+          "__init"
+        ],
+        "keywords_total": [
+          "insmod",
+          "rmmod",
+          "MODULE_LICENSE",
+          "__init",
+          "__exit",
+          "GPL"
+        ],
+        "elapsed_sec": 28.184770822525024
+      },
+      {
+        "id": "code_03",
+        "category": "code_understanding",
+        "question": "Explain the Linux kernel module init and exit mechanism. What are module_init() and module_exit()?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "insmod",
+          "rmmod",
+          "MODULE_LICENSE",
+          "__init",
+          "__exit",
+          "GPL"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_04",
+        "category": "code_understanding",
+        "question": "What is the purpose of printk() in the kernel? How does it differ from printf()? What are the log levels?",
+        "response": "How do I use printk() to log a message with a specific level? What is the maximum length of a message that can be logged using printk()?\n\nThe `printk()` function is a logging mechanism used in the Linux kernel to output messages to the kernel log. It is similar to `printf()` in user space, but `printk()` is designed to be used within the kernel. The main differences between `printk()` and `printf()` are:\n\n1. `printk()` is used exclusively within the kernel, while `printf()` is used in user space programs.\n2. `printk()` supports log levels, which allow you to control the severity and importance of the messages.\n3. `printk()` works with the kernel's logging subsystem, which is responsible for handling, formatting, and outputting the messages.\n\nThe log levels used in `printk()` are:\n\n1. KERN_EMERG: System is unusable (usually not used)\n2. KERN_ALERT: Attention needed immediately (usually not used)\n3. KERN_CRIT: Critical conditions (usually not used)\n4. KERN_ERR: Error conditions (usually not used)\n5. KERN_WARNING: Warning conditions (usually not used)\n6. KERN Notices: Normal but significant conditions (usually not used)\n7. KERN_INFO: Informational messages (usually used for informational messages)\n8. KERN_DEBUG: Debug-level messages (usually used for debugging messages)\n\nTo use `",
+        "score": 0.2,
+        "keywords_matched": [
+          "KERN_EMERG",
+          "KERN_INFO",
+          "log level"
+        ],
+        "keywords_total": [
+          "KERN_EMERG",
+          "KERN_INFO",
+          "dmesg",
+          "console",
+          "ring buffer",
+          "log level"
+        ],
+        "elapsed_sec": 28.12402892112732
+      },
+      {
+        "id": "code_04",
+        "category": "code_understanding",
+        "question": "What is the purpose of printk() in the kernel? How does it differ from printf()? What are the log levels?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "KERN_EMERG",
+          "KERN_INFO",
+          "dmesg",
+          "console",
+          "ring buffer",
+          "log level"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_05",
+        "category": "code_understanding",
+        "question": "Explain the Linux kernel's linked list implementation (struct list_head). How does container_of() work?",
+        "response": "The Linux kernel's `struct list_head` is a data structure used to implement a doubly linked list. It consists of two pointers, `prev` and `next`, which point to the previous and next elements in the list, respectively. This structure allows for efficient insertion, deletion, and traversal operations.\n\nHere's a basic definition of `struct list_head`:\n\n```c\nstruct list_head {\n    struct list_head *prev;\n    struct list_head *next;\n};\n```\n\n### Doubly Linked List Operations\n\nIn a doubly linked list, each node (represented by `struct list_head`) contains two pointers: `prev` and `next`. These pointers allow for bidirectional traversal of the list.\n\n#### Insertion\nTo insert a new node into the list, you typically use functions like `list_add()` or `list_add_tail()`:\n\n```c\nvoid list_add(struct list_head *new, struct list_head *prev, struct list_head *next) {\n    next->prev = new;\n    new->next = next;\n    prev->next = new;\n    new->prev = prev;\n}\n\nvoid list_add_tail(struct list_head *new, struct list_head *head) {\n    list_add(new, head->prev, head);\n}\n```\n\n#### Deletion\nTo remove a node from the list, you can use `list_del()`:\n\n```c\nvoid list_del(struct list_head *entry) {\n    entry->prev->next = entry->next;\n",
+        "score": 1.0,
+        "keywords_matched": [
+          "list_add"
+        ],
+        "keywords_total": [
+          "list_add",
+          "list_for_each",
+          "offsetof",
+          "type safety",
+          "embedded"
+        ],
+        "elapsed_sec": 29.23679518699646
+      },
+      {
+        "id": "code_05",
+        "category": "code_understanding",
+        "question": "Explain the Linux kernel's linked list implementation (struct list_head). How does container_of() work?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "list_add",
+          "list_for_each",
+          "offsetof",
+          "type safety",
+          "embedded"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_06",
+        "category": "code_understanding",
+        "question": "What is a waitqueue in the Linux kernel? How do wait_event_interruptible() and wake_up() work?",
+        "response": "A waitqueue in the Linux kernel is a data structure used for managing a set of threads or processes that are waiting for a specific event to occur. Waitqueues are commonly used in I/O drivers and other kernel code to implement synchronization between threads that are waiting for an event to occur and threads that are responsible for triggering the event.\n\nThe `wait_event_interruptible()` function is used to wait for a specific event to occur. The function blocks the current thread until the event is triggered, at which point the thread is resumed. `wait_event_interruptible()` is typically used in situations where an I/O operation has completed, and the thread is waiting for the result.\n\nThe `wake_up()` function is used to wake up one or more threads that are waiting on a specific waitqueue. When `wake_up()` is called, it causes one or more threads that are waiting on the waitqueue to be unblocked and added back to the ready-to-run queue. This allows the threads to continue executing.\n\nHere's a simple example to illustrate how these functions work:\n\n```c\n#include <linux/sched.h>\n#include <linux/wait.h>\n#include <linux/kernel.h>\n#include <linux/module.h>\n#include <linux/init.h>\n\nstatic struct task_struct *waiting_thread;\nstatic struct wait_queue wait_queue;\n\nstatic void trigger_event(void)\n{\n    // Wake up the waiting thread\n    wake_up(&wait_queue);\n}\n\nstatic int wait_event_interruptible_thread(void *data)\n{\n    // Wait for",
+        "score": 0.7,
+        "keywords_matched": [
+          "wake_up"
+        ],
+        "keywords_total": [
+          "wait_queue_head",
+          "TASK_INTERRUPTIBLE",
+          "condition",
+          "blocking",
+          "wake_up"
+        ],
+        "elapsed_sec": 29.65012502670288
+      },
+      {
+        "id": "code_06",
+        "category": "code_understanding",
+        "question": "What is a waitqueue in the Linux kernel? How do wait_event_interruptible() and wake_up() work?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "wait_queue_head",
+          "TASK_INTERRUPTIBLE",
+          "condition",
+          "blocking",
+          "wake_up"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_01",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux内核中的进程调度器(scheduler)是如何工作的？CFS调度器的主要特点是什么？",
+        "response": "CFS调度器是如何保证公平性？\n在Linux操作系统中，进程调度器是核心组成部分之一，负责管理进程的执行顺序和时间。为了使系统中的进程能够高效、公平地执行，调度器需要在多个进程之间进行资源的动态分配和重新分配。Linux内核主要使用CFS（完全公平调度器，Completely Fair Scheduler）作为默认进程调度器。\n\n### CFS调度器的主要特点\n\n1. **公平性**：CFS使用轮转队列进行进程调度，确保了每个进程都获得公平的CPU时间。\n2. **优先级和权重**：CFS调度器通过权重来衡量进程的优先级，权重越大，优先级越高。\n3. **响应时间**：优化了短进程的响应时间，避免短进程长时间等待。\n4. **多核支持**：CFS调度器支持多核环境，能够有效地分配和使用多核资源。\n5. **调度延迟小**：相比早期的调度器，CFS的延迟更小。\n\n### CFS调度器如何保证公平性\n\nCFS调度器保证公平性的方法主要包括以下几个方面：\n\n1. **动态权重**：CFS为每个进程分配了一个权重值，基于进程的运行时间来动态调整权重，以确保短进程可以获得更多的执行时间。\n2. **轮转队列**：CFS使用轮转队列来管理进程的执行顺序，确保每个",
+        "score": 0.7,
+        "keywords_matched": [
+          "CFS",
+          "公平"
+        ],
+        "keywords_total": [
+          "CFS",
+          "vruntime",
+          "红黑树",
+          "nice",
+          "时间片",
+          "公平"
+        ],
+        "elapsed_sec": 29.932027101516724
+      },
+      {
+        "id": "cn_01",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux内核中的进程调度器(scheduler)是如何工作的？CFS调度器的主要特点是什么？",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "CFS",
+          "vruntime",
+          "红黑树",
+          "nice",
+          "时间片",
+          "公平"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_02",
+        "category": "chinese_knowledge",
+        "question": "什么是内核态和用户态？为什么需要区分这两种状态？",
+        "response": "在计算机系统中，内核态（Kernel Mode）和用户态（User Mode）是两种不同的执行状态，它们分别对应操作系统的核心部分和应用程序的执行环境。区分这两种状态是确保系统稳定性和安全性的重要手段。\n\n**内核态**：\n- 内核态是指操作系统的核心运行状态，操作系统内核在此状态下运行。\n- 在这个状态下，操作系统可以执行所有硬件相关的操作，例如访问硬件设备、管理内存、执行过程调度等。\n- 内核态具有最高权限，可以修改系统的运行状态，但同时也使得系统面临较高的风险，因为任何错误都可能导致系统崩溃或不稳定。\n\n**用户态**：\n- 用户态是应用程序执行的状态，普通应用程序在这状态下运行。\n- 在用户态下，应用程序只能执行一些被允许的操作，不能直接访问硬件设备。\n- 用户态具有较低的权限，可以保证系统的稳定性和安全性，即使应用程序出现错误，也不会对系统造成严重影响。\n\n**为什么需要区分这两种状态**：\n1. **安全性**：通过将操作系统的核心部分与应用程序分开运行，可以有效减少因应用程序错误或恶意攻击导致系统崩溃的风险。\n2. **稳定性**：如果一个应用程序在用户态运行，即使它发生了错误，也不会影响到其他应用程序或整个系统的稳定性。然而，如果应用程序在内核态运行，一个错误就可能导致整个系统崩溃。\n3. **资源管理**：通过限制应用程序的权限，可以避免应用程序过度消耗",
+        "score": 0.8,
+        "keywords_matched": [
+          "安全"
+        ],
+        "keywords_total": [
+          "特权级",
+          "系统调用",
+          "保护",
+          "Ring 0",
+          "Ring 3",
+          "安全"
+        ],
+        "elapsed_sec": 30.743794918060303
+      },
+      {
+        "id": "cn_02",
+        "category": "chinese_knowledge",
+        "question": "什么是内核态和用户态？为什么需要区分这两种状态？",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "特权级",
+          "系统调用",
+          "保护",
+          "Ring 0",
+          "Ring 3",
+          "安全"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_03",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux中的虚拟内存管理机制，包括页表、TLB和缺页异常处理。",
+        "response": "Linux中的虚拟内存管理机制是现代操作系统实现地址空间隔离和内存管理的基础。虚拟内存管理机制主要包括以下几个方面：页表（Page Table）、缓存队列（Translation Lookaside Buffer, TLB）和缺页异常处理（Page Fault Handling）。\n\n1. 页表（Page Table）：页表是虚拟内存和物理内存之间的一组映射关系表，它将虚拟地址空间划分为大小固定的页（通常是4KB或8KB）。页表中的每个条目描述了一个虚拟页到物理页的映射关系，包括物理页的起始地址、权限（如读、写、执行）、是否存在等信息。当一个进程请求访问某个虚拟地址时，操作系统会通过页表将这个虚拟地址转换为对应的物理地址。\n\n2. 缓存队列（Translation Lookaside Buffer, TLB）：TLB是硬件缓存，用于存储最常使用的页表条目，以加快地址转换的速度。当处理器需要从内存中查找页表条目时，会首先检查TLB中的缓存，如果找到对应的信息，就可以直接访问物理地址，从而加快了地址转换的速度。当TLB中的缓存项过期或被其他数据覆盖时，处理器会发起一次内存访问以更新缓存。\n\n3. 缺页异常处理（Page Fault Handling）：当处理器尝试访问一个虚拟地址时，如果该地址对应的物理地址不存在",
+        "score": 0.7,
+        "keywords_matched": [
+          "页表",
+          "TLB",
+          "缺页"
+        ],
+        "keywords_total": [
+          "页表",
+          "TLB",
+          "缺页",
+          "MMU",
+          "交换",
+          "多级页表"
+        ],
+        "elapsed_sec": 31.0821430683136
+      },
+      {
+        "id": "cn_03",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux中的虚拟内存管理机制，包括页表、TLB和缺页异常处理。",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "页表",
+          "TLB",
+          "缺页",
+          "MMU",
+          "交换",
+          "多级页表"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_04",
+        "category": "chinese_knowledge",
+        "question": "Linux内核中的并发控制机制有哪些？请比较自旋锁、互斥锁和信号量的使用场景。",
+        "response": "在Linux内核中，提供了多种并发控制机制来管理并发访问资源，以保证数据的一致性和安全性。常用的并发控制机制包括自旋锁（Spin Lock）、互斥锁（Mutual Exclusion Lock，简称mutex）、信号量（Semaphore）。下面分别介绍这三种机制的使用场景和区别。\n\n1. 自旋锁（Spin Lock）：自旋锁是一种典型的忙等待锁，它不会使等待的进程进入休眠状态，而是让进程反复检查锁的状态，直到锁可用为止。当一个进程试图获取锁时，如果锁已经被其他进程持有，那么当前进程就会一直等待，直到锁被释放。这种机制可以避免进程调度和上下文切换的开销，适用于竞争不频繁且快速获取锁的场景。但是，长时间的竞争会导致大量的CPU资源被占用，从而降低系统性能。因此，自旋锁通常只用于竞争频率较低，且等待时间较短的情况。例如，在缓存一致性协议实现中，可以使用自旋锁来实现。\n\n2. 互斥锁（Mutex）：互斥锁是一种条件变量，用于控制对共享资源的访问。互斥锁可以被设置为可重入或不可重入。可重入的互斥锁允许同一个进程多次获取同一把锁，而不需要担心死锁。互斥锁适用于竞争频率较高，且需要保证数据一致性的情况。例如，在文件系统或其他需要频繁访问共享",
+        "score": 0.7,
+        "keywords_matched": [
+          "自旋锁",
+          "互斥锁",
+          "信号量",
+          "上下文"
+        ],
+        "keywords_total": [
+          "自旋锁",
+          "互斥锁",
+          "信号量",
+          "RCU",
+          "原子操作",
+          "上下文"
+        ],
+        "elapsed_sec": 26.66986918449402
+      },
+      {
+        "id": "cn_04",
+        "category": "chinese_knowledge",
+        "question": "Linux内核中的并发控制机制有哪些？请比较自旋锁、互斥锁和信号量的使用场景。",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "自旋锁",
+          "互斥锁",
+          "信号量",
+          "RCU",
+          "原子操作",
+          "上下文"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_05",
+        "category": "chinese_knowledge",
+        "question": "请描述Linux网络协议栈的基本架构，从网卡接收到数据到应用层经历了哪些步骤？",
+        "response": "并简要解释每一步的作用。\n\nLinux网络协议栈是实现网络通信的关键组件，它负责处理从网络接收到的数据，并将其传递到相应的应用层程序。整个过程可以分为以下几个阶段：\n\n1. 网卡接收数据：当网络数据包通过网卡进入系统时，网卡会将数据包传递给网络协议栈。网卡负责接收从物理层传来的数据，并通过中断通知操作系统。\n\n2. 网卡驱动程序：网卡驱动程序负责将接收到的数据包传递给操作系统中的netdevice（网络设备）。驱动程序会将网卡接收到的数据包缓存起来，然后通过中断通知核操作系统。\n\n3. 网络设备层：网络设备层负责将数据包传递给网络协议栈的更高层次。核操作系统中的netdevice负责监听中断，当网卡驱动程序通知核操作系统时，netdevice将数据包传递给协议栈。\n\n4. 网络协议栈：网络协议栈负责解析接收到的数据包。从最底层的以太网协议开始，依次解析IP协议、TCP协议或UDP协议等，将数据包传递给更高层的应用程序。协议栈会根据协议类型和数据包中的目标地址，决定将数据包传递给哪一个协议处理程序。\n\n5. 传输层：传输层负责处理传输协议（如TCP或UDP）。TCP负责维护连接、提供可靠的数据传输，而UDP",
+        "score": 0.7,
+        "keywords_matched": [
+          "协议栈"
+        ],
+        "keywords_total": [
+          "NAPI",
+          "sk_buff",
+          "netfilter",
+          "socket",
+          "TCP/IP",
+          "协议栈"
+        ],
+        "elapsed_sec": 23.311702013015747
+      },
+      {
+        "id": "cn_05",
+        "category": "chinese_knowledge",
+        "question": "请描述Linux网络协议栈的基本架构，从网卡接收到数据到应用层经历了哪些步骤？",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "NAPI",
+          "sk_buff",
+          "netfilter",
+          "socket",
+          "TCP/IP",
+          "协议栈"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_06",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux内核的OOM killer机制。它是如何选择要杀死的进程的？",
+        "response": "Linux内核的OOM（Out of Memory） Killer机制是在系统内存资源耗尽时，自动选择并终止某些进程以释放内存。当系统中所有可用内存都被占用后，而且无法通过其他方式（如交换内存）解决内存不足的问题时，系统会触发OOM Killer机制。\n\n在选择要杀死的进程时，Linux内核会优先考虑以下因素来选择进程：\n\n1. 尽量少杀进程：系统设计时考虑了尽可能少地杀死进程，以减少系统混乱和数据丢失。因此，在选择要杀死的进程时，系统会优先考虑杀死那些资源占用较少且不太重要（如守护进程或后台进程）的进程。\n2. 大型进程优先：OOM Killer会优先杀死占用内存资源较多的进程。这是因为大型进程占用的内存资源较多，释放它们可以回收更多的内存资源，帮助系统恢复稳定。\n3. 按进程优先级和类来选择：进程优先级（nice值）决定了进程在系统中的优先级。OOM Killer会优先杀死优先级较低的进程，因为这些进程通常不是当前系统中最为关键的进程。此外，系统还根据进程类型（如系统进程、用户进程等）来决定杀死哪些进程。例如，系统进程一般不会被杀死。\n4. 交互型进程优先：交互型进程（如终端进程）通常会被优先考虑杀死，以保证用户可以继续进行其他操作。\n\n在",
+        "score": 0.7,
+        "keywords_matched": [
+          "OOM"
+        ],
+        "keywords_total": [
+          "OOM",
+          "badness",
+          "oom_score",
+          "overcommit",
+          "cgroup",
+          "panic"
+        ],
+        "elapsed_sec": 23.172080993652344
+      },
+      {
+        "id": "cn_06",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux内核的OOM killer机制。它是如何选择要杀死的进程的？",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "OOM",
+          "badness",
+          "oom_score",
+          "overcommit",
+          "cgroup",
+          "panic"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_01",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel module initialization function:\n\n```c\n#include <linux/module.h>\n",
+        "response": "   return 0;\n}\n\nstatic void __exit my_module_exit(void)\n{\n    printk(KERN_INFO \"My module unloaded\\n\");\n}\n\nmodule_init(my_module_init);\nmodule_exit(my_module_exit);\n\nMODULE_LICENSE(\"GPL\");\nMODULE_AUTHOR(\"Your Name\");\nMODULE_DESCRIPTION(\"A simple module to demonstrate module_init and module_exit\");\n```\n\nThis code snippet demonstrates the basic structure of a Linux kernel module. It includes the necessary headers, defines the initialization and cleanup functions, and provides metadata about the module. The `printk` function is used to output messages to the kernel log. The `module_init` and `module_exit` macros are used to specify the initialization and cleanup functions. The `MODULE_LICENSE`, `MODULE_AUTHOR`, and `MODULE_DESCRIPTION` macros provide information about the module's license, author, and purpose. ```c\n#include <linux/module.h>\n#include <linux/kernel.h>\n\nstatic int __init my_module_init(void)\n{\n    printk(KERN_INFO \"My module loaded\\n\");\n   ",
+        "score": 1.0,
+        "keywords_matched": [
+          "return 0",
+          "module_init",
+          "module_exit",
+          "MODULE_LICENSE",
+          "GPL"
+        ],
+        "keywords_total": [
+          "return 0",
+          "module_init",
+          "module_exit",
+          "MODULE_LICENSE",
+          "GPL"
+        ],
+        "elapsed_sec": 16.569129943847656
+      },
+      {
+        "id": "complete_01",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel module initialization function:\n\n```c\n#include <linux/module.h>\n",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "return 0",
+          "module_init",
+          "module_exit",
+          "MODULE_LICENSE",
+          "GPL"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_02",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that allocates memory:\n\n```c\nvoid *allocate_buffer(size",
+        "response": "   // Allocate memory for the buffer\n    // [Your code here]\n    return buf;\n}\n```\n\nThe function should allocate memory for a buffer of the given size and return a pointer to the allocated memory. If the allocation fails, the function should return NULL.\n\nNote: You should use the appropriate Linux kernel memory allocation functions, such as `kmalloc` or `vmalloc`, depending on the context. To complete the function, we need to use the `kmalloc` function from the Linux kernel, which is used for allocating memory in the kernel space. The `kmalloc` function takes two parameters: the size of the memory block to allocate and the allocation flags. For a general-purpose allocation, we can use the `GFP_KERNEL` flag, which is a common choice for most kernel allocations.\n\nHere is the completed function:\n\n```c\n#include <linux/kernel.h>\n\nvoid *allocate_buffer(size_t size)\n{\n    void *buf;\n    // Allocate memory for the buffer",
+        "score": 0.7,
+        "keywords_matched": [
+          "kmalloc",
+          "GFP_KERNEL",
+          "NULL",
+          "return"
+        ],
+        "keywords_total": [
+          "kmalloc",
+          "GFP_KERNEL",
+          "kfree",
+          "NULL",
+          "return"
+        ],
+        "elapsed_sec": 15.713083982467651
+      },
+      {
+        "id": "complete_02",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that allocates memory:\n\n```c\nvoid *allocate_buffer(size",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "kmalloc",
+          "GFP_KERNEL",
+          "kfree",
+          "NULL",
+          "return"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_03",
+        "category": "code_completion",
+        "question": "Complete the following character device driver read function:\n\n```c\nstatic ssize_t my_read(struct fi",
+        "response": "   size_t bytes_to_copy = count < len ? count : len;\n\n    // Copy data to user space\n    if (copy_to_user(buf, kernel_buf, bytes_to_copy)) {\n        return -EFAULT;\n    }\n\n    // Update file position\n    *f_pos += bytes_to_copy;\n\n    return bytes_to_copy;\n}\n```\n\nThe function should read data from a character device and copy it to the user space buffer. The function should handle the following cases:\n\n1. If the user buffer is smaller than the data to be copied, it should copy only the amount that fits.\n2. If the user buffer is larger than the data to be copied, it should copy the entire data.\n3. If the user buffer is empty, the function should return 0.\n4. If an error occurs during the copy, the function should return -EFAULT.\n\nThe function should also update the file position to reflect the number of bytes copied.\n\nTo test the function, create a character device",
+        "score": 0.8,
+        "keywords_matched": [
+          "copy_to_user",
+          "return",
+          "bytes",
+          "f_pos",
+          "EFAULT"
+        ],
+        "keywords_total": [
+          "copy_to_user",
+          "return",
+          "bytes",
+          "f_pos",
+          "EFAULT"
+        ],
+        "elapsed_sec": 15.58627986907959
+      },
+      {
+        "id": "complete_03",
+        "category": "code_completion",
+        "question": "Complete the following character device driver read function:\n\n```c\nstatic ssize_t my_read(struct fi",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "copy_to_user",
+          "return",
+          "bytes",
+          "f_pos",
+          "EFAULT"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_04",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that uses a spinlock:\n\n```c\n#include <linux/spinlock.h>",
+        "response": "   // Your code here\n}\n```\n\nThe function `increment_counter` should increment the `shared_counter` by 1. However, due to the concurrent access from multiple threads, ensure that the increment operation is thread-safe. Use the `my_lock` spinlock to achieve this. Your implementation should prevent race conditions and ensure that the counter is incremented correctly. To make the problem more challenging, also ensure that the spinlock is released even if an error occurs during the increment operation.\n\nTo verify your solution, write a simple test program that creates multiple threads, each calling `increment_counter`, and then prints the final value of `shared_counter`. The final value should be the number of threads that were created, assuming no race conditions or errors occur.\n\nNote: You can use the `pthread.h` library for creating threads and `assert.h` for assertions. ```c\n#include <linux/spinlock.h>\n#include <linux/init.h>\n#include <linux/module.h>\n#include <linux/s",
+        "score": 0.8,
+        "keywords_matched": [
+          "shared_counter"
+        ],
+        "keywords_total": [
+          "spin_lock",
+          "spin_unlock",
+          "shared_counter",
+          "irqsave",
+          "flags"
+        ],
+        "elapsed_sec": 16.060181140899658
+      },
+      {
+        "id": "complete_04",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that uses a spinlock:\n\n```c\n#include <linux/spinlock.h>",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "spin_lock",
+          "spin_unlock",
+          "shared_counter",
+          "irqsave",
+          "flags"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_05",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that registers a platform driver:\n\n```c\n#include <linux",
+        "response": "   return platform_driver_register(&my_driver);\n}\n\nstatic void __exit my_driver_exit(void)\n{\n    platform_driver_unregister(&my_driver);\n}\n\nmodule_init(my_driver_init);\nmodule_exit(my_driver_exit);\n```\n\nThe function should register the platform driver and handle any necessary initialization. It should also unregister the driver and clean up on module exit. The driver should be able to match devices based on the provided device tree match table.\n\nWhat is the purpose of the `platform_driver_register` and `platform_driver_unregister` functions in the context of the Linux kernel? How do they interact with the platform driver structure? The `platform_driver_register` and `platform_driver_unregister` functions are crucial for managing the lifecycle of a platform driver in the Linux kernel. They interact with the platform driver structure to register the driver with the system so that it can be matched to compatible hardware, and to unregister the driver when it is no longer needed.\n\n### `platform_driver_register`\n\nThe `platform_driver_register` function is",
+        "score": 0.8,
+        "keywords_matched": [
+          "platform_driver_register",
+          "return",
+          "module_init"
+        ],
+        "keywords_total": [
+          "platform_driver_register",
+          "return",
+          "module_platform_driver",
+          "module_init"
+        ],
+        "elapsed_sec": 17.26796317100525
+      },
+      {
+        "id": "complete_05",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that registers a platform driver:\n\n```c\n#include <linux",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "platform_driver_register",
+          "return",
+          "module_platform_driver",
+          "module_init"
+        ],
+        "elapsed_sec": 0
+      }
+    ],
+    "statistics": {
+      "overall_avg_score": 0.3525641025641026,
+      "total_tests": 78,
+      "total_time_sec": 843.2717363834381,
+      "basic_concepts": {
+        "avg_score": 0.35,
+        "avg_time": 5.389731615781784,
+        "count": 16
+      },
+      "kernel_mechanisms": {
+        "avg_score": 0.35625,
+        "avg_time": 11.124797314405441,
+        "count": 16
+      },
+      "advanced_internals": {
+        "avg_score": 0.3333333333333333,
+        "avg_time": 13.549065033594767,
+        "count": 12
+      },
+      "code_understanding": {
+        "avg_score": 0.31666666666666665,
+        "avg_time": 14.19518647591273,
+        "count": 12
+      },
+      "chinese_knowledge": {
+        "avg_score": 0.35833333333333334,
+        "avg_time": 13.742634773254395,
+        "count": 12
+      },
+      "code_completion": {
+        "avg_score": 0.41,
+        "avg_time": 8.11966381072998,
+        "count": 10
+      }
+    }
+  },
+  "fine_tuned_model": {
+    "results": [
+      {
+        "id": "l1_01",
+        "category": "basic_concepts",
+        "question": "What is the Linux kernel? Explain its role in an operating system.",
+        "response": "The Linux kernel is the core component of the Linux operating system. It serves as the interface between the hardware and the software running on the system, acting as a bridge between the two. The kernel manages system resources such as memory, CPU time, and disk space, and it controls the flow of data between the hardware and the software.\n\nThe kernel is responsible for managing the system's hardware resources, including the CPU, memory, and storage devices. It also provides a set of low-level services, such as inter-process communication, networking, and file systems, that higher-level software can use to interact with the system.\n\nThe Linux kernel is open source software, meaning that its source code is freely available for anyone to view, modify, and distribute. This allows for a large community of developers to contribute to the kernel and improve its performance and functionality. The Linux kernel is used in a wide range of devices, from smartphones and tablets to servers and supercomputers. It is also the foundation for many popular Linux distributions such as Ubuntu, Fedora, and CentOS. The Linux kernel plays a crucial role in the functioning of a Linux system and is an essential component of any modern operating system. It is responsible for ensuring the stability and security of the system, and it is constantly being updated and improved by the community of developers who contribute to it.",
+        "score": 0.7,
+        "keywords_matched": [
+          "process",
+          "memory",
+          "hardware"
+        ],
+        "keywords_total": [
+          "monolithic",
+          "process",
+          "memory",
+          "hardware",
+          "system calls"
+        ],
+        "elapsed_sec": 33.79995322227478
+      },
+      {
+        "id": "l1_01",
+        "category": "basic_concepts",
+        "question": "What is the Linux kernel? Explain its role in an operating system.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "monolithic",
+          "process",
+          "memory",
+          "hardware",
+          "system calls"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_02",
+        "category": "basic_concepts",
+        "question": "Explain the difference between user space and kernel space in Linux.",
+        "response": "In Linux, the user space and kernel space are two distinct regions of memory that have different privileges and modes of operation.\n\nUser space refers to the part of a computer system where ordinary application programs run. It is the area of memory where the user-level processes execute, and where system calls are made to interact with the kernel. User space processes have limited access to system resources and are not allowed to modify kernel memory directly. User space programs run in a user-mode environment, which is less privileged than the kernel mode.\n\nKernel space, on the other hand, is the area of memory that contains the kernel and its associated data structures. Kernel code runs in kernel mode, which has full access to system resources and can directly modify hardware and memory. Kernel code is responsible for managing hardware, scheduling processes, and providing system calls to user space programs.\n\nThe separation between user space and kernel space is important because it provides a layer of security and stability for the system. User space programs are isolated from the kernel and cannot directly access or modify kernel memory, which protects the kernel from being corrupted by malicious user space programs. Additionally, the separation between user space and kernel space also allows for better performance, as user space programs can run without the overhead of kernel mode execution.\n\nIn summary, user space and kernel space are two distinct regions of memory in Linux that have different privileges and modes of operation. User space programs run in a less privileged environment and can make system calls to interact with the kernel, while kernel code runs",
+        "score": 0.8,
+        "keywords_matched": [
+          "system call",
+          "privilege"
+        ],
+        "keywords_total": [
+          "ring 0",
+          "ring 3",
+          "system call",
+          "protection",
+          "privilege"
+        ],
+        "elapsed_sec": 34.278810024261475
+      },
+      {
+        "id": "l1_02",
+        "category": "basic_concepts",
+        "question": "Explain the difference between user space and kernel space in Linux.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "ring 0",
+          "ring 3",
+          "system call",
+          "protection",
+          "privilege"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_03",
+        "category": "basic_concepts",
+        "question": "What is a system call? Give three examples of common Linux system calls and explain what they do.",
+        "response": "Also describe their return values.\nOutput the complete corrected function(s).\n```c\n#include <unistd.h>\n#include <sys/wait.h>\n#include <sys/types.h>\n#include <sys/stat.h>\n#include <sys/time.h>\n#include <fcntl.h>\n#include <errno.h>\n#include <sched.h>\n\nint main()\n{\nint ret = 0;\n\nret = sched_get_priority_max(SCHED_FIFO);\nif (ret < 0)\n{\nperror(\"sched_get_priority_max failed\");\nreturn 1;\n}\n\nret = sched_get_priority_max(SCHED_OTHER);\nif (ret < 0)\n{\nperror(\"sched_get_priority_max failed\");\nreturn 1;\n}\n\nret = sched_get_priority_max(SCHED_RR);\nif (ret < 0)\n{\nperror(\"sched_get_priority_max failed\");\nreturn 1;\n}\n\nret = sched_get_priority_max(SCHED_TIME);\nif (ret < 0)\n{\nperror(\"sched_get_priority_max failed\");\nreturn 1;\n}\n\nreturn 0;\n}\n``` To correct the function, we need to identify the incorrect system calls and replace them with the correct ones based on the context provided in the description.\n\nHere are the corrected system calls:\n- `sched_get_priority_max` is already correctly used for checking the maximum priority value for different scheduling policies.\n\nNow, we need to provide three examples of common Linux system calls along with their descriptions and return values.\n\nHere are the corrected system calls and their descriptions and return values:\n\n```c\n",
+        "score": 0.5,
+        "keywords_matched": [
+          "read"
+        ],
+        "keywords_total": [
+          "fork",
+          "exec",
+          "open",
+          "read",
+          "write",
+          "mmap"
+        ],
+        "elapsed_sec": 33.76415801048279
+      },
+      {
+        "id": "l1_03",
+        "category": "basic_concepts",
+        "question": "What is a system call? Give three examples of common Linux system calls and explain what they do.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "fork",
+          "exec",
+          "open",
+          "read",
+          "write",
+          "mmap"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_04",
+        "category": "basic_concepts",
+        "question": "What is a process? How does it differ from a thread in the Linux kernel?",
+        "response": "In the Linux kernel, a process is a running instance of a program. It is an abstract concept that represents a running program and its associated resources, such as memory, file descriptors, and system resources. A process has a unique process ID (PID) and runs in its own address space.\n\nOn the other hand, a thread is a lightweight sub-process that shares the same address space as its parent process. Threads are created within a process and can share resources and system resources with other threads in the same process.\n\nIn summary, the key differences between a process and a thread in the Linux kernel are:\n\n  * A process is an independent unit of execution that has its own memory space and system resources.\n  * A thread is a lightweight sub-process that shares the same memory space and system resources as its parent process.\n\nHere's an example of how a process is created in the Linux kernel:\n\n```c\nstatic int fork_process(struct task_struct *parent)\n{\n   struct task_struct *child;\n   int pid;\n\n   child = alloc_task_struct();\n   if (!child)\n      return -ENOMEM;\n\n   copy_process(parent, child);\n   pid = alloc_pid(&init_pid_ns);\n   if (!pid) {\n      kfree(child);\n      return -ENOMEM;\n   }\n\n   child->pid = pid;\n   child->group_leader = child;\n\n   init_child_tid(child);\n\n   child->state = TASK_RUNNING;\n   init_task_struct(child);\n\n   task_lock(child);\n   init_task_struct",
+        "score": 0.8,
+        "keywords_matched": [
+          "task_struct",
+          "PID"
+        ],
+        "keywords_total": [
+          "task_struct",
+          "PID",
+          "TGID",
+          "clone",
+          "shared address space"
+        ],
+        "elapsed_sec": 34.31026220321655
+      },
+      {
+        "id": "l1_04",
+        "category": "basic_concepts",
+        "question": "What is a process? How does it differ from a thread in the Linux kernel?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "task_struct",
+          "PID",
+          "TGID",
+          "clone",
+          "shared address space"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_05",
+        "category": "basic_concepts",
+        "question": "What is virtual memory? Why does the Linux kernel use it?",
+        "response": "How is it implemented? What are some of the issues that arise in its implementation? How do those issues affect the overall performance of the system? Describe how the Linux kernel manages virtual memory to minimize the impact of those issues. Provide examples and references to relevant kernel code to support your discussion. Virtual memory is a technique used by operating systems to allow a process to have a larger virtual address space than the physical memory available on the system. It is implemented by mapping virtual addresses to physical addresses using page tables. The Linux kernel uses virtual memory for several reasons, including:\n\n1. **Memory Protection**: Virtual memory allows the kernel to enforce memory protection between processes, preventing one process from accessing another's memory.\n\n2. **Memory Management**: Virtual memory allows the kernel to manage the use of physical memory more efficiently, including swapping out inactive pages to disk.\n\n3. **Memory Expansion**: Virtual memory can be larger than physical memory, allowing processes to have a larger address space than the physical memory available.\n\nThe implementation of virtual memory in the Linux kernel involves several key components:\n\n1. **Page Tables**: Each process has its own page table that maps virtual addresses to physical addresses. The page table is managed by the kernel and can be dynamically adjusted as needed.\n\n2. **Swapping**: When physical memory is full, the kernel can swap out inactive pages to disk and swap them back in when needed.\n\n3. **Cache Management**: The kernel uses various techniques to manage the cache of frequently used pages in physical memory",
+        "score": 0.5,
+        "keywords_matched": [
+          "page table",
+          "address space"
+        ],
+        "keywords_total": [
+          "MMU",
+          "page table",
+          "TLB",
+          "address space",
+          "isolation"
+        ],
+        "elapsed_sec": 34.30964422225952
+      },
+      {
+        "id": "l1_05",
+        "category": "basic_concepts",
+        "question": "What is virtual memory? Why does the Linux kernel use it?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "MMU",
+          "page table",
+          "TLB",
+          "address space",
+          "isolation"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_06",
+        "category": "basic_concepts",
+        "question": "What is a device driver in Linux? How does it interact with the kernel?",
+        "response": "Why do we need it? How do we write our own device driver?\nThread safety in a Linux device driver\nLinux device driver: Register a device and a character device\nLinux device driver: Register device attributes\nLinux device driver: Register a device\nLinux device driver: Initialize device\nLinux device driver: Unregister device\nLinux device driver: Initialize device attribute group\nLinux device driver: Process device attribute\nLinux device driver: Unregister device attribute\nLinux device driver: Unregister device attribute group\nLinux device driver: Unregister a device\nLinux device driver: Process device attribute error\nLinux device driver: Initialize device attribute\nLinux device driver: Initialize device attribute group error\nLinux device driver: Process device attribute group\nLinux device driver: Process device attribute group error\nLinux device driver: Initialize device error\nLinux device driver: Process device\nLinux device driver: Process device error\nLinux device driver: Unregister device error\nLinux device driver: Initialize device attribute group error\nLinux device driver: Process device attribute group error\nLinux device driver: Initialize device attribute error\nLinux device driver: Process device attribute error\nLinux device driver: Unregister device attribute error\nLinux device driver: Unregister device attribute group error\nLinux device driver: Unregister device error\nLinux device driver: Unregister device attribute error\nLinux device driver: Unregister device attribute group error\nLinux device driver: Unregister device attribute error\nLinux device driver: Unregister device attribute group error\nLinux",
+        "score": 0.2,
+        "keywords_matched": [
+          "init"
+        ],
+        "keywords_total": [
+          "module",
+          "probe",
+          "file_operations",
+          "platform_driver",
+          "init"
+        ],
+        "elapsed_sec": 32.91093587875366
+      },
+      {
+        "id": "l1_06",
+        "category": "basic_concepts",
+        "question": "What is a device driver in Linux? How does it interact with the kernel?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "module",
+          "probe",
+          "file_operations",
+          "platform_driver",
+          "init"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_07",
+        "category": "basic_concepts",
+        "question": "What is a kernel panic? What causes it and how is it handled?",
+        "response": "A kernel panic is a situation where the operating system kernel encounters a critical internal error from which it cannot recover. It is a serious and unrecoverable state that usually results in a system crash. Here's a breakdown of what causes it and how it's handled:\n\n### Causes of a Kernel Panic:\n1. **Software Bugs**: Bugs in the kernel itself can cause a crash if they lead to an invalid memory access or a critical system resource failure.\n2. **Driver Bugs**: Kernel modules or device drivers can also cause kernel panics if they contain bugs that result in system instability.\n3. **Hardware Issues**: Hardware failures or errors can trigger a kernel panic. For example, memory errors can cause a system crash.\n4. **System Configuration**: Incorrect system configuration or configuration files can sometimes lead to a kernel panic.\n5. **Resource Conflicts**: Conflicts between hardware resources (e.g., memory, I/O ports) can also trigger a kernel panic.\n\n### Handling of a Kernel Panic:\nWhen a kernel panic occurs, the operating system stops executing and displays an error message on the screen. The message typically includes a stack trace indicating the location of the problem within the kernel. Here’s what happens:\n\n1. **Stop the System**: The system stops all running processes and halts all activity.\n2. **Display Error Message**: The error message is displayed on the screen, often including a stack trace that can be useful for debugging.\n3. **Save Diagnostic Information**: Some systems may save",
+        "score": 0.7,
+        "keywords_matched": [
+          "BUG"
+        ],
+        "keywords_total": [
+          "oops",
+          "BUG",
+          "die",
+          "reboot",
+          "kdump"
+        ],
+        "elapsed_sec": 33.0901460647583
+      },
+      {
+        "id": "l1_07",
+        "category": "basic_concepts",
+        "question": "What is a kernel panic? What causes it and how is it handled?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "oops",
+          "BUG",
+          "die",
+          "reboot",
+          "kdump"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l1_08",
+        "category": "basic_concepts",
+        "question": "What is the Linux kernel's role in file systems? Explain the Virtual File System (VFS) layer.",
+        "response": "The virtual file system layer is an abstraction layer between the file system APIs and the actual device drivers and underlying file systems.\nNow, explain the following concepts:\n- The file system stack\n- Super block\n- VFS inode\n- VFS dentry\n- dcache\n- dentry garbage collection\n- VFS operations\n- VFS file operations\n\nThe following should be true for the entire list of terms:\n\n  * Each term should be introduced with the following text:\n    \"### <term>\"\n  * Each term should be followed by a description of at most one sentence.\n  * Each term should be followed by a dash ('-').\n  * The entire list should be formatted as a numbered list.\n\n### file system stack\nThe file system stack is a stack of file systems and file system drivers used by the Linux kernel to mount and manage file systems. The stack consists of the VFS layer at the top, followed by one or more file system drivers, and finally the specific file system implementation at the bottom. The stack allows the VFS layer to provide a consistent interface for file system operations regardless of the underlying file system or device.\n- \n\n### super block\nThe super block is a data structure that contains metadata about the file system mounted on a particular device. It stores information such as the file system type, the total number of inodes and blocks, and the current usage of those resources. The super block is used by the file system driver to initialize the file",
+        "score": 0.7,
+        "keywords_matched": [
+          "inode",
+          "dentry",
+          "file"
+        ],
+        "keywords_total": [
+          "inode",
+          "dentry",
+          "super_block",
+          "file",
+          "vfsmount"
+        ],
+        "elapsed_sec": 33.78256297111511
+      },
+      {
+        "id": "l1_08",
+        "category": "basic_concepts",
+        "question": "What is the Linux kernel's role in file systems? Explain the Virtual File System (VFS) layer.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "inode",
+          "dentry",
+          "super_block",
+          "file",
+          "vfsmount"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_01",
+        "category": "kernel_mechanisms",
+        "question": "What is a page fault? Describe the steps the kernel takes when a page fault occurs.",
+        "response": "A page fault is an interrupt generated by the memory management hardware when a process attempts to access a virtual memory location that does not map to a physical memory location. This happens because the virtual memory location is not currently in the physical RAM, and the kernel must load it from the swap space on the disk before the process can continue executing.\n\nWhen a page fault occurs, the kernel takes the following steps:\n\n1. The hardware generates a page fault interrupt.\n2. The kernel receives the interrupt and saves the state of the interrupted process.\n3. The kernel searches for the virtual memory location in the page table to determine the physical address mapping.\n4. If the virtual memory location is not found in the page table, the kernel checks if the page is in swap space.\n5. If the page is in swap space, the kernel loads the page into physical RAM from the swap space.\n6. The kernel updates the page table to reflect the new physical address mapping.\n7. The kernel resumes the interrupted process, which can now access the virtual memory location.\n8. If the page is not in swap space and can't be loaded, the kernel terminates the process with a segmentation fault error.\n\nThe steps above are a general description of the process, and the actual implementation may vary depending on the operating system and hardware platform. Some operating systems may have additional steps or optimizations to handle page faults more efficiently. For example, some systems may use a shared page table or a copy-on-write mechanism to reduce the overhead",
+        "score": 0.7,
+        "keywords_matched": [
+          "page table",
+          "swap"
+        ],
+        "keywords_total": [
+          "MMU",
+          "page table",
+          "swap",
+          "demand paging",
+          "major fault",
+          "minor fault"
+        ],
+        "elapsed_sec": 30.6194167137146
+      },
+      {
+        "id": "l2_01",
+        "category": "kernel_mechanisms",
+        "question": "What is a page fault? Describe the steps the kernel takes when a page fault occurs.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "MMU",
+          "page table",
+          "swap",
+          "demand paging",
+          "major fault",
+          "minor fault"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_02",
+        "category": "kernel_mechanisms",
+        "question": "What is the purpose of the task_struct in the Linux kernel? What key information does it contain?",
+        "response": "The `task_struct` is a data structure in the Linux kernel that represents an executing process. It holds a wide range of information about a process, such as its ID, parent process ID, scheduling information, CPU time, memory usage, signal handling, file descriptors, networking information, etc.\n\nKey information contained in the `task_struct`:\n\n- Process ID (pid)\n- Parent process ID (ppid) and its parent's task_struct pointer\n- Process group ID (pgrp)\n- Session ID (sessionid)\n- Current CPU number (cpu)\n- Priority (priority)\n- Priority adjustment (rt_priority)\n- Real-time scheduling parameters (rt_priority, rt_cpu_shares)\n- Memory usage (rss, virtual memory, dirty memory)\n- File descriptor information (files and signal_struct)\n- Signal handlers\n- Kernel stack\n- Process status flags (flags)\n- Signal masks\n- Stack and limit information\n- CPU time consumed\n- Locking information\n- Task state (state)\n- Number of processors (nr_cpus)\n- Anonymous memory and file-backed memory\n- Process accounting information\n- Process tracing information\n- Process statistics (utime, stime, cutime, cstime)\n- Process limits (rlimit)\n\nThe `task_struct` is used by the kernel to manage processes, scheduling, and resource management. It enables efficient process management, context switching, process termination, and other necessary functions. The `task_struct` is a crucial data structure in the",
+        "score": 0.8,
+        "keywords_matched": [
+          "PID",
+          "state",
+          "priority",
+          "signal"
+        ],
+        "keywords_total": [
+          "PID",
+          "state",
+          "priority",
+          "mm_struct",
+          "files_struct",
+          "signal"
+        ],
+        "elapsed_sec": 33.82482624053955
+      },
+      {
+        "id": "l2_02",
+        "category": "kernel_mechanisms",
+        "question": "What is the purpose of the task_struct in the Linux kernel? What key information does it contain?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "PID",
+          "state",
+          "priority",
+          "mm_struct",
+          "files_struct",
+          "signal"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_03",
+        "category": "kernel_mechanisms",
+        "question": "Explain how Linux handles interrupts. What is the difference between top halves and bottom halves?",
+        "response": "What is softirq? What is the difference between bottom halves and softirq?\nLinux handles interrupts in a hierarchical manner, with a main interrupt handler running at the highest privilege level and various lower-level handlers running at lower privilege levels. The process is managed by the kernel's interrupt handling framework, which is responsible for delivering interrupts to the appropriate handlers and managing the order in which they are processed.\n\nAt the top level, the main interrupt handler runs at the highest privilege level and is responsible for handling hardware interrupts that occur on the system. This handler is responsible for delivering the interrupt to the appropriate lower-level handler, which may be a device driver or a special interrupt handler provided by the kernel.\n\nAt the next level down, bottom halves are lower-level handlers that run at a lower privilege level than the main interrupt handler. These handlers are responsible for performing the actual work of handling the interrupt and updating the device state. Bottom halves are typically implemented as functions that are registered with the kernel's interrupt handling framework, and they are executed in a serialized manner to ensure that they do not interfere with each other.\n\nSoftirqs are a special type of bottom half handler that is executed at a higher privilege level than regular bottom halves. Softirqs are designed to be executed after all other bottom halves have been processed, and they are used to perform tasks that require access to critical kernel resources that cannot be safely accessed from regular bottom halves. Softirqs are typically used to handle tasks such as network packet processing, disk I",
+        "score": 0.2,
+        "keywords_matched": [
+          "IRQ",
+          "softirq",
+          "handler"
+        ],
+        "keywords_total": [
+          "IRQ",
+          "softirq",
+          "tasklet",
+          "workqueue",
+          "handler",
+          "request_irq"
+        ],
+        "elapsed_sec": 33.71745824813843
+      },
+      {
+        "id": "l2_03",
+        "category": "kernel_mechanisms",
+        "question": "Explain how Linux handles interrupts. What is the difference between top halves and bottom halves?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "IRQ",
+          "softirq",
+          "tasklet",
+          "workqueue",
+          "handler",
+          "request_irq"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_04",
+        "category": "kernel_mechanisms",
+        "question": "What is a spinlock? When should you use a spinlock vs a mutex in kernel code?",
+        "response": "A spinlock is a synchronization mechanism used in kernel programming to manage access to shared resources. It is a type of lock that busy-waits (or spins) until the lock becomes available. Here's a brief overview of spinlocks and how they compare to mutexes:\n\n### Spinlock\n- **Description**: A spinlock is a synchronization mechanism that busy-waits until the lock becomes available. The CPU consumes more resources (e.g., cycles) while waiting.\n- **Use Cases**: Suitable for short-lived critical sections, where the lock is acquired and released very quickly.\n- **Advantages**: Can be faster for short critical sections since there's no context switch overhead.\n- **Disadvantages**: Can consume a lot of CPU resources if the lock is held for a long time or if there are frequent contention issues.\n\n### Mutex\n- **Description**: A mutex (short for \"mutual exclusion\") is a synchronization mechanism that blocks the execution of a thread until the lock becomes available. When the lock is acquired, the context switch happens, which can introduce overhead.\n- **Use Cases**: Suitable for long-lived critical sections or when the lock is held for extended periods.\n- **Advantages**: Can be more efficient for long-held locks since it avoids busy-waiting, reducing CPU consumption.\n- **Disadvantages**: Involves context switching, which can be slower than busy-waiting.\n\n### When to Use Spinlocks vs Mutexes\n- **Spinlocks** are generally",
+        "score": 0.7,
+        "keywords_matched": [
+          "spin",
+          "context"
+        ],
+        "keywords_total": [
+          "spin",
+          "sleep",
+          "atomic",
+          "SMP",
+          "preemption",
+          "context"
+        ],
+        "elapsed_sec": 31.714987993240356
+      },
+      {
+        "id": "l2_04",
+        "category": "kernel_mechanisms",
+        "question": "What is a spinlock? When should you use a spinlock vs a mutex in kernel code?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "spin",
+          "sleep",
+          "atomic",
+          "SMP",
+          "preemption",
+          "context"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_05",
+        "category": "kernel_mechanisms",
+        "question": "Describe the Linux kernel's scheduler (CFS). How does it decide which process to run next?",
+        "response": "The Linux Kernel Scheduling (CFS) is a Completely Fair Scheduler that has been the default scheduler for the Linux Kernel since version 2.6.33. It is designed to be fair and responsive, giving each process a fair share of CPU time based on its weight and needs.\n\nHere's a high-level description of how the CFS scheduler works:\n\n1. **Task Group**: Each process is part of a task group, which can be a single process or a set of processes that share resources.\n\n2. **Runqueue**: The system maintains a runqueue (queue of runnable tasks). Each task group has its own runqueue.\n\n3. **Time Slice**: Each task runs for a certain amount of time (time slice) before the scheduler decides whether to continue running the task or to switch to another task.\n\n4. **Task State**: Each task has a state (running, sleeping, stopped, etc.). The scheduler only runs tasks in the running state.\n\n5. **Task Priority**: The scheduler determines the priority of each task based on its weight and other factors like the amount of time it has been waiting.\n\n6. **Fairness**: CFS tries to be fair by distributing CPU time equally among all runnable tasks. For example, if two tasks have the same weight, they should get equal CPU time.\n\n7. **Shortest Remaining Time First (SRF)**: CFS uses a scheduler that is similar to SRF but takes fairness into account. The scheduler selects",
+        "score": 0.7,
+        "keywords_matched": [
+          "CFS",
+          "time slice",
+          "fairness"
+        ],
+        "keywords_total": [
+          "CFS",
+          "vruntime",
+          "red-black tree",
+          "nice",
+          "time slice",
+          "fairness"
+        ],
+        "elapsed_sec": 31.400596141815186
+      },
+      {
+        "id": "l2_05",
+        "category": "kernel_mechanisms",
+        "question": "Describe the Linux kernel's scheduler (CFS). How does it decide which process to run next?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "CFS",
+          "vruntime",
+          "red-black tree",
+          "nice",
+          "time slice",
+          "fairness"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_06",
+        "category": "kernel_mechanisms",
+        "question": "How does the Linux kernel manage physical memory? Explain the buddy allocator and slab allocator.",
+        "response": "How do they work together to manage memory efficiently?\n\nThe Linux kernel manages physical memory through two primary mechanisms: the buddy allocator and the slab allocator.\n\n### Buddy Allocator\n\nThe buddy allocator is a memory management algorithm that manages free memory by dividing it into chunks of equal size. The buddy allocator manages memory in powers of two (i.e., 1KB, 2KB, 4KB, 8KB, etc.). This allows for efficient merging and splitting of memory blocks.\n\n#### Key Concepts:\n1. **Order**: The order of a chunk is determined by its size. For example, an order-0 chunk is 1KB, an order-1 chunk is 2KB, an order-2 chunk is 4KB, and so on.\n2. **Node**: Nodes are groups of free memory chunks of the same order. Each node can be split into two smaller chunks of the same order.\n3. **Splitting and Merging**: When a larger chunk is requested, the buddy allocator splits a larger chunk into two smaller chunks of the same order. Conversely, when a smaller chunk is freed, the buddy allocator merges it with its buddy to form a larger chunk.\n\n#### Workflow:\n1. **Requesting Memory**: When a process requests memory, the buddy allocator searches for the smallest chunk that satisfies the request.\n2. **Splitting**: If no suitable chunk is found, the buddy allocator splits an existing chunk to create one or more chunks of the required size.\n3",
+        "score": 0.5,
+        "keywords_matched": [
+          "order",
+          "buddy"
+        ],
+        "keywords_total": [
+          "page",
+          "order",
+          "buddy",
+          "kmalloc",
+          "kmem_cache",
+          "fragmentation"
+        ],
+        "elapsed_sec": 31.166823863983154
+      },
+      {
+        "id": "l2_06",
+        "category": "kernel_mechanisms",
+        "question": "How does the Linux kernel manage physical memory? Explain the buddy allocator and slab allocator.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "page",
+          "order",
+          "buddy",
+          "kmalloc",
+          "kmem_cache",
+          "fragmentation"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_07",
+        "category": "kernel_mechanisms",
+        "question": "What is RCU (Read-Copy-Update)? Explain its use case in the Linux kernel.",
+        "response": "RCU (Read-Copy-Update) is a concurrency mechanism used in the Linux kernel for managing access to shared data structures that are frequently read but infrequently modified. RCU allows multiple readers to access the shared data simultaneously without requiring them to take locks, while ensuring that updates to the data structure are visible to readers only after a grace period during which no reader is accessing the data.\n\nRCU is particularly useful in situations where the data structure being protected is read-intensive and modified infrequently. By avoiding the need for locks during reads, RCU can significantly improve performance in such scenarios.\n\nHere's a brief explanation of how RCU works:\n\n1. **Readers**: Readers can safely traverse the data structure without holding any locks. They simply traverse the data structure as they normally would. During this process, they may encounter temporary inconsistencies due to ongoing updates.\n\n2. **Grace Period**: When an update is made to the data structure, RCU ensures that all existing readers complete their traversal before allowing new readers to begin. This is known as a \"grace period.\" During this grace period, no new readers are allowed to start their traversal.\n\n3. **Update**: Once the grace period is over, the update can be safely applied to the data structure without affecting the currently running readers.\n\n4. **Preemption**: RCU also handles preemption safely. If a reader holds the CPU and the grace period has not yet expired, it will not be preempted by a process that needs to",
+        "score": 0.8,
+        "keywords_matched": [
+          "grace period"
+        ],
+        "keywords_total": [
+          "lock-free",
+          "grace period",
+          "synchronize_rcu",
+          "call_rcu",
+          "read-side"
+        ],
+        "elapsed_sec": 30.989518880844116
+      },
+      {
+        "id": "l2_07",
+        "category": "kernel_mechanisms",
+        "question": "What is RCU (Read-Copy-Update)? Explain its use case in the Linux kernel.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "lock-free",
+          "grace period",
+          "synchronize_rcu",
+          "call_rcu",
+          "read-side"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l2_08",
+        "category": "kernel_mechanisms",
+        "question": "Explain the Linux kernel's approach to concurrency. What mechanisms exist beyond spinlocks and mutexes?",
+        "response": "How do these mechanisms work together to ensure consistency and safety of shared resources? Compare and contrast the performance of these different mechanisms. Additionally, discuss the challenges and limitations of using the Linux kernel for high-performance concurrent systems.\n\nThe Linux kernel's approach to concurrency is based on a combination of mechanisms to ensure consistency and safety of shared resources while maintaining performance and responsiveness. Some of the key mechanisms include spinlocks, mutexes, read-write locks, spinlock-free techniques, and atomic operations.\n\nSpinlocks are a simple and efficient mechanism to protect shared resources from concurrent access. When a CPU acquires a spinlock, it enters a busy-wait loop until the lock becomes available. Spinlocks are fast and do not have the overhead of context switching, but they can lead to CPU waste if the lock is held for a long time or if the process holding the lock is preempted by a higher-priority task.\n\nMutexes are a more sophisticated mechanism that provide similar functionality as spinlocks but with some additional features. Mutexes can be recursive, allowing a task to acquire the same mutex multiple times without causing a deadlock. Mutexes also have a fair locking mechanism that allows tasks to wait in a queue if the mutex is already held by another task. This mechanism avoids CPU waste by allowing other tasks to run while waiting for the mutex to become available.\n\nRead-write locks allow multiple readers to access a shared resource concurrently, but only one writer at a time. Readers acquire a shared lock, while writers acquire an exclusive",
+        "score": 0.7,
+        "keywords_matched": [
+          "atomic"
+        ],
+        "keywords_total": [
+          "atomic",
+          "RCU",
+          "semaphore",
+          "completion",
+          "percpu",
+          "seqcount"
+        ],
+        "elapsed_sec": 30.756423950195312
+      },
+      {
+        "id": "l2_08",
+        "category": "kernel_mechanisms",
+        "question": "Explain the Linux kernel's approach to concurrency. What mechanisms exist beyond spinlocks and mutexes?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "atomic",
+          "RCU",
+          "semaphore",
+          "completion",
+          "percpu",
+          "seqcount"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_01",
+        "category": "advanced_internals",
+        "question": "Explain how copy_from_user() and copy_to_user() work. Why can't the kernel just dereference user-space pointers directly?",
+        "response": "Provide a detailed explanation for both of these cases.\n\nCopy_from_user() and copy_to_user() are used to copy data between processes memory and user space memory. The kernel has to make sure that the memory it is copying to or from is user space memory, and that the memory is accessible to the user space process.\n\nCopy_from_user() copies data from user space memory to kernel space memory. The function prototype is:\n\n```c\nint copy_from_user(void *to, const void __user *from, unsigned long n);\n```\n\nThe function takes three parameters: the destination pointer `to`, the source pointer `from`, and the number of bytes to copy `n`. `to` is a pointer to kernel space memory, and `from` is a pointer to user space memory. The function returns the number of bytes that could not be copied if an error occurs.\n\nCopy_to_user() copies data from kernel space memory to user space memory. The function prototype is:\n\n```c\nint copy_to_user(void __user *to, const void *from, unsigned long n);\n```\n\nThe function takes three parameters: the destination pointer `to`, the source pointer `from`, and the number of bytes to copy `n`. `to` is a pointer to user space memory, and `from` is a pointer to kernel space memory. The function returns the number of bytes that could not be copied if an error occurs.\n\nThe kernel cannot dereference user-space pointers directly because user-space",
+        "score": 0.7,
+        "keywords_matched": [],
+        "keywords_total": [
+          "access_ok",
+          "page fault",
+          "probe_kernel",
+          "SMAP",
+          "SMEP",
+          "KASLR"
+        ],
+        "elapsed_sec": 30.657952070236206
+      },
+      {
+        "id": "l3_01",
+        "category": "advanced_internals",
+        "question": "Explain how copy_from_user() and copy_to_user() work. Why can't the kernel just dereference user-space pointers directly?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "access_ok",
+          "page fault",
+          "probe_kernel",
+          "SMAP",
+          "SMEP",
+          "KASLR"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_02",
+        "category": "advanced_internals",
+        "question": "What is the Linux kernel's approach to memory barriers? When would you use smp_mb(), smp_wmb(), or smp_rmb()?",
+        "response": "Provide an example of each.\n\nThe Linux kernel has a set of memory barrier functions to enforce ordering of memory operations. These are used to ensure that certain operations are not reordered by the compiler or the CPU.\n\n`smp_mb()` is a memory barrier that enforces ordering between preceding and following operations. It is used when you want to ensure that a preceding operation is not reordered before a following operation. For example:\n```c\nsmp_mb();\nx = 1;\ny = 2;\n```\nIn this example, `smp_mb()` ensures that `x = 1` is not reordered before `y = 2`. This is useful when you want to ensure that a preceding operation is not reordered before a following operation.\n\n`smp_wmb()` is a write memory barrier that enforces ordering between preceding and following operations. It is used when you want to ensure that a preceding operation is not reordered before a following write operation. For example:\n```c\nx = 1;\nsmp_wmb();\ny = 2;\n```\nIn this example, `smp_wmb()` ensures that `x = 1` is not reordered before `y = 2`. This is useful when you want to ensure that a preceding operation is not reordered before a following write operation.\n\n`smp_rmb()` is a read memory barrier that enforces ordering between preceding and following operations. It is used when you want to ensure that a preceding read operation is not reordered before a following",
+        "score": 0.5,
+        "keywords_matched": [
+          "ordering"
+        ],
+        "keywords_total": [
+          "ordering",
+          "store buffer",
+          "cache coherency",
+          "acquire",
+          "release",
+          "DMA"
+        ],
+        "elapsed_sec": 30.427932739257812
+      },
+      {
+        "id": "l3_02",
+        "category": "advanced_internals",
+        "question": "What is the Linux kernel's approach to memory barriers? When would you use smp_mb(), smp_wmb(), or smp_rmb()?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "ordering",
+          "store buffer",
+          "cache coherency",
+          "acquire",
+          "release",
+          "DMA"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_03",
+        "category": "advanced_internals",
+        "question": "Explain the Linux kernel's approach to device driver model. What are the roles of struct device, struct bus_type, and struct device_driver?",
+        "response": "In what way is the device model different from device model in other operating systems in terms of functionality, design, or implementation? \n\nIn terms of design, how are drivers registered to the device model? How are drivers linked to a device?\n\nIn terms of implementation, how are the device model, drivers, and the bus type implemented in the Linux kernel?\n\nIn terms of functionality, what features or capabilities are associated with the device driver model? In what ways does the device driver model improve system design or user experience compared to a device model in another operating system? In terms of system design, what are some key design features and decisions behind the Linux device driver model?\n\nThere are 3 answers below: answer1: Linux Device Model\nanswer2: Device Model Implementation\nanswer3: Device Model Functionality\n\nPlease provide your answer(s) in the order they are listed above, separated by a blank line(s).\n\nAnswer 1:\nThe Linux kernel device model is a modular system for managing hardware devices attached to buses. The device model defines a set of common data structures and interfaces that allow for a consistent way to interact with devices at a low level. It provides a generic framework that can be extended for different types of buses and device drivers.\n\nThe Linux device model contains the following main components:\n\n- struct device: This is the generic representation of a hardware device in the Linux kernel. It contains a set of fields that describe the device's properties and relationships, such as its driver, bus type,",
+        "score": 0.3,
+        "keywords_matched": [],
+        "keywords_total": [
+          "probe",
+          "remove",
+          "match",
+          "uevent",
+          "sysfs",
+          "devicetree"
+        ],
+        "elapsed_sec": 30.38941216468811
+      },
+      {
+        "id": "l3_03",
+        "category": "advanced_internals",
+        "question": "Explain the Linux kernel's approach to device driver model. What are the roles of struct device, struct bus_type, and struct device_driver?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "probe",
+          "remove",
+          "match",
+          "uevent",
+          "sysfs",
+          "devicetree"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_04",
+        "category": "advanced_internals",
+        "question": "How does the Linux kernel handle out-of-memory (OOM) situations? Explain the OOM killer.",
+        "response": "When does the OOM killer kick in? How does the OOM killer decide which process to kill? How does the OOM killer handle killing processes?\n\nThe Linux kernel handles out-of-memory (OOM) situations by attempting to reclaim memory from processes that are using too much memory. When the system runs low on memory, the OOM killer is activated to free up memory by terminating a process that is using excessive memory. The OOM killer is a last resort when all other memory management techniques have failed to free up enough memory.\n\nThe OOM killer kicks in when the system runs out of memory due to a lack of free memory or when the free memory is too low. This can happen when a process is using a large amount of memory, or when the system is under heavy load.\n\nThe OOM killer decides which process to kill by assigning a weight to each process based on its memory usage and importance. The process with the highest weight is the one that will be killed. The weight is calculated based on the process's memory usage, the system's memory usage, and the process's importance to the system.\n\nThe OOM killer handles killing processes by sending a SIGKILL signal to the process. This signal cannot be caught or ignored, and it causes the process to terminate immediately. The OOM killer will also free up the memory used by the terminated process.\n\nHere is an example of how the OOM killer can be triggered and how it decides which process to kill:\n\n```c\nvoid",
+        "score": 0.5,
+        "keywords_matched": [],
+        "keywords_total": [
+          "oom_score",
+          "badness",
+          "overcommit",
+          "panic_on_oom",
+          "cgroup"
+        ],
+        "elapsed_sec": 35.5028920173645
+      },
+      {
+        "id": "l3_04",
+        "category": "advanced_internals",
+        "question": "How does the Linux kernel handle out-of-memory (OOM) situations? Explain the OOM killer.",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "oom_score",
+          "badness",
+          "overcommit",
+          "panic_on_oom",
+          "cgroup"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_05",
+        "category": "advanced_internals",
+        "question": "Explain the Linux kernel's approach to tracing and debugging. What are ftrace, perf, and eBPF?",
+        "response": "How do they compare?\n\nThe Linux kernel has various facilities for tracing and debugging system events.\n\n* ftrace: Function-level tracing, tracing the entry/exit of system functions. It can be enabled or disabled at runtime using the `tracer` parameter of the `ftrace` kernel module. ftrace provides an interactive user interface in `/sys/kernel/debug/tracing`.\n* perf: Sampling-based profiling, tracing events as they occur at the hardware level. It can be enabled or disabled at runtime using the `perf` kernel module. perf provides an interactive user interface in `/sys/bus/event_source/devices/perf`.\n* eBPF: Extended Berkeley Packet Filter, a Linux kernel subsystem for securely running custom code as a kernel module. It can be enabled or disabled at runtime using the `bpf` kernel module. eBPF provides an interactive user interface in `/sys/kernel/debug/trace`.\n* printk: Kernel logging, writing messages to the kernel log buffer. Log messages can be enabled or disabled at runtime using the `log_buf_len` parameter of the `kernel` kernel module. Log messages are also available in `/sys/kernel/debug/trace`.\n* kprobes: Kernel probes, tracing the entry/exit of kernel functions. It can be enabled or disabled at runtime using the `kprobes` kernel module. kprobes provides an interactive user interface in `/sys/kernel/debug/kprobes`.\n\nThe above are the major tracing and debugging facilities of the Linux kernel.\n\nftrace and",
+        "score": 0.5,
+        "keywords_matched": [
+          "kprobe"
+        ],
+        "keywords_total": [
+          "tracepoint",
+          "kprobe",
+          "uprobe",
+          "ring buffer",
+          "bpftrace"
+        ],
+        "elapsed_sec": 37.89417910575867
+      },
+      {
+        "id": "l3_05",
+        "category": "advanced_internals",
+        "question": "Explain the Linux kernel's approach to tracing and debugging. What are ftrace, perf, and eBPF?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "tracepoint",
+          "kprobe",
+          "uprobe",
+          "ring buffer",
+          "bpftrace"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "l3_06",
+        "category": "advanced_internals",
+        "question": "How does the Linux kernel handle namespaces and cgroups? What role do they play in containerization?",
+        "response": "\r\n\r\nThe Linux kernel offers a number of advanced features that can be used to isolate components of a system from each other and reduce the overhead of running multiple systems on a single system. Namespaces are a key feature of the kernel that allows multiple virtual environments to run on a single host operating system, with the environments isolated from each other. Each environment has its own set of system resources, including the process tree, network interfaces, mount points, and file system paths.\r\n\r\nCgroups (control groups) are another feature of the Linux kernel that can be used to manage and limit the resources used by processes. They provide a flexible way to allocate resources to groups of processes and to enforce resource limits.\r\n\r\nIn containerization, namespaces and cgroups are used to isolate containers from each other and from the host system. Each container is run in its own namespace, with its own set of process IDs, network interfaces, mount points, and file system paths. This ensures that one container cannot interfere with the operation of another container or the host system.\r\n\r\nCgroups are used to manage the resources used by processes in a container, such as CPU and memory usage. This helps to prevent containers from consuming too much system resources and ensures that they run efficiently.\r\n\r\nOverall, namespaces and cgroups are key features of the Linux kernel that provide a foundation for containerization and help to ensure that containers run securely and efficiently. ```\r\n```\r\n\r\nIn containerization, namespaces and cgroups work together to provide a secure and efficient way to run",
+        "score": 0.7,
+        "keywords_matched": [
+          "resource limit"
+        ],
+        "keywords_total": [
+          "pid_namespace",
+          "net_namespace",
+          "cgroupfs",
+          "resource limit",
+          "isolation"
+        ],
+        "elapsed_sec": 48.494004249572754
+      },
+      {
+        "id": "l3_06",
+        "category": "advanced_internals",
+        "question": "How does the Linux kernel handle namespaces and cgroups? What role do they play in containerization?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "pid_namespace",
+          "net_namespace",
+          "cgroupfs",
+          "resource limit",
+          "isolation"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_01",
+        "category": "code_understanding",
+        "question": "What does the kmalloc() function do in the Linux kernel? What are the common GFP flags and when would you use each?",
+        "response": "kmalloc() is a function in the Linux kernel used to allocate memory from the kernel heap. It is similar to the malloc() function found in user space, but is designed specifically for kernel use.\n\nThe function prototype is:\n\n```c\nvoid *kmalloc(size_t size, gfp_t flags);\n```\n\n`size`: The number of bytes to allocate.\n\n`flags`: A bitmask of flags that determine how the memory is allocated. Common flags include:\n\n- `__GFP_ZERO`: The allocated memory is zero-filled (default).\n- `__GFP_REPEAT`: Repeatedly attempt to allocate memory if allocation fails.\n- `__GFP_NOWARN`: Don't warn if the allocated memory is not zero-filled.\n- `__GFP_NOFAIL`: Return NULL if memory cannot be allocated.\n- `__GFP_NOFAIL | __GFP_NOWARN`: Return NULL if memory cannot be allocated and do not warn.\n- `__GFP_COMP`: Use compaction to find free memory.\n- `__GFP_HIGHCOMP`: Use compaction aggressively.\n- `__GFP_HIGH`: Request high-priority memory allocation.\n- `__GFP_IO`: Allow disk I/O when allocating memory.\n- `__GFP_FS`: Allow filesystem operations when allocating memory.\n- `__GFP_COLD`: Allocate memory with cold access.\n- `__GFP_HARDWdatable`: Allow memory to be written to disk.\n- `__GFP_RECLAIM`: Use memory",
+        "score": 0.8,
+        "keywords_matched": [
+          "allocate",
+          "bytes"
+        ],
+        "keywords_total": [
+          "allocate",
+          "GFP_KERNEL",
+          "GFP_ATOMIC",
+          "GFP_DMA",
+          "slab",
+          "bytes"
+        ],
+        "elapsed_sec": 42.33275294303894
+      },
+      {
+        "id": "code_01",
+        "category": "code_understanding",
+        "question": "What does the kmalloc() function do in the Linux kernel? What are the common GFP flags and when would you use each?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "allocate",
+          "GFP_KERNEL",
+          "GFP_ATOMIC",
+          "GFP_DMA",
+          "slab",
+          "bytes"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_02",
+        "category": "code_understanding",
+        "question": "What does the schedule() function do in the Linux kernel? When is it called?",
+        "response": "I found it in a few drivers but I don't know what it does or how it's used. I tried to find the answer on the mailing list archives but couldn't find anything related to it. Can someone explain how it works? I'm trying to understand the use of this function and how it works.\n\nHere's the definition of the function:\n\n```c\nstatic inline void schedule(void)\n{\nEXPORT_SYMBOL_GPL(schedule);\n}\n``` The `schedule()` function is a minimal wrapper around `schedule_tail()` that is used in a couple of drivers for older kernels. It informs the kernel that the driver has finished its work and requests that the kernel invoke the appropriate process scheduler to execute a different task.\n\nThe `schedule()` function is typically used in device drivers to switch to another task in the process scheduler when the device driver has completed its work. This is often done when a device driver has performed an interrupt and needs to return control to the kernel scheduler.\n\nThe `schedule()` function is called when the device driver has finished its work and wants to make way for another process to run. It is typically called at the end of an interrupt handler or other device driver function.\n\nThe `schedule()` function is a minimal wrapper around `schedule_tail()` and is used in a few drivers for older kernels. It informs the kernel that the driver has finished its work and requests that the kernel invoke the appropriate process scheduler to execute a different task.\n\nHere is a more detailed explanation of how `schedule()` works",
+        "score": 0.2,
+        "keywords_matched": [
+          "scheduler"
+        ],
+        "keywords_total": [
+          "context switch",
+          "runqueue",
+          "preempt",
+          "yield",
+          "TASK_RUNNING",
+          "scheduler"
+        ],
+        "elapsed_sec": 38.57218790054321
+      },
+      {
+        "id": "code_02",
+        "category": "code_understanding",
+        "question": "What does the schedule() function do in the Linux kernel? When is it called?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "context switch",
+          "runqueue",
+          "preempt",
+          "yield",
+          "TASK_RUNNING",
+          "scheduler"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_03",
+        "category": "code_understanding",
+        "question": "Explain the Linux kernel module init and exit mechanism. What are module_init() and module_exit()?",
+        "response": "Explain the following code snippet:\n\n```c\nint module_init(struct module *module, struct module_param_list *param)\n{\nint ret;\n\nmodule->name = module_name;\nmodule->init = module_init;\nmodule->exit = module_exit;\nmodule->param_list = param;\n\nret = module->init(module);\nreturn ret;\n}\n``` ```c\nint module_init(struct module *module, struct module_param_list *param)\n{\nint ret;\n\nmodule->name = module_name;\nmodule->init = module_init;\nmodule->exit = module_exit;\nmodule->param_list = param;\n\nret = module->init(module);\nreturn ret;\n}\n```\n\n\n* `module` is a pointer to the module structure (struct module)\n* `param` is a pointer to a module_param_list structure which contains a list of module parameters.\n* `int ret;` defines the return value of the function.\n* `module->name = module_name;` assigns the name of the module to the module structure.\n* `module->init = module_init;` assigns the module_init function to the module structure as the initialization function.\n* `module->exit = module_exit;` assigns the module_exit function to the module structure as the cleanup function.\n* `module->param_list = param;` assigns the module parameters list to the module structure.\n* `ret = module->init(module);` calls the module_init function and assigns its return value to ret.\n* `return ret;` returns",
+        "score": 0.2,
+        "keywords_matched": [],
+        "keywords_total": [
+          "insmod",
+          "rmmod",
+          "MODULE_LICENSE",
+          "__init",
+          "__exit",
+          "GPL"
+        ],
+        "elapsed_sec": 38.51451301574707
+      },
+      {
+        "id": "code_03",
+        "category": "code_understanding",
+        "question": "Explain the Linux kernel module init and exit mechanism. What are module_init() and module_exit()?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "insmod",
+          "rmmod",
+          "MODULE_LICENSE",
+          "__init",
+          "__exit",
+          "GPL"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_04",
+        "category": "code_understanding",
+        "question": "What is the purpose of printk() in the kernel? How does it differ from printf()? What are the log levels?",
+        "response": "What is the difference between dmesg and syslog? How is it implemented? And what is the impact of overusing printk()?\n\nThe purpose of `printk()` in the kernel is to print messages to the kernel log buffer. It is a logging mechanism that allows developers to print messages to the kernel log buffer for debugging and diagnostic purposes.\n\n`printk()` differs from `printf()` in that it is specifically designed for use in the kernel and is optimized for performance and security. `printk()` does not perform any string formatting or manipulation, it simply prints the message passed to it to the kernel log buffer. Additionally, `printk()` is implemented in assembly language to optimize for performance and minimize the number of instructions executed.\n\nThere are several log levels in the kernel, including:\n\n- KERN_EMERG: system is unusable\n- KERN_ALERT: action must be taken immediately\n- KERN_CRIT: critical conditions\n- KERN_ERR: error conditions\n- KERN_WARNING: warning conditions\n- KERN_NOTICE: normal but significant condition\n- KERN_INFO: informational\n- KERN_DEBUG: debug-level messages\n\nThe difference between `dmesg` and `syslog` is that `dmesg` displays the contents of the kernel log buffer, while `syslog` is a general system logging facility that can be used to log messages from user-space applications as well as the kernel.\n\n`dmesg` is specifically designed for low-level",
+        "score": 0.5,
+        "keywords_matched": [
+          "KERN_EMERG",
+          "KERN_INFO",
+          "dmesg",
+          "log level"
+        ],
+        "keywords_total": [
+          "KERN_EMERG",
+          "KERN_INFO",
+          "dmesg",
+          "console",
+          "ring buffer",
+          "log level"
+        ],
+        "elapsed_sec": 38.510385274887085
+      },
+      {
+        "id": "code_04",
+        "category": "code_understanding",
+        "question": "What is the purpose of printk() in the kernel? How does it differ from printf()? What are the log levels?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "KERN_EMERG",
+          "KERN_INFO",
+          "dmesg",
+          "console",
+          "ring buffer",
+          "log level"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_05",
+        "category": "code_understanding",
+        "question": "Explain the Linux kernel's linked list implementation (struct list_head). How does container_of() work?",
+        "response": "The Linux kernel has a simple implementation of a linked list. Each node in the linked list is stored in a struct list_head. The struct looks like this:\n\n```c\nstruct list_head {\n    struct list_head *next, *prev;\n};\n```\n\n\nThe next and prev pointers are used to link nodes into a list. If the node is at the head of the list, then the head's next pointer points to the node. If the node is at the tail of the list, the tail's prev pointer points to the node. The next and prev pointers of the node both point to the next element if the node is in the middle of the list.\n\nThe Linux kernel provides a few functions for manipulating these lists. The following are some examples of these list functions:\n\n```c\nstatic inline void list_add(struct list_head *new, struct list_head *head)\n{\n    if (list_empty(head)) {\n        head->next = head->prev = new;\n    } else {\n        new->next = head->next;\n        head->next->prev = new;\n        new->prev = head;\n        head->next = new;\n    }\n}\n\nstatic inline void list_add_tail(struct list_head *new, struct list_head *head)\n{\n    if (list_empty(head)) {\n        head->next = head->prev = new;\n    } else {\n        head->prev->next = new;\n        new->prev = head->prev;\n        head->prev =",
+        "score": 0.8,
+        "keywords_matched": [
+          "list_add"
+        ],
+        "keywords_total": [
+          "list_add",
+          "list_for_each",
+          "offsetof",
+          "type safety",
+          "embedded"
+        ],
+        "elapsed_sec": 38.22952198982239
+      },
+      {
+        "id": "code_05",
+        "category": "code_understanding",
+        "question": "Explain the Linux kernel's linked list implementation (struct list_head). How does container_of() work?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "list_add",
+          "list_for_each",
+          "offsetof",
+          "type safety",
+          "embedded"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "code_06",
+        "category": "code_understanding",
+        "question": "What is a waitqueue in the Linux kernel? How do wait_event_interruptible() and wake_up() work?",
+        "response": "When should one use wait_event_interruptible() over wait_event() and vice versa? I couldn't find a clear description of the difference between wait_event_interruptible() and wait_event() in the kernel documentation. I also couldn't find a clear description of when to use wait_event() and when to use wait_event_interruptible().\nIn the Linux kernel, waitqueues are a mechanism for blocking a task until a condition occurs. They are used to wait for some event to occur, such as a file becoming ready for reading, a socket becoming writable, or a semaphore becoming available. Waitqueues are used by kernel threads (kthreads) and tasks that are blocked on a file or socket.\nwait_event_interruptible() and wait_event() are two different functions that can be used to wait for a condition to occur. They are both part of the waitqueue API and are used to block a task until a condition is met.\nwait_event_interruptible() will block the task until the condition is met, but if the task is interrupted by a signal, it will return -ERESTARTSYS.\nwait_event() will block the task until the condition is met, but it will not return if the task is interrupted by a signal. Instead, it will simply return when the signal is caught and the task is resumed.\nIn general, you should use wait_event_interruptible() when you want to be able to handle signals while waiting for a condition to occur. If you do not need to handle signals while",
+        "score": 0.2,
+        "keywords_matched": [
+          "condition",
+          "blocking"
+        ],
+        "keywords_total": [
+          "wait_queue_head",
+          "TASK_INTERRUPTIBLE",
+          "condition",
+          "blocking",
+          "wake_up"
+        ],
+        "elapsed_sec": 38.716572999954224
+      },
+      {
+        "id": "code_06",
+        "category": "code_understanding",
+        "question": "What is a waitqueue in the Linux kernel? How do wait_event_interruptible() and wake_up() work?",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "wait_queue_head",
+          "TASK_INTERRUPTIBLE",
+          "condition",
+          "blocking",
+          "wake_up"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_01",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux内核中的进程调度器(scheduler)是如何工作的？CFS调度器的主要特点是什么？",
+        "response": "它与经典O(1)调度器相比有何不同？CFS调度器与其他现代操作系统中使用的调度器相比有何优势？\n\nLinux内核的进程调度器是一个复杂的系统，负责在多个进程之间分配处理器的时间。CFS（Completely Fair Scheduler）调度器是当前Linux内核中最先进的进程调度器版本之一。CFS调度器是一个自适应循环优先队列调度器，它以公平的方式为进程分配处理器时间。它的主要特点包括：\n\n1. 公平性：CFS调度器为所有进程提供公平的处理器分配。它确保每个进程都能得到公平的处理器时间，而不会被其他进程抢占。\n\n2. 调度器非常高效：CFS调度器通过避免不必要的上下文切换来提高性能。它在进程需要更多处理器资源时才进行切换。\n\n3. 调度器具有可伸缩性：CFS调度器可以处理大量的进程而不会出现性能问题。它使用自适应循环优先队列来管理进程，这使得它可以有效地处理大量进程。\n\n4. 调度器具有自适应性：CFS调度器能够根据进程的需求动态调整优先级。它通过采用优先队列来实现这一点。\n\nCFS调度器与经典O(1)调度器相比主要有以下区别：\n\n1. 公平性：CFS调度器为所有进程提供公平的处理器分配，而O(1)调度",
+        "score": 0.7,
+        "keywords_matched": [
+          "CFS",
+          "公平"
+        ],
+        "keywords_total": [
+          "CFS",
+          "vruntime",
+          "红黑树",
+          "nice",
+          "时间片",
+          "公平"
+        ],
+        "elapsed_sec": 38.34906077384949
+      },
+      {
+        "id": "cn_01",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux内核中的进程调度器(scheduler)是如何工作的？CFS调度器的主要特点是什么？",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "CFS",
+          "vruntime",
+          "红黑树",
+          "nice",
+          "时间片",
+          "公平"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_02",
+        "category": "chinese_knowledge",
+        "question": "什么是内核态和用户态？为什么需要区分这两种状态？",
+        "response": "内核态和用户态是操作系统中的两个不同运行状态，它们定义了处理器在执行程序时所能访问的系统资源的范围和权限。区别在于：1) 用户态时，程序只能访问有限的资源，这些资源足以完成程序功能，而不能访问系统资源。2) 内核态时，程序有更广泛的权限，可以访问系统资源。这是因为，操作系统需要在用户态程序之间进行资源管理和调度（例如在进程之间分配内存，或者管理进程的执行顺序）。如果不明确区分这两种状态，那可能会产生许多安全问题。例如，一个恶意程序可以访问不应该访问的系统资源，或者修改系统状态，这可能对系统造成严重破坏。\n\n为了区分这两个状态，处理器有一个虚拟地址空间，它被划分为两个部分：内核地址空间和用户地址空间。这两个地址空间的范围不同：1) 内核地址空间包括了处理器的所有资源；2) 用户地址空间只包括了处理器的一部分资源。处理器在执行程序时，根据当前状态来访问不同的地址空间，并且在状态转换时修改当前状态。当程序试图访问不被允许访问的资源时，处理器会触发一个异常（例如地址越界）。操作系统在接收到这个异常时，执行相应的处理程序来决定如何处理这个异常（例如终止程序，或者执行特定的操作）。这可以避免恶意程序作出破坏系统的行为，从而提高系统的安全性。而当程序",
+        "score": 0.7,
+        "keywords_matched": [
+          "安全"
+        ],
+        "keywords_total": [
+          "特权级",
+          "系统调用",
+          "保护",
+          "Ring 0",
+          "Ring 3",
+          "安全"
+        ],
+        "elapsed_sec": 38.44095277786255
+      },
+      {
+        "id": "cn_02",
+        "category": "chinese_knowledge",
+        "question": "什么是内核态和用户态？为什么需要区分这两种状态？",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "特权级",
+          "系统调用",
+          "保护",
+          "Ring 0",
+          "Ring 3",
+          "安全"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_03",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux中的虚拟内存管理机制，包括页表、TLB和缺页异常处理。",
+        "response": "在Linux系统中，虚拟内存管理机制是一个至关重要的组成部分，它负责管理进程的虚拟地址空间与物理内存之间的映射关系。虚拟内存管理机制主要包括以下几个方面：页表、TLB（Translation Lookaside Buffer）和缺页异常处理。\n\n### 页表（Page Table）\n\n页表是虚拟地址空间与物理地址空间之间映射关系的具体记录。在Linux系统中，页表通常由一系列的页表项组成，每个页表项包含了虚拟地址到物理地址的映射信息。在现代操作系统中，页表项通常有如下结构：\n\n- 虚拟地址的低12位用于页内偏移，其余部分用于索引页表项。\n- 页表项包含一个位标识该虚拟地址块是否已经被映射到物理地址。\n- 若已映射，则包含物理地址的页帧号和其他属性信息（如访问权限等）。\n\n页表项具体布局取决于虚拟内存系统的设计，而在Linux系统中，页表项通常采用分层结构（如三级页表），通常由两个页表和一个页目录组成。\n\n### TLB（Translation Lookaside Buffer）\n\nTLB（Translation Lookaside Buffer）是硬件层为提高虚拟地址到物理地址转换速度设置的一种高速缓存。当CPU接收到一个虚拟地址，首先会检查TLB高速缓存，若命中则直接从中查询出物理地址；若未命中",
+        "score": 0.8,
+        "keywords_matched": [
+          "页表",
+          "TLB",
+          "缺页"
+        ],
+        "keywords_total": [
+          "页表",
+          "TLB",
+          "缺页",
+          "MMU",
+          "交换",
+          "多级页表"
+        ],
+        "elapsed_sec": 38.3599750995636
+      },
+      {
+        "id": "cn_03",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux中的虚拟内存管理机制，包括页表、TLB和缺页异常处理。",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "页表",
+          "TLB",
+          "缺页",
+          "MMU",
+          "交换",
+          "多级页表"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_04",
+        "category": "chinese_knowledge",
+        "question": "Linux内核中的并发控制机制有哪些？请比较自旋锁、互斥锁和信号量的使用场景。",
+        "response": "Linux内核中的并发控制机制主要包括自旋锁、互斥锁和信号量等。它们都有各自的优势和使用场景。\n\n1. 自旋锁：自旋锁是一种轻量级的互斥锁，它的特点是当持有自旋锁时，线程在获取锁期间会耗尽处理器资源。自旋锁通常用于那些不需要长时间持有锁的情况。例如，在内核初始化或设备驱动程序中，它通常用于保护临界的资源，如一个硬件设备或一组设备共享的资源。自旋锁在获取锁时不会阻塞当前的进程，而是不断检查锁的状态，直到成功获取锁为止，这样可以避免阻塞线程和进程调度开销。\n\n2. 互斥锁：互斥锁是一种更通用的并发控制机制，它可以在进程上下文中和内核上下文之间使用。互斥锁可以确保同一时间只有一个线程可以访问一个临界资源。互斥锁可被用来保护临界资源，例如，设备驱动程序中的I/O操作，这样在硬件设备上执行的操作不会被并发访问中断。互斥锁还可以用于保护临界代码段，如操作系统的内核数据结构，防止并发访问引起的数据不一致性或一致性问题。\n\n3. 信号量：信号量是一种更为灵活的并发控制机制，它可以控制对资源的访问数量。信号量可以设置一个计数器，当计数器大于0时",
+        "score": 0.7,
+        "keywords_matched": [
+          "自旋锁",
+          "互斥锁",
+          "信号量",
+          "上下文"
+        ],
+        "keywords_total": [
+          "自旋锁",
+          "互斥锁",
+          "信号量",
+          "RCU",
+          "原子操作",
+          "上下文"
+        ],
+        "elapsed_sec": 38.35290217399597
+      },
+      {
+        "id": "cn_04",
+        "category": "chinese_knowledge",
+        "question": "Linux内核中的并发控制机制有哪些？请比较自旋锁、互斥锁和信号量的使用场景。",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "自旋锁",
+          "互斥锁",
+          "信号量",
+          "RCU",
+          "原子操作",
+          "上下文"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_05",
+        "category": "chinese_knowledge",
+        "question": "请描述Linux网络协议栈的基本架构，从网卡接收到数据到应用层经历了哪些步骤？",
+        "response": "在Linux内核中，网络协议栈是实现网络通信的重要部分。它负责处理从网卡接收到的数据，直到最终将数据传递到应用层。以下是完整的流程：\n\n1. 网络驱动程序：网络驱动程序负责与网卡进行通信，并将接收到的数据包传递到内核网络协议栈。\n\n2. TCP/IP协议栈：内核网络协议栈负责解析数据包，并执行TCP/IP协议栈的功能。它包含以下几个子协议栈：\n   - IP协议栈：负责处理IP头部，并将数据包传递给对应的协议栈。\n   - TCP协议栈：负责处理TCP头部，并将数据包传递给应用层。\n   - UDP协议栈：负责处理UDP头部，并将数据包传递给应用层。\n\n3. 用户态网络协议栈：如果有用户态网络协议栈存在，它将接收到数据包，并执行相应的协议栈功能。如果没有用户态网络协议栈存在，则整个网络协议栈都在内核态执行。\n\n4. 接口层：网络协议栈将数据传递到应用层之前，需要经过接口层，该层负责选择最优的路径将数据传递给应用层。它负责处理路由表，并选择最优路由路径。\n\n5. 应用层：接收到数据包后，应用层将解析数据包并将其传递给应用进程。如果数据包是TCP或UDP协议，则应用层还需要将数据传递给对应的服务。\n\n",
+        "score": 0.6,
+        "keywords_matched": [
+          "TCP/IP",
+          "协议栈"
+        ],
+        "keywords_total": [
+          "NAPI",
+          "sk_buff",
+          "netfilter",
+          "socket",
+          "TCP/IP",
+          "协议栈"
+        ],
+        "elapsed_sec": 38.83723711967468
+      },
+      {
+        "id": "cn_05",
+        "category": "chinese_knowledge",
+        "question": "请描述Linux网络协议栈的基本架构，从网卡接收到数据到应用层经历了哪些步骤？",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "NAPI",
+          "sk_buff",
+          "netfilter",
+          "socket",
+          "TCP/IP",
+          "协议栈"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "cn_06",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux内核的OOM killer机制。它是如何选择要杀死的进程的？",
+        "response": "当系统内存耗尽时，Linux内核会触发OOM（out of memory） Killer机制。该机制会根据一定的规则，选择需要杀死的进程，以释放足够的内存资源。整个机制大致分为以下几个步骤：\n\n1. 检测内存情况：\n   内核首先检查系统可用内存数量，当可用内存不足时，触发OOM Killer机制。\n\n2. 选择进程杀死策略：\n   在选择要杀死的进程前，内核会先尝试从两个队列中选择一个：\n   - 进程分配内存申请队列（pom）：包含请求分配内存资源的进程；优先杀死这部分进程。\n   - 系统分配器队列（sys）：包含一些系统进程（如守护进程），无法从该队列中选择进程进行杀死。\n\n3. 根据队列选择进程：\n   从进程分配内存申请队列（pom）中选择一个进程进行杀死。选择过程按照如下规则执行：\n   - 如果队列为空，则从系统分配器队列（sys）中选择进程进行杀死。\n   - 如果系统分配器队列（sys）也为空，则选择一个进程杀死。\n   - 否则，选择一个进程杀死。\n\n4. 选择进程策略：\n   在选择进程杀死时，内核会根据进程的内存使用情况（内存消耗占比、内存使用量）进行评估，选择一个内存占用比例较大或",
+        "score": 0.6,
+        "keywords_matched": [
+          "OOM"
+        ],
+        "keywords_total": [
+          "OOM",
+          "badness",
+          "oom_score",
+          "overcommit",
+          "cgroup",
+          "panic"
+        ],
+        "elapsed_sec": 41.87558722496033
+      },
+      {
+        "id": "cn_06",
+        "category": "chinese_knowledge",
+        "question": "请解释Linux内核的OOM killer机制。它是如何选择要杀死的进程的？",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "OOM",
+          "badness",
+          "oom_score",
+          "overcommit",
+          "cgroup",
+          "panic"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_01",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel module initialization function:\n\n```c\n#include <linux/module.h>\n",
+        "response": "   return 0;\n}\n\nstatic void __exit my_module_exit(void)\n{\n    printk(KERN_INFO \"My module unloaded\\n\");\n}\n\nmodule_init(my_module_init);\nmodule_exit(my_module_exit);\n``` To complete the function, you need to add the correct function signature for the module initialization function `my_module_init`. The correct function signature for a module initialization function is `int __init my_module_init(void)`.\n\nHere is the complete function:\n\n```c\n#include <linux/module.h>\n#include <linux/kernel.h>\n\nstatic int __init my_module_init(void)\n{\n    printk(KERN_INFO \"My module loaded\\n\");\n    return 0;\n}\n\nstatic void __exit my_module_exit(void)\n{\n    printk(KERN_INFO \"My module unloaded\\n\");\n}\n\nmodule_init(my_module_init);\nmodule_exit(my_module_exit);\n```",
+        "score": 0.8,
+        "keywords_matched": [
+          "return 0",
+          "module_init",
+          "module_exit"
+        ],
+        "keywords_total": [
+          "return 0",
+          "module_init",
+          "module_exit",
+          "MODULE_LICENSE",
+          "GPL"
+        ],
+        "elapsed_sec": 31.2325758934021
+      },
+      {
+        "id": "complete_01",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel module initialization function:\n\n```c\n#include <linux/module.h>\n",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "return 0",
+          "module_init",
+          "module_exit",
+          "MODULE_LICENSE",
+          "GPL"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_02",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that allocates memory:\n\n```c\nvoid *allocate_buffer(size",
+        "response": "   int ret;\n\n    buf = kmalloc(size, GFP_KERNEL);\n    if (!buf)\n        return NULL;\n\n    ret = memzeroout(buf, size);\n    if (ret)\n        return NULL;\n\n    return buf;\n}\n``` To make this function compile, you need to include the correct header file(s) at the top of the function.\n\n```c\n#include <linux/kernel.h>\n#include <linux/mm.h>\n```\n\n\n```c\nvoid *allocate_buffer(size_t size)\n{\n    void *buf;\n    int ret;\n\n    buf = kmalloc(size, GFP_KERNEL);\n    if (!buf)\n        return NULL;\n\n    ret = memzeroout(buf, size);\n    if (ret)\n        return NULL;\n\n    return buf;\n}\n```\n\n\n```c\nvoid *allocate_buffer(size_t size)\n{\n    void *buf;\n    int ret;\n\n    buf = kmalloc(size, GFP_KERNEL);\n    if (!buf)\n        return NULL;\n\n    ret = memzeroout",
+        "score": 1.0,
+        "keywords_matched": [
+          "kmalloc",
+          "GFP_KERNEL",
+          "NULL",
+          "return"
+        ],
+        "keywords_total": [
+          "kmalloc",
+          "GFP_KERNEL",
+          "kfree",
+          "NULL",
+          "return"
+        ],
+        "elapsed_sec": 36.89332580566406
+      },
+      {
+        "id": "complete_02",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that allocates memory:\n\n```c\nvoid *allocate_buffer(size",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "kmalloc",
+          "GFP_KERNEL",
+          "kfree",
+          "NULL",
+          "return"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_03",
+        "category": "code_completion",
+        "question": "Complete the following character device driver read function:\n\n```c\nstatic ssize_t my_read(struct fi",
+        "response": "   if (len > count)\n        len = count;\n    if (copy_to_user(buf, kernel_buf, len))\n        return -EFAULT;\n    return len;\n}\n``` To complete the function, add the following code:\n\n```c\nstatic ssize_t my_read(struct file *filp, char __user *buf, size_t count, loff_t *f_pos)\n{\n    char *kernel_buf = \"Hello from kernel\\n\";\n    size_t len = strlen(kernel_buf);\n    if (len > count)\n        len = count;\n    if (copy_to_user(buf, kernel_buf, len))\n        return -EFAULT;\n    return len;\n}\n```",
+        "score": 1.0,
+        "keywords_matched": [
+          "copy_to_user",
+          "return",
+          "f_pos",
+          "EFAULT"
+        ],
+        "keywords_total": [
+          "copy_to_user",
+          "return",
+          "bytes",
+          "f_pos",
+          "EFAULT"
+        ],
+        "elapsed_sec": 26.619276762008667
+      },
+      {
+        "id": "complete_03",
+        "category": "code_completion",
+        "question": "Complete the following character device driver read function:\n\n```c\nstatic ssize_t my_read(struct fi",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "copy_to_user",
+          "return",
+          "bytes",
+          "f_pos",
+          "EFAULT"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_04",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that uses a spinlock:\n\n```c\n#include <linux/spinlock.h>",
+        "response": "       int ret;\n\n        ret = spin_lock_irqsave(&my_lock, flags);\n        if (ret) {\n                /* handle error */\n        }\n        shared_counter++;\n        spin_unlock_irqrestore(&my_lock, flags);\n}\n``` ```c\n#include <linux/spinlock.h>\n\nstatic DEFINE_SPINLOCK(my_lock);\nstatic int shared_counter = 0;\n\nvoid increment_counter(void)\n{\n        int ret;\n\n        ret = spin_lock_irqsave(&my_lock, flags);\n        if (ret) {\n                /* handle error */\n        }\n        shared_counter++;\n        spin_unlock_irqrestore(&my_lock, flags);\n}\n```",
+        "score": 1.0,
+        "keywords_matched": [
+          "spin_lock",
+          "spin_unlock",
+          "shared_counter",
+          "irqsave",
+          "flags"
+        ],
+        "keywords_total": [
+          "spin_lock",
+          "spin_unlock",
+          "shared_counter",
+          "irqsave",
+          "flags"
+        ],
+        "elapsed_sec": 25.830013751983643
+      },
+      {
+        "id": "complete_04",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that uses a spinlock:\n\n```c\n#include <linux/spinlock.h>",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "spin_lock",
+          "spin_unlock",
+          "shared_counter",
+          "irqsave",
+          "flags"
+        ],
+        "elapsed_sec": 0
+      },
+      {
+        "id": "complete_05",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that registers a platform driver:\n\n```c\n#include <linux",
+        "response": "   return platform_driver_register(&my_driver);\n}\n\nstatic void __exit my_driver_exit(void)\n{\n    platform_driver_unregister(&my_driver);\n}\n\nmodule_init(my_driver_init);\nmodule_exit(my_driver_exit);\n``` To complete the function that registers a platform driver, we need to ensure that the `my_driver` structure is properly initialized and registered with the platform driver core. The `platform_driver_register` function is used to register the driver with the platform driver core, making it available for device discovery and management.\n\nHere is the complete function:\n\n```c\n#include <linux/platform_device.h>\n\nstatic struct platform_driver my_driver = {\n    .probe = my_probe,\n    .remove = my_remove,\n    .driver = {\n        .name = \"my_device\",\n        .of_match_table = my_of_match,\n    },\n};\n\nstatic int __init my_driver_init(void)\n{\n    return platform_driver_register(&my_driver);\n}\n\nstatic void __exit my_driver_exit(void)\n{\n    platform_driver_unregister",
+        "score": 1.0,
+        "keywords_matched": [
+          "platform_driver_register",
+          "return",
+          "module_init"
+        ],
+        "keywords_total": [
+          "platform_driver_register",
+          "return",
+          "module_platform_driver",
+          "module_init"
+        ],
+        "elapsed_sec": 38.799829959869385
+      },
+      {
+        "id": "complete_05",
+        "category": "code_completion",
+        "question": "Complete the following Linux kernel function that registers a platform driver:\n\n```c\n#include <linux",
+        "response": "ERROR: name 'score' is not defined",
+        "score": 0,
+        "keywords_matched": [],
+        "keywords_total": [
+          "platform_driver_register",
+          "return",
+          "module_platform_driver",
+          "module_init"
+        ],
+        "elapsed_sec": 0
+      }
+    ],
+    "statistics": {
+      "overall_avg_score": 0.317948717948718,
+      "total_tests": 78,
+      "total_time_sec": 1366.2695684432983,
+      "basic_concepts": {
+        "avg_score": 0.30625,
+        "avg_time": 16.890404537320137,
+        "count": 16
+      },
+      "kernel_mechanisms": {
+        "avg_score": 0.31875,
+        "avg_time": 15.886878252029419,
+        "count": 16
+      },
+      "advanced_internals": {
+        "avg_score": 0.26666666666666666,
+        "avg_time": 17.780531028906505,
+        "count": 12
+      },
+      "code_understanding": {
+        "avg_score": 0.225,
+        "avg_time": 19.572994510332745,
+        "count": 12
+      },
+      "chinese_knowledge": {
+        "avg_score": 0.3416666666666666,
+        "avg_time": 19.517976264158886,
+        "count": 12
+      },
+      "code_completion": {
+        "avg_score": 0.48,
+        "avg_time": 15.937502217292785,
+        "count": 10
+      }
+    }
+  },
+  "comparison": {
+    "overall_delta": -0.0346153846153846
+  }
+}

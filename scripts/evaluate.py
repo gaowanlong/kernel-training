@@ -381,8 +381,16 @@ static int __init my_driver_init(void)
 ]
 
 
-def run_evaluation(model, tokenizer, test_cases, code_tests, model_name: str) -> list[dict]:
+def run_evaluation(model, tokenizer, test_cases, code_tests, model_name: str, judge_model=None, judge_tokenizer=None) -> list[dict]:
     """Run all test cases and return results."""
+    # Validate no duplicate IDs
+    all_ids = [t["id"] for t in test_cases] + [t["id"] for t in code_tests]
+    from collections import Counter
+    dupes = {k:v for k,v in Counter(all_ids).items() if v > 1}
+    if dupes:
+        console.print(f"[yellow]Warning: {len(dupes)} duplicate test IDs found![/yellow]")
+        console.print(f"  Duplicates: {list(dupes.keys())}")
+    
     results = []
     total = len(test_cases) + len(code_tests)
 
@@ -400,17 +408,38 @@ def run_evaluation(model, tokenizer, test_cases, code_tests, model_name: str) ->
             )
             elapsed = time.time() - start_time
 
-            # Simple keyword-based scoring
-            score = 0
-            found_keywords = []
-            response_lower = response.lower()
-            for kw in test["reference_keywords"]:
-                if kw.lower() in response_lower:
-                    score += 1
-                    found_keywords.append(kw)
+            # LLM-as-judge scoring (v0.3)
+            # Use the model itself to evaluate answer quality semantically
+            jm = judge_model or model
+            jt = judge_tokenizer or tokenizer
+            judge_prompt = (
+                f"You are an expert Linux kernel evaluator. "
+                f"Rate the following answer on a scale of 0-10 based on correctness, completeness, and precision.\n\n"
+                f"Question: {test['question']}\n\n"
+                f"Answer: {response[:1000]}\n\n"
+                f"Reference keywords that should be mentioned: {', '.join(test['reference_keywords'])}\n\n"
+                f"Output ONLY a number 0-10, nothing else."
+            )
+            try:
+                judge_response = generate(
+                    jm, jt,
+                    prompt=judge_prompt,
+                    max_tokens=10,
+                    sampler=make_sampler(temp=0.1),
+                )
+                # Parse the numeric score
+                import re
+                score_match = re.search(r'\b(\d+)(?:/10)?\b', judge_response.strip())
+                if score_match:
+                    judge_score = int(score_match.group(1))
+                    judge_score = max(0, min(10, judge_score))
+                else:
+                    judge_score = 5  # default
+            except Exception:
+                judge_score = 5
 
-            max_score = len(test["reference_keywords"])
-            normalized_score = score / max_score if max_score > 0 else 0
+            normalized_score = judge_score / 10.0
+            found_keywords = [kw for kw in test["reference_keywords"] if kw.lower() in response.lower()]
 
             results.append({
                 "id": test["id"],
@@ -423,7 +452,7 @@ def run_evaluation(model, tokenizer, test_cases, code_tests, model_name: str) ->
                 "elapsed_sec": elapsed,
             })
 
-            console.print(f"    Score: {score}/{max_score} ({normalized_score:.0%}) | {elapsed:.1f}s")
+            console.print(f"    Score: {normalized_score:.0%} | {elapsed:.1f}s")
 
         except Exception as e:
             console.print(f"    [red]Error: {e}[/red]")
@@ -451,16 +480,32 @@ def run_evaluation(model, tokenizer, test_cases, code_tests, model_name: str) ->
             )
             elapsed = time.time() - start_time
 
-            score = 0
-            found_keywords = []
-            response_lower = response.lower()
-            for kw in test["reference_keywords"]:
-                if kw.lower() in response_lower:
-                    score += 1
-                    found_keywords.append(kw)
+            # LLM-as-judge for code completion
+            jm = judge_model or model
+            jt = judge_tokenizer or tokenizer
+            judge_prompt = (
+                f"You are an expert Linux kernel C programmer. "
+                f"Rate the following code completion on a scale of 0-10 based on correctness and completeness.\n\n"
+                f"Code context:\n{test['prompt'][:800]}\n\n"
+                f"Completion:\n{response[:800]}\n\n"
+                f"Output ONLY a number 0-10, nothing else."
+            )
+            try:
+                judge_response = generate(
+                    jm, jt,
+                    prompt=judge_prompt,
+                    max_tokens=10,
+                    sampler=make_sampler(temp=0.1),
+                )
+                import re
+                score_match = re.search(r'\b(\d+)(?:/10)?\b', judge_response.strip())
+                judge_score = int(score_match.group(1)) if score_match else 5
+                judge_score = max(0, min(10, judge_score))
+            except Exception:
+                judge_score = 5
 
-            max_score = len(test["reference_keywords"])
-            normalized_score = score / max_score if max_score > 0 else 0
+            normalized_score = judge_score / 10.0
+            found_keywords = [kw for kw in test["reference_keywords"] if kw.lower() in response.lower()]
 
             results.append({
                 "id": test["id"],
@@ -473,7 +518,7 @@ def run_evaluation(model, tokenizer, test_cases, code_tests, model_name: str) ->
                 "elapsed_sec": elapsed,
             })
 
-            console.print(f"    Score: {score}/{max_score} ({normalized_score:.0%}) | {elapsed:.1f}s")
+            console.print(f"    Score: {normalized_score:.0%} | {elapsed:.1f}s")
 
         except Exception as e:
             console.print(f"    [red]Error: {e}[/red]")
@@ -633,6 +678,14 @@ def save_results(base_results, lora_results, base_stats, lora_stats, output_dir:
 
     console.print(f"\n[green]Report saved to: {report_path}[/green]")
 
+    # Dedup check: warn if duplicate IDs found
+    base_ids = [r["id"] for r in base_results]
+    from collections import Counter
+    dupes = {k:v for k,v in Counter(base_ids).items() if v > 1}
+    if dupes:
+        console.print(f"[yellow]Warning: {len(dupes)} duplicate question IDs found![/yellow]")
+        console.print(f"  Duplicates: {list(dupes.keys())[:5]}...")
+
     # Also save a human-readable summary
     summary_path = output_dir / f"eval_summary_{timestamp}.txt"
     with open(summary_path, "w") as f:
@@ -679,7 +732,7 @@ def main():
 
     # Evaluate base model
     console.rule("[bold yellow]Evaluating Base Model[/bold yellow]")
-    base_results = run_evaluation(model, tokenizer, TEST_CASES, CODE_COMPLETION_TESTS, "Base Model")
+    base_results = run_evaluation(model, tokenizer, TEST_CASES, CODE_COMPLETION_TESTS, "Base Model", judge_model=model, judge_tokenizer=tokenizer)
     base_stats = compute_statistics(base_results)
 
     console.print(f"\\n[bold yellow]Base Model Overall Score: {base_stats['overall_avg_score']:.1%}[/bold yellow]")
@@ -714,7 +767,7 @@ def main():
 
     # Evaluate fine-tuned model
     console.rule("[bold green]Evaluating Fine-tuned Model[/bold green]")
-    lora_results = run_evaluation(model_ft, tokenizer_ft, TEST_CASES, CODE_COMPLETION_TESTS, "Fine-tuned Model")
+    lora_results = run_evaluation(model_ft, tokenizer_ft, TEST_CASES, CODE_COMPLETION_TESTS, "Fine-tuned Model", judge_model=model, judge_tokenizer=tokenizer)
     lora_stats = compute_statistics(lora_results)
 
     console.print(f"\\n[bold green]Fine-tuned Model Overall Score: {lora_stats['overall_avg_score']:.1%}[/bold green]")

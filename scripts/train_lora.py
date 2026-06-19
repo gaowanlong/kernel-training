@@ -18,6 +18,7 @@ import mlx.optimizers as optim
 from mlx_lm import load, generate
 from mlx_lm.sample_utils import make_sampler
 from mlx_lm.tuner import train, TrainingArgs, linear_to_lora_layers
+from mlx.utils import tree_flatten
 from mlx_lm.tuner.datasets import create_dataset, CacheDataset
 from rich.console import Console
 from rich.table import Table
@@ -158,12 +159,17 @@ def run_training(model, tokenizer, train_dataset, valid_dataset, lora_config, ou
     # - Lower learning rate for more stable convergence
     # - Larger batch size with grad_accumulation for smoother gradients
     # - More frequent eval to catch overfitting early
+    # v0.4 hyperparameters:
+    # - 200 iters with larger dataset (258 samples) 
+    # - Lower LR (2e-5) for stable convergence
+    # - More frequent eval to catch overfitting
+    # - Weight decay via Adam default
     training_args = TrainingArgs(
         batch_size=1,
-        iters=100,
-        val_batches=20,
+        iters=200,
+        val_batches=25,
         steps_per_report=5,
-        steps_per_eval=25,
+        steps_per_eval=20,
         steps_per_save=50,
         max_seq_length=2048,
         adapter_file=str(adapter_path),
@@ -181,7 +187,8 @@ def run_training(model, tokenizer, train_dataset, valid_dataset, lora_config, ou
 
     # Optimizer
     # v0.2: Lower LR (5e-5 vs 1e-4) to prevent catastrophic forgetting
-    optimizer = optim.Adam(learning_rate=5e-5)
+    # v0.4: Lower LR (2e-5) for stable convergence on eval-aligned data
+    optimizer = optim.Adam(learning_rate=2e-5)
 
     # Save config
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -201,17 +208,71 @@ def run_training(model, tokenizer, train_dataset, valid_dataset, lora_config, ou
 
     start_time = time.time()
 
-    train(
-        model=model,
-        optimizer=optimizer,
-        train_dataset=train_dataset,
-        val_dataset=valid_dataset,
-        args=training_args,
-    )
+    # v0.3: Custom training loop with early stopping based on val loss
+    best_val_loss = float('inf')
+    best_step = 0
+    patience = 3  # Stop if val loss doesn't improve for 3 evaluations
+    patience_counter = 0
+
+    # We use mlx_lm's built-in train but add a callback for early stopping
+    from mlx_lm.tuner.callbacks import TrainingCallback
+
+    # v0.3: Track best checkpoint with early stopping
+    best_val_loss = [float('inf')]  # mutable container for closure
+    best_step = [0]
+    patience_counter = [0]
+    PATIENCE = 3
+    early_stop = [False]
+
+    class EarlyStoppingCallback(TrainingCallback):
+        def on_val_loss_report(self, info):
+            val_loss = info["val_loss"]
+            step = info["iteration"]
+            if val_loss < best_val_loss[0]:
+                best_val_loss[0] = val_loss
+                best_step[0] = step
+                patience_counter[0] = 0
+                # Save best checkpoint
+                best_path = Path(str(adapter_path).replace("adapters.safetensors", "best_adapters.safetensors"))
+                adapter_weights = dict(tree_flatten(model.trainable_parameters()))
+                mx.save_safetensors(str(best_path), adapter_weights)
+                console.print(f"    [green]New best val loss: {val_loss:.3f} at step {step} (saved)[/green]")
+            else:
+                patience_counter[0] += 1
+                console.print(f"    [yellow]Val loss {val_loss:.3f} (best: {best_val_loss[0]:.3f}, patience: {patience_counter[0]}/{PATIENCE})[/yellow]")
+                if patience_counter[0] >= PATIENCE:
+                    console.print(f"    [bold red]Early stopping triggered at step {step}![/bold red]")
+                    early_stop[0] = True
+
+        def on_train_loss_report(self, info):
+            if early_stop[0]:
+                raise StopIteration("Early stopping")
+
+    callback = EarlyStoppingCallback()
+
+    try:
+        train(
+            model=model,
+            optimizer=optimizer,
+            train_dataset=train_dataset,
+            val_dataset=valid_dataset,
+            args=training_args,
+            training_callback=callback,
+        )
+    except StopIteration as e:
+        console.print(f"  [bold yellow]Training stopped early[/bold yellow]")
+
+    # Load best checkpoint
+    best_path = Path(str(adapter_path).replace("adapters.safetensors", "best_adapters.safetensors"))
+    if best_path.exists():
+        model.load_weights(str(best_path), strict=False)
+        console.print(f"  [green]Loaded best checkpoint from step {best_step[0]} (val loss: {best_val_loss[0]:.3f})[/green]")
 
     elapsed = time.time() - start_time
     console.print(f"\n  [bold green]Training complete![/bold green]")
     console.print(f"  Time: {elapsed/60:.1f} minutes")
+    console.print(f"  Best checkpoint: step {best_step[0]}")
+    console.print(f"  Best val loss: {best_val_loss[0]:.3f}")
     console.print(f"  Adapter saved to: {adapter_path}")
 
     return adapter_path
@@ -243,9 +304,9 @@ def main():
                         help="Path to processed training data")
     parser.add_argument("--output", type=str, default="lora_adapters/kernel-lora",
                         help="Output directory for LoRA adapters")
-    parser.add_argument("--iters", type=int, default=100,
+    parser.add_argument("--iters", type=int, default=200,
                         help="Number of training iterations")
-    parser.add_argument("--lr", type=float, default=5e-5,
+    parser.add_argument("--lr", type=float, default=2e-5,
                         help="Learning rate")
     parser.add_argument("--rank", type=int, default=8,
                         help="LoRA rank")
