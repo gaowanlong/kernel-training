@@ -9,3 +9,4 @@ lora_adapters/
 *.bin
 .DS_Store
 *.jsonl
+data/distilled/

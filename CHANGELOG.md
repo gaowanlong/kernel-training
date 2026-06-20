@@ -1,3 +1,59 @@
+## v0.6 (2026-06-20) — Knowledge Distillation from Qwen-3.7-Max
+
+### Overview
+Sixth iteration using 5,000 high-quality kernel Q&A samples distilled from Qwen-3.7-Max. This is the first version with professionally generated training data covering both English and Chinese kernel knowledge.
+
+### What Changed
+
+**Training Data**: 5,000 Qwen-3.7-Max distilled samples
+- 4,500 train / 500 validation
+- 3,132 English + 1,368 Chinese samples
+- Covers 10 kernel subsystems (filesystem, syscall, debug, interrupt, locking, arch/security, process, driver, network, memory)
+- Three difficulty levels: L1 (1112), L2 (1618), L3 (1089), Code (681)
+- High-quality answers with deep technical detail
+
+**Training**: QLoRA (rank=8, LR=2e-5, 200 iters)
+- Early stopping at step 99 (best checkpoint at step 39)
+- Best val loss: 1.452
+- Training time: 36.5 minutes on M1 Pro 32GB (fastest convergence yet)
+- Peak memory: 7.1 GB
+
+### Evaluation Results
+
+39 test questions across 6 categories (LLM-as-judge scoring):
+
+| Metric | Base Model | Fine-tuned | Delta |
+|--------|-----------|------------|-------|
+| **Overall** | **74.1%** | **69.2%** | **-4.9%** |
+| Basic Concepts | 72.5% | 76.2% | **+3.7%** |
+| Chinese Knowledge | 70.0% | 68.3% | **-1.7%** |
+| Kernel Mechanisms | 72.5% | 68.8% | -3.7% |
+| Code Completion | 88.0% | 88.0% | +0.0% |
+| Advanced Internals | 70.0% | 56.7% | -13.3% |
+| Code Understanding | 75.0% | 58.3% | -16.7% |
+
+### Key Improvements over v0.5
+- **Basic Concepts**: maintained positive at **+3.7%** (consistent across versions)
+- **Chinese Knowledge**: recovered from **-13.3% to -1.7%** (Chinese training data works!)
+- **Kernel Mechanisms**: improved from **-10.0% to -3.7%**
+- **Code Completion**: stable at 0%
+- Fastest training convergence ever (36.5 min, best checkpoint at step 39)
+
+### Remaining Issues
+1. **Advanced Internals (-13.3%)**: Distilled data lacks deep internals coverage
+2. **Code Understanding (-16.7%)**: Still struggling with code-specific questions
+3. **Evaluation-test mismatch**: Some distilled answers are more detailed than eval expects
+
+### Improvement Directions for v0.7
+1. Add more advanced internals questions to the distillation prompt
+2. Include code-specific Q&A in the distillation data
+3. Try higher LoRA rank (16) for more capacity
+4. Increase training iters with better regularization
+
+### Files Changed
+- `data/processed/train.jsonl`: 4,500 Qwen-3.7-Max distilled samples
+- `data/processed/valid.jsonl`: 500 Qwen-3.7-Max distilled samples
+
 ## v0.5 (2026-06-20) — High-Quality Kernel Q&A with Ewedubs Dataset
 
 ### Overview
