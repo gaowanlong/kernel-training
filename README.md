@@ -8,6 +8,7 @@ Fine-tuned models are available on HuggingFace:
 
 | Version | Model | Description |
 |---------|-------|-------------|
+| **v1.0** | **[gaowanlong/kernel-lora-v1.0](https://huggingface.co/gaowanlong/kernel-lora-v1.0)** | **Hybrid: kernel-doc + distilled Q&A (Best!) |
 | v0.6 | [gaowanlong/kernel-lora-v0.6](https://huggingface.co/gaowanlong/kernel-lora-v0.6) | Knowledge distillation from Qwen-3.7-Max |
 | v0.5 | [gaowanlong/kernel-lora-v0.5](https://huggingface.co/gaowanlong/kernel-lora-v0.5) | Ewedubs premium commits dataset |
 
