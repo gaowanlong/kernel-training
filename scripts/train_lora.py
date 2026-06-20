@@ -194,7 +194,12 @@ def run_training(model, tokenizer, train_dataset, valid_dataset, lora_config, ou
     output_dir.mkdir(parents=True, exist_ok=True)
     config_path = output_dir / "adapter_config.json"
     adapter_config = {
-        "lora_config": lora_config,
+        "num_layers": 28,
+        "lora_parameters": {
+            "rank": lora_config["rank"],
+            "scale": lora_config["scale"],
+            "dropout": lora_config["dropout"],
+        },
         "base_model": str(PROJECT_ROOT / "models" / "qwen2.5-7b"),
         "created_at": datetime.now().isoformat(),
     }

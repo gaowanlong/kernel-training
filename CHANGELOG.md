@@ -1,3 +1,61 @@
+## v0.5 (2026-06-20) — High-Quality Kernel Q&A with Ewedubs Dataset
+
+### Overview
+Fifth iteration using the ewedubs/linux-kernel-commits-aireason-instruct dataset (35K premium commits) combined with base model evaluation responses. This is the best result so far, narrowing the gap to -4.1%.
+
+### What Changed
+
+**Training Data**: 557 samples
+- 57 base model high-score evaluation responses (score >= 0.5)
+- 500 ewedubs premium commits with detailed instructions
+- Training data now includes both kernel Q&A and real commit explanations
+
+**Training**: QLoRA (rank=8, LR=2e-5, 200 iters)
+- Early stopping at step 179 (best checkpoint at step 119)
+- Best val loss: 1.064
+- Training time: 88.1 minutes on M1 Pro 32GB
+- Peak memory: 8.7 GB
+
+### Evaluation Results
+
+39 test questions across 6 categories (LLM-as-judge scoring):
+
+| Metric | Base Model | Fine-tuned | Delta |
+|--------|-----------|------------|-------|
+| **Overall** | **72.6%** | **68.5%** | **-4.1%** |
+| Advanced Internals | 66.7% | 73.3% | **+6.7%** |
+| Basic Concepts | 73.8% | 67.5% | -6.2% |
+| Chinese Knowledge | 70.0% | 56.7% | -13.3% |
+| Code Completion | 86.0% | 92.0% | **+6.0%** |
+| Code Understanding | 65.0% | 61.7% | -3.3% |
+| Kernel Mechanisms | 75.0% | 65.0% | -10.0% |
+
+### Key Improvements over v0.4
+- Overall gap narrowed from **-5.1% to -4.1%** (best result so far)
+- **Advanced Internals**: first positive category at **+6.7%**
+- **Code Understanding**: recovered from -23.3% to -3.3%
+- **Code Completion**: improved from -4.0% to +6.0%
+- Notable wins: memory barriers (+30%), namespaces/cgroups (+30%), schedule() (+60%)
+
+### Remaining Issues
+1. **Chinese Knowledge (-13.3%)**: English-only training data causes Chinese regression
+2. **Kernel Mechanisms (-10.0%)**: Still some degradation in core mechanism knowledge
+3. **Data quality ceiling**: Base model's own responses can't exceed its knowledge
+
+### Improvement Directions for v0.6
+1. **Knowledge distillation**: Use GPT-4/Claude API to generate expert-level kernel Q&A
+2. **Add Chinese training data**: Prevent Chinese knowledge regression
+3. **Multi-task training**: Better balance between Q&A and code understanding
+4. **HuggingFace upload**: Model uploaded to gaowanlong/kernel-lora-v0.5
+
+### Files Changed
+- `scripts/train_lora.py`: Fixed adapter_config.json format for mlx_lm compatibility
+- `scripts/build_qa_data.py`: New script for constructing Q&A from ewedubs commits
+- `data/external/premium_score.jsonl`: 35K premium kernel commits (new)
+- `data/external/super_ultra.jsonl`: 206 highest-quality commits (new)
+- `data/processed/train.jsonl`: New training data from base model eval + ewedubs
+- `data/processed/valid.jsonl`: New validation data
+
 ## v0.4 (2026-06-19) — Evaluation-Aligned Training
 
 ### Overview
