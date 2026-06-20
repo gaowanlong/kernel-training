@@ -8,3 +8,4 @@ lora_adapters/
 *.safetensors
 *.bin
 .DS_Store
+*.jsonl
