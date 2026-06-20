@@ -4,13 +4,29 @@
 
 ## HuggingFace Model
 
-The fine-tuned model is available for upload to HuggingFace. To upload:
+Fine-tuned models are available on HuggingFace:
 
-1. Login to HuggingFace: `huggingface-cli login`
-2. Upload the fused model: `python -m mlx_lm fuse --model models/qwen2.5-7b --adapter-path lora_adapters/kernel-lora --save-path models/qwen2.5-7b-fused --upload-repo gaowanlong/kernel-lora-v0.4`
+| Version | Model | Description |
+|---------|-------|-------------|
+| v0.6 | [gaowanlong/kernel-lora-v0.6](https://huggingface.co/gaowanlong/kernel-lora-v0.6) | Knowledge distillation from Qwen-3.7-Max |
+| v0.5 | [gaowanlong/kernel-lora-v0.5](https://huggingface.co/gaowanlong/kernel-lora-v0.5) | Ewedubs premium commits dataset |
 
-The fused model is at `models/qwen2.5-7b-fused/` (~4.3GB).
+### Upload to HuggingFace
 
+If you are in China and cannot access huggingface.co directly, use the mirror site [hf-mirror.com](https://hf-mirror.com):
+
+```bash
+# Set the mirror endpoint (no proxy needed)
+export HF_ENDPOINT=https://hf-mirror.com
+
+# Login with your HuggingFace token
+hf auth login --token YOUR_TOKEN
+
+# Upload the fused model
+hf upload gaowanlong/kernel-lora-v0.X models/qwen2.5-7b-fused/ .
+```
+
+Note: hf-mirror.com is a read-only mirror of huggingface.co. Uploads go through the mirror endpoint and sync to the main site.
 
 ## 硬件要求
 
