@@ -1,0 +1,16 @@
+{
+  "method": "RAG vs QLoRA Comparison",
+  "rag_score": 0.7666666666666667,
+  "v10_qlora_score": 0.6641025641025641,
+  "v10_base_score": 0.6923076923076923,
+  "rag_vs_qlora": 0.10256410256410264,
+  "rag_vs_base": 0.07435897435897443,
+  "categories": {
+    "basic_concepts": 0.8,
+    "kernel_mechanisms": 0.75,
+    "advanced_internals": 0.7333333333333334,
+    "code_understanding": 0.7333333333333334,
+    "chinese_knowledge": 0.7166666666666667,
+    "code_completion": 0.8800000000000001
+  }
+}

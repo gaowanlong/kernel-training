@@ -1,0 +1,328 @@
+{
+  "timestamp": "20260621_103458",
+  "method": "RAG (TF-IDF retrieval + base model)",
+  "index_size": 9919,
+  "overall_score": 0.7666666666666667,
+  "results": [
+    {
+      "id": "l1_01",
+      "score": 0.8,
+      "keywords_matched": 4,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 12.1
+    },
+    {
+      "id": "l1_02",
+      "score": 0.8,
+      "keywords_matched": 2,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 12.7
+    },
+    {
+      "id": "l1_03",
+      "score": 0.8,
+      "keywords_matched": 3,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 12.8
+    },
+    {
+      "id": "l1_04",
+      "score": 0.8,
+      "keywords_matched": 0,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 13.2
+    },
+    {
+      "id": "l1_05",
+      "score": 0.8,
+      "keywords_matched": 2,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 12.8
+    },
+    {
+      "id": "l1_06",
+      "score": 0.8,
+      "keywords_matched": 1,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 12.0
+    },
+    {
+      "id": "l1_07",
+      "score": 0.8,
+      "keywords_matched": 3,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 11.9
+    },
+    {
+      "id": "l1_08",
+      "score": 0.8,
+      "keywords_matched": 1,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 12.9
+    },
+    {
+      "id": "l2_01",
+      "score": 0.7,
+      "keywords_matched": 1,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 12.5
+    },
+    {
+      "id": "l2_02",
+      "score": 0.7,
+      "keywords_matched": 1,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 12.5
+    },
+    {
+      "id": "l2_03",
+      "score": 0.7,
+      "keywords_matched": 1,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 13.2
+    },
+    {
+      "id": "l2_04",
+      "score": 0.7,
+      "keywords_matched": 3,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 12.6
+    },
+    {
+      "id": "l2_05",
+      "score": 0.8,
+      "keywords_matched": 1,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 13.8
+    },
+    {
+      "id": "l2_06",
+      "score": 0.8,
+      "keywords_matched": 3,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.8
+    },
+    {
+      "id": "l2_07",
+      "score": 0.8,
+      "keywords_matched": 1,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.6
+    },
+    {
+      "id": "l2_08",
+      "score": 0.8,
+      "keywords_matched": 1,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 9.9
+    },
+    {
+      "id": "l3_01",
+      "score": 0.8,
+      "keywords_matched": 0,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 9.5
+    },
+    {
+      "id": "l3_02",
+      "score": 0.7,
+      "keywords_matched": 0,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.6
+    },
+    {
+      "id": "l3_03",
+      "score": 0.7,
+      "keywords_matched": 3,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.4
+    },
+    {
+      "id": "l3_04",
+      "score": 0.7,
+      "keywords_matched": 0,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.2
+    },
+    {
+      "id": "l3_05",
+      "score": 0.8,
+      "keywords_matched": 0,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 9.7
+    },
+    {
+      "id": "l3_06",
+      "score": 0.7,
+      "keywords_matched": 1,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.4
+    },
+    {
+      "id": "code_01",
+      "score": 0.8,
+      "keywords_matched": 3,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 8.9
+    },
+    {
+      "id": "code_02",
+      "score": 0.5,
+      "keywords_matched": 0,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 9.5
+    },
+    {
+      "id": "code_03",
+      "score": 0.7,
+      "keywords_matched": 2,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.0
+    },
+    {
+      "id": "code_04",
+      "score": 0.8,
+      "keywords_matched": 2,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.3
+    },
+    {
+      "id": "code_05",
+      "score": 0.8,
+      "keywords_matched": 0,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 9.5
+    },
+    {
+      "id": "code_06",
+      "score": 0.8,
+      "keywords_matched": 3,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.8
+    },
+    {
+      "id": "cn_01",
+      "score": 0.5,
+      "keywords_matched": 3,
+      "keywords_total": 6,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.1
+    },
+    {
+      "id": "cn_02",
+      "score": 0.8,
+      "keywords_matched": 1,
+      "keywords_total": 6,
+      "retrieved_chunks": 0,
+      "elapsed_sec": 8.4
+    },
+    {
+      "id": "cn_03",
+      "score": 0.8,
+      "keywords_matched": 4,
+      "keywords_total": 6,
+      "retrieved_chunks": 0,
+      "elapsed_sec": 8.5
+    },
+    {
+      "id": "cn_04",
+      "score": 0.7,
+      "keywords_matched": 3,
+      "keywords_total": 6,
+      "retrieved_chunks": 0,
+      "elapsed_sec": 8.5
+    },
+    {
+      "id": "cn_05",
+      "score": 0.7,
+      "keywords_matched": 2,
+      "keywords_total": 6,
+      "retrieved_chunks": 0,
+      "elapsed_sec": 8.5
+    },
+    {
+      "id": "cn_06",
+      "score": 0.8,
+      "keywords_matched": 1,
+      "keywords_total": 6,
+      "retrieved_chunks": 0,
+      "elapsed_sec": 8.5
+    },
+    {
+      "id": "complete_01",
+      "score": 0.8,
+      "keywords_matched": 4,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.6
+    },
+    {
+      "id": "complete_02",
+      "score": 0.8,
+      "keywords_matched": 4,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.4
+    },
+    {
+      "id": "complete_03",
+      "score": 1.0,
+      "keywords_matched": 5,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 11.0
+    },
+    {
+      "id": "complete_04",
+      "score": 0.8,
+      "keywords_matched": 3,
+      "keywords_total": 5,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 10.1
+    },
+    {
+      "id": "complete_05",
+      "score": 1.0,
+      "keywords_matched": 3,
+      "keywords_total": 4,
+      "retrieved_chunks": 5,
+      "elapsed_sec": 11.2
+    }
+  ],
+  "categories": {
+    "basic_concepts": 0.8,
+    "kernel_mechanisms": 0.75,
+    "advanced_internals": 0.7333333333333334,
+    "code_understanding": 0.7333333333333334,
+    "chinese_knowledge": 0.7166666666666667,
+    "code_completion": 0.8800000000000001
+  }
+}
