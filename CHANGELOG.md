@@ -358,3 +358,71 @@ The hybrid approach works exactly as hypothesized:
 - `data/processed/train.jsonl`: 8,789 hybrid samples (replaced v0.7 kernel-doc data)
 - `data/processed/valid.jsonl`: 977 hybrid samples
 - `lora_adapters/kernel-lora-v1.0/`: New v1.0 adapter (rank=16, best checkpoint at step ~120)
+
+## v1.1 (2026-06-21) — Multi-Turn Conversation + Curriculum Learning (Experimental)
+
+### Overview
+Eleventh iteration experimenting with multi-turn conversation data (3,027 samples) and curriculum learning (L1→L3 progressive weighting). This was an experimental version that did not outperform v1.0.
+
+### What Changed
+
+**Training Data**: 13,095 samples (v1.0's 9,766 + 3,027 multi-turn + 302 validation)
+- 11,816 train / 1,279 valid
+- 3,027 multi-turn conversation chains (2-turn: Q1→A1→Q2→A2)
+- Multi-turn generated from kernel-doc function/struct blocks with follow-up questions about parameters, fields, and return values
+- 34% Chinese maintained
+
+**Training**: QLoRA (rank=16, LR=2e-5, **300 iters**) with curriculum learning
+- Curriculum: L1 samples weighted higher at start, L3 samples weighted higher over time
+- Initial curriculum dataset: 20,000 weighted samples (L1-heavy)
+- Best checkpoint at step ~250 (val loss: best at early steps)
+- Training time: ~40 minutes on M1 Pro 32GB
+
+### Evaluation Results
+
+39 test questions across 6 categories (LLM-as-judge scoring):
+
+| Metric | v1.0 FT | v1.1 FT | Delta |
+|--------|---------|---------|-------|
+| **Overall** | **66.4%** | **61.3%** | **-5.1%** |
+| Advanced Internals | 53.0% | 58.0% | **+5.0%** |
+| Code Completion | 86.0% | 88.0% | **+2.0%** |
+| Basic Concepts | 66.0% | 68.0% | +1.0% |
+| Chinese Knowledge | 70.0% | 65.0% | -5.0% |
+| Code Understanding | 57.0% | 52.0% | -5.0% |
+| Kernel Mechanisms | 69.0% | 45.0% | -24.0% |
+
+### Key Findings
+
+**What worked:**
+- Advanced Internals improved (+5%) — curriculum learning helped with harder topics
+- Code Completion improved (+2%) — stable at 88%
+- Basic Concepts stable (+1%)
+
+**What didn't work:**
+- **Kernel Mechanisms collapsed (-24%)** — multi-turn data may have confused the model on single-turn mechanism questions
+- **Chinese Knowledge regressed (-5%)** — multi-turn data was English-heavy
+- **Code Understanding regressed (-5%)** — linked list, schedule() dropped significantly
+
+### Root Cause Analysis
+
+The multi-turn + curriculum experiment failed for three reasons:
+
+1. **Format mismatch**: Training on 2-turn conversations (Q1→A1→Q2→A2) but evaluating on single-turn (Q→A). The model learned to expect follow-up context that wasn't present during evaluation.
+
+2. **Curriculum dilution**: The weighted sampling created a 20,000-sample dataset that over-represented L1 samples, causing the model to forget deeper kernel mechanisms.
+
+3. **Overfitting on multi-turn patterns**: The 3,027 multi-turn samples introduced conversation patterns that interfered with the model's ability to give concise single-turn answers.
+
+### Conclusion
+
+**v1.0 remains the best version.** The hybrid kernel-doc + distilled Q&A approach (v1.0) is the optimal strategy for this task. Multi-turn data and curriculum learning require more careful integration to be beneficial.
+
+### Files Changed
+- `scripts/build_multiturn_data.py`: New script for generating multi-turn conversation data
+- `scripts/train_lora_v11.py`: New training script with curriculum learning support
+- `data/processed/train.jsonl`: 11,816 samples (v1.0 + multi-turn)
+- `data/processed/valid.jsonl`: 1,279 samples
+- `lora_adapters/kernel-lora-v1.1/`: Experimental v1.1 adapter
+- `results/eval_report_20260621_015946.json`: v1.1 evaluation report
+- `results/eval_summary_20260621_015946.txt`: v1.1 evaluation summary
