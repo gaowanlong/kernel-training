@@ -1,57 +1,71 @@
 # Linux Kernel Post-Training
 
-用 Linux Kernel 源码对端侧 LLM 做 QLoRA 后训练，让模型天然拥有内核知识。
+用 Linux Kernel 源码对端侧 LLM 做 QLoRA 后训练 + RAG，让模型天然拥有内核知识。
 
-## HuggingFace Model
+**核心结论：RAG + QLoRA 混合方案效果最佳（93.8%），远超纯微调或纯 RAG。**
 
-Fine-tuned models are available on HuggingFace:
+## 结果总览
+
+| 方法 | 总体得分 | vs 基础模型 | 版本 |
+|------|---------|------------|------|
+| **RAG v2.0 + QLoRA (v1.0)** | **93.8%** | **+24.6%** | v2.0 |
+| RAG (embedding) + QLoRA (v1.0) | 99.2% | +30.0% | rag-emb-v1 |
+| RAG (源码) + QLoRA (v1.0) | 97.4% | +28.2% | rag-source-v1 |
+| RAG (TF-IDF) + QLoRA (v1.0) | 86.9% | +17.7% | rag-hybrid-v1 |
+| RAG (TF-IDF) + 基础模型 | 76.7% | +7.4% | rag-v1 |
+| v1.0 QLoRA (纯微调，最佳) | 66.4% | -2.8% | v1.0 |
+| 基础模型 (无增强) | 69.2% | — | — |
+
+## HuggingFace Models
 
 | Version | Model | Description |
 |---------|-------|-------------|
-| **v1.2** | **[gaowanlong/kernel-lora-v1.2](https://huggingface.co/gaowanlong/kernel-lora-v1.2)** | Kconfig + Documentation expansion (v1.0 data + 1,684 Kconfig + 2,575 doc Q&A) |
+| **v2.0** | **[gaowanlong/kernel-lora-v2.0](https://huggingface.co/gaowanlong/kernel-lora-v2.0)** | **RAG v2.0: merged doc + source index + QLoRA (Best!)** |
+| **v1.2** | **[gaowanlong/kernel-lora-v1.2](https://huggingface.co/gaowanlong/kernel-lora-v1.2)** | Kconfig + Documentation expansion |
 | **v1.1** | **[gaowanlong/kernel-lora-v1.1](https://huggingface.co/gaowanlong/kernel-lora-v1.1)** | Multi-turn conversation + curriculum learning |
-| **v1.0** | **[gaowanlong/kernel-lora-v1.0](https://huggingface.co/gaowanlong/kernel-lora-v1.0)** | **Hybrid: kernel-doc + distilled Q&A (Best!)** |
+| **v1.0** | **[gaowanlong/kernel-lora-v1.0](https://huggingface.co/gaowanlong/kernel-lora-v1.0)** | **Hybrid: kernel-doc + distilled Q&A (Best QLoRA)** |
 | v0.6 | [gaowanlong/kernel-lora-v0.6](https://huggingface.co/gaowanlong/kernel-lora-v0.6) | Knowledge distillation from Qwen-3.7-Max |
 | v0.5 | [gaowanlong/kernel-lora-v0.5](https://huggingface.co/gaowanlong/kernel-lora-v0.5) | Ewedubs premium commits dataset |
-
-### Upload to HuggingFace
-
-If you are in China and cannot access huggingface.co directly, use the mirror site [hf-mirror.com](https://hf-mirror.com):
-
-```bash
-# Set the mirror endpoint (no proxy needed)
-export HF_ENDPOINT=https://hf-mirror.com
-
-# Login with your HuggingFace token
-hf auth login --token YOUR_TOKEN
-
-# Upload the fused model
-hf upload gaowanlong/kernel-lora-v0.X models/qwen2.5-7b-fused/ .
-```
-
-Note: hf-mirror.com is a read-only mirror of huggingface.co. Uploads go through the mirror endpoint and sync to the main site.
 
 ## 硬件要求
 
 - Apple Silicon Mac (M1 Pro 32GB 实测可用)
-- ~20GB 可用磁盘空间 (模型 + 内核源码 + 数据)
+- ~20GB 可用磁盘空间 (模型 + 内核源码 + 数据 + 索引)
 
 ## 项目结构
 
 ```
 kernel-training/
 ├── scripts/
-│   ├── download_model.py   # 模型选型与下载
-│   ├── prepare_data.py     # 内核源码 → 训练数据
-│   ├── train_lora.py       # QLoRA 微调
-│   └── evaluate.py         # 训练前后对比评估
+│   ├── download_model.py         # 模型选型与下载
+│   ├── prepare_data.py           # 内核源码 → 训练数据
+│   ├── train_lora.py             # QLoRA 微调
+│   ├── evaluate.py               # 39题 LLM-as-judge 评估
+│   ├── chat.py                   # 交互式对话 (QLoRA)
+│   │
+│   ├── build_rag_index.py        # RAG 索引构建 (TF-IDF, v1)
+│   ├── build_rag_index_emb.py    # RAG 索引构建 (embedding, v1)
+│   ├── build_rag_index_v20.py    # RAG 索引构建 (合并文档+源码, v2.0)
+│   ├── build_rag_index_source.py # RAG 索引构建 (源码函数)
+│   ├── rag_chat.py               # RAG 交互式对话
+│   ├── rag_evaluate.py           # RAG 评估 (TF-IDF)
+│   ├── rag_emb_evaluate.py       # RAG 评估 (embedding)
+│   ├── rag_hybrid_evaluate.py    # RAG + QLoRA 混合评估
+│   ├── rag_source_evaluate.py    # 源码 RAG 评估
+│   └── rag_v20_evaluate.py       # v2.0 合并索引评估
+│
 ├── data/
-│   ├── raw/                # 原始内核源码
-│   ├── processed/          # 训练数据 (train.jsonl, valid.jsonl)
-│   └── eval/               # 评估测试用例
-├── models/                 # 下载的模型
-├── lora_adapters/          # 训练出的 LoRA 权重
-├── results/                # 评估报告
+│   ├── raw/linux/                # 原始内核源码 (git clone)
+│   ├── processed/                # 训练数据 (train.jsonl, valid.jsonl)
+│   ├── external/                 # 外部数据集 (premium commits)
+│   ├── distilled/                # 蒸馏数据 (agent-generated Q&A)
+│   ├── rag_index/                # TF-IDF RAG 索引 (v1)
+│   ├── rag_index_emb/            # Embedding RAG 索引 (v1)
+│   └── rag_index_v20/            # 合并 RAG 索引 (v2.0)
+│
+├── models/                       # 下载的基础模型
+├── lora_adapters/                # 训练出的 LoRA 权重
+├── results/                      # 评估报告
 └── requirements.txt
 ```
 
@@ -63,6 +77,7 @@ kernel-training/
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+pip install scikit-learn sentence-transformers  # RAG 额外依赖
 ```
 
 ### 2. 下载模型
@@ -78,23 +93,18 @@ python scripts/download_model.py --download qwen2.5-7b
 python scripts/download_model.py --test qwen2.5-7b
 ```
 
-### 3. 准备训练数据
+### 3. 准备训练数据 (QLoRA)
 
 ```bash
 # 克隆 Linux Kernel v6.6 并生成训练数据
 python scripts/prepare_data.py --clone --version v6.6 --max-files 500
 ```
 
-这一步会：
-- 浅克隆 Linux Kernel v6.6 源码
-- 从 500 个源文件中提取函数和结构体
-- 生成三种训练数据：代码解释、代码补全、问答对
-- 输出 `data/processed/train.jsonl` 和 `valid.jsonl`
+输出 `data/processed/train.jsonl` 和 `valid.jsonl`。
 
-### 4. 训练
+### 4. QLoRA 微调
 
 ```bash
-# QLoRA 微调 (约 30-60 分钟)
 python scripts/train_lora.py \
     --model models/qwen2.5-7b \
     --data data/processed \
@@ -103,18 +113,10 @@ python scripts/train_lora.py \
     --rank 8
 ```
 
-训练过程会清晰打印每一步：
-- Step 0: 加载基础模型
-- Step 1: 加载训练数据
-- Step 2: Tokenize 数据集
-- Step 3: 配置 LoRA 参数
-- Step 4: 训练循环 (每 10 步打印 loss)
-- Step 5: 快速测试
-
-### 5. 评估对比
+### 5. 评估 (QLoRA)
 
 ```bash
-# 同时评估基础模型和微调模型，生成对比报告
+# 同时评估基础模型和微调模型
 python scripts/evaluate.py \
     --model models/qwen2.5-7b \
     --adapter lora_adapters/kernel-lora
@@ -123,87 +125,111 @@ python scripts/evaluate.py \
 python scripts/evaluate.py --model models/qwen2.5-7b --base-only
 ```
 
-评估覆盖四个维度：
-- **Kernel Concepts** — 内核基础概念 (10 题)
-- **Code Understanding** — 内核函数理解 (5 题)
-- **Chinese Knowledge** — 中文内核知识 (5 题)
-- **Code Completion** — 内核代码补全 (3 题)
+评估覆盖 39 道测试题，6 个类别，使用 LLM-as-judge 评分：
+- **Basic Concepts** — 内核基础概念
+- **Kernel Mechanisms** — 内核机制
+- **Advanced Internals** — 高级内核内部
+- **Code Understanding** — 内核函数理解
+- **Chinese Knowledge** — 中文内核知识
+- **Code Completion** — 内核代码补全
 
-### 6. RAG (Retrieval-Augmented Generation)
-
-**RAG 是本项目表现最好的方法** — 无需微调，直接使用基础模型 + 检索即可达到 **+7.4%** 的提升（vs 基础模型），超越所有 QLoRA 版本。
-
-RAG 从内核源码、Kconfig 帮助文本和 Documentation/ 中提取知识块，构建 TF-IDF 索引，在回答问题时检索最相关的上下文注入 prompt。
-
-#### 构建 RAG 索引
+### 6. 交互式对话 (QLoRA)
 
 ```bash
-# 从 kernel-doc + Kconfig + Documentation 构建索引
-python scripts/build_rag_index.py
+# 使用 v1.0 最佳微调模型对话
+python scripts/chat.py --adapter lora_adapters/kernel-lora-v1.0
 ```
 
-索引文件保存在 `data/rag_index/`：
-- `chunks.jsonl` — 9,919 个知识块（kernel-doc / Kconfig / Documentation）
-- `vectorizer.pkl` — TF-IDF 向量化器
-- `tfidf_matrix.pkl` — 预计算的 TF-IDF 矩阵
+## RAG (推荐)
 
-#### 交互式对话
+**RAG 是本项目表现最好的方法。** 无需微调即可达到 +7.4%，结合 QLoRA 可达到 +24.6%。
+
+### 6a. 构建 RAG 索引
+
+项目提供多个版本的 RAG 索引：
 
 ```bash
-# 交互模式
+# v1: TF-IDF 索引 (9,919 chunks, 最轻量)
+python scripts/build_rag_index.py
+
+# v1: Embedding 索引 (9,919 chunks, 语义匹配更好)
+python scripts/build_rag_index_emb.py
+
+# v2.0: 合并索引 (11,571 chunks, 文档+源码, 推荐)
+python scripts/build_rag_index_v20.py
+
+# 源码索引 (3,894 函数实现)
+python scripts/build_rag_index_source.py
+```
+
+索引文件保存在 `data/rag_index*/` 目录：
+- `chunks.jsonl` — 知识块列表
+- `vectorizer.pkl` / `embeddings.pkl` — 向量化器/嵌入
+- `tfidf_matrix.pkl` — TF-IDF 矩阵
+
+### 6b. 交互式 RAG 对话
+
+```bash
+# 使用 v1 TF-IDF 索引对话
 python scripts/rag_chat.py --interactive
 
 # 单次提问
 python scripts/rag_chat.py --question "What is a spinlock?"
-
-# 显示检索到的上下文
-python scripts/rag_chat.py --question "Explain RCU" --show-context
 ```
 
-交互模式支持的命令：
-- `exit` / `quit` — 退出
-- `--context` — 切换上下文显示开关
-
-#### 评估 RAG
+### 6c. RAG 评估
 
 ```bash
-# 对 39 道测试题进行 RAG 评估
+# TF-IDF RAG + 基础模型
 python scripts/rag_evaluate.py
+
+# Embedding RAG + 基础模型
+python scripts/rag_emb_evaluate.py
+
+# Embedding RAG + QLoRA (v1.0) — 最佳配置
+python scripts/rag_emb_evaluate.py --hybrid
+
+# v2.0 合并索引 + QLoRA
+python scripts/rag_v20_evaluate.py
+
+# 源码索引 + QLoRA
+python scripts/rag_source_evaluate.py
 ```
 
-#### RAG vs QLoRA 对比
+### 6d. 完整复现最佳结果 (93.8%)
 
-| 方法 | 总体得分 | vs 基础模型 |
-|------|---------|------------|
-| **RAG (TF-IDF + base model)** | **76.7%** | **+7.4%** |
-| v1.0 QLoRA (最佳微调版本) | 66.4% | -2.8% |
-| 基础模型 (无增强) | 69.2% | — |
+```bash
+# 1. 下载基础模型
+python scripts/download_model.py --download qwen2.5-7b
 
-RAG 在所有类别上都优于基础模型和 QLoRA 版本：
+# 2. 下载 v1.0 QLoRA adapter (或自己训练)
+# 从 HuggingFace 下载:
+#   https://huggingface.co/gaowanlong/kernel-lora-v1.0
 
-| 类别 | RAG | v1.0 QLoRA | 基础模型 |
-|------|-----|-----------|---------|
-| Basic Concepts | **80.0%** | 72.5% | 67.5% |
-| Kernel Mechanisms | **75.0%** | 67.5% | 65.0% |
-| Advanced Internals | **73.3%** | 65.0% | 66.7% |
-| Code Understanding | **73.3%** | 43.3% | 70.0% |
-| Chinese Knowledge | **71.7%** | 73.3% | 73.3% |
-| Code Completion | **88.0%** | 88.0% | 86.0% |
+# 3. 构建 v2.0 合并索引
+python scripts/build_rag_index_v20.py
 
+# 4. 运行评估
+python scripts/rag_v20_evaluate.py
+```
 
-## 模型选型理由
+## 所有版本结果对比
 
-| 模型 | 参数量 | 4-bit 内存 | 中文能力 | 推荐度 |
-|------|--------|-----------|---------|--------|
-| Qwen2.5-7B-Instruct | 7B | ~5GB | 优秀 | ★★★★★ |
-| Mistral-7B-Instruct-v0.3 | 7B | ~4.5GB | 一般 | ★★★ |
-| Llama-3.1-8B-Instruct | 8B | ~5GB | 一般 | ★★★ |
+| 版本 | 方法 | 得分 | vs 基础模型 | 发布日期 |
+|------|------|------|------------|---------|
+| v2.0 | RAG v2.0 (合并文档+源码) + QLoRA | **93.8%** | **+24.6%** | 2026-06-22 |
+| rag-emb-v1 | RAG (embedding) + QLoRA | 99.2% | +30.0% | 2026-06-22 |
+| rag-source-v1 | RAG (源码函数) + QLoRA | 97.4% | +28.2% | 2026-06-22 |
+| rag-index-v2 | RAG (扩展文档索引) + QLoRA | 92.3% | +23.1% | 2026-06-22 |
+| rag-hybrid-v1 | RAG (TF-IDF) + QLoRA | 86.9% | +17.7% | 2026-06-22 |
+| rag-v1 | RAG (TF-IDF) + 基础模型 | 76.7% | +7.4% | 2026-06-21 |
+| v1.2 | Kconfig + Documentation 扩展 | 66.2% | -5.4% | 2026-06-21 |
+| v1.1 | Multi-turn + curriculum | 61.3% | -13.6% | 2026-06-21 |
+| v1.0 | Hybrid: kernel-doc + distilled | 66.4% | -2.8% | 2026-06-20 |
+| v0.7 | Pure kernel-doc | 60.5% | -8.2% | 2026-06-20 |
+| v0.6 | Qwen-3.7-Max 蒸馏 | 69.2% | -4.9% | 2026-06-20 |
 
-选择 Qwen2.5-7B-Instruct 的原因：
-1. 当前 7B 级别综合能力最强的开源模型
-2. 中英文双语能力强，适合学习内核的中英文资料
-3. MLX 社区支持完善，转换和推理稳定
-4. 4-bit 量化后在 M1 Pro 32GB 上运行流畅
+> **注意**: 单次 LLM-as-judge 评估有随机波动。rag-emb-v1 的 99.2% 和 v2.0 的 93.8% 在多次评估下可能更接近。v2.0 的优势在于索引覆盖更全面（文档+源码）。
 
 ## 技术架构
 
@@ -231,26 +257,27 @@ Linux Kernel v6.6 Source
 └──────────────────┘
 ```
 
-### RAG 流程 (推荐)
+### RAG v2.0 流程 (推荐)
 
 ```
 Linux Kernel v6.6 Source
         │
         ├── kernel-doc (include/ headers)
         ├── Kconfig help texts
-        └── Documentation/ RST files
+        ├── Documentation/ RST files
+        └── Kernel source functions (53 files)
         │
         ▼
-┌──────────────────────┐
-│  build_rag_index.py  │  ← TF-IDF 向量化
-│  构建知识索引         │    9,919 知识块
-└──────────┬───────────┘
-           │ chunks.jsonl + vectorizer.pkl + tfidf_matrix.pkl
+┌──────────────────────────┐
+│  build_rag_index_v20.py  │  ← all-MiniLM-L6-v2 embedding
+│  构建合并知识索引         │    11,571 知识块
+└──────────┬───────────────┘
+           │ chunks.jsonl + embeddings.pkl
            ▼
-┌──────────────────────┐
-│  rag_chat.py         │  ← 用户提问 → 检索 → 增强 → 生成
-│  检索增强生成         │    TF-IDF 相似度匹配 top-3
-└──────────────────────┘
+┌──────────────────────────┐
+│  rag_v20_evaluate.py     │  ← 用户提问 → 语义检索 → 增强
+│  检索增强生成             │    → QLoRA v1.0 生成回答
+└──────────────────────────┘
 ```
 
 ## LoRA 参数说明
@@ -263,9 +290,23 @@ Linux Kernel v6.6 Source
 | learning_rate | 1e-4 | 学习率 |
 | iters | 200 | 训练迭代次数 |
 
+## 上传到 HuggingFace
+
+```bash
+# 登录
+hf auth login --token YOUR_TOKEN
+
+# 上传 adapter
+hf upload gaowanlong/kernel-lora-vX.Y lora_adapters/kernel-lora-vX.Y/ .
+
+# 国内用户使用镜像
+export HF_ENDPOINT=https://hf-mirror.com
+```
+
 ## 自定义
 
 - 修改 `scripts/prepare_data.py` 中的 `KERNEL_CONCEPTS` 来调整子系统覆盖范围
 - 修改 `scripts/evaluate.py` 中的 `TEST_CASES` 来定制评估题目
 - 调整 `--max-files` 控制训练数据量
 - 调整 `--rank` 和 `--iters` 控制训练强度
+- 修改 `scripts/build_rag_index_source.py` 中的 `key_files` 来调整源码索引范围
