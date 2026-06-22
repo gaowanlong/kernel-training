@@ -231,6 +231,55 @@ python scripts/rag_v20_evaluate.py
 
 > **注意**: 单次 LLM-as-judge 评估有随机波动。rag-emb-v1 的 99.2% 和 v2.0 的 93.8% 在多次评估下可能更接近。v2.0 的优势在于索引覆盖更全面（文档+源码）。
 
+## KernelBench: 内核代码生成评估
+
+KernelBench 评估模型编写正确 Linux 内核代码的能力。包含 12 道题，覆盖模块初始化、字符驱动、平台驱动、内存分配、自旋锁、工作队列、定时器、中断处理、procfs、链表、kobject/sysfs、等待队列。
+
+### 评分标准
+- **关键词匹配** — 是否使用了正确的内核 API
+- **LLM-as-judge** — 代码正确性和完整性
+- **编译检查** — 是否能通过内核构建系统编译（需要本地内核源码和构建环境）
+
+### 运行
+
+```bash
+# 评估基础模型
+python scripts/kernelbench_evaluate.py
+
+# 评估微调模型
+python scripts/kernelbench_evaluate.py --adapter lora_adapters/kernel-lora-v1.0
+```
+
+### 结果
+
+| 模型 | 总体 | 关键词 | LLM Judge | 编译通过率 |
+|------|------|--------|-----------|-----------|
+| 基础模型 | **50.4%** | 77.0% | 74.2% | 0% (无构建环境) |
+| QLoRA v1.0 | 14.1% | 13.1% | 29.2% | 0% (无构建环境) |
+
+> **重要发现**: QLoRA 微调显著损害了模型的代码生成能力。基础模型（Qwen2.5-7B-Instruct）在代码任务上远优于微调版本。这是因为训练数据主要是概念性 Q&A，没有代码生成样本。
+
+## SWE-bench Kernel: 内核补丁生成评估
+
+SWE-bench Kernel 评估模型修复内核代码中常见 bug 的能力。包含 8 道题，覆盖空指针解引用、内存泄漏、锁错误、use-after-free、引用计数、竞态条件、整数溢出、缓冲区溢出。
+
+### 运行
+
+```bash
+# 评估基础模型
+python scripts/swebench_evaluate.py
+
+# 评估微调模型
+python scripts/swebench_evaluate.py --adapter lora_adapters/kernel-lora-v1.0
+```
+
+### 结果
+
+| 模型 | 总体 | 关键词 | LLM Judge |
+|------|------|--------|-----------|
+| 基础模型 | **49.1%** | 23.1% | 75.0% |
+| QLoRA v1.0 | — | — | — |
+
 ## 技术架构
 
 ### QLoRA 微调流程
